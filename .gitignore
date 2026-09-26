@@ -1,0 +1,18 @@
+# Claude Code e ferramental do Spec Kit (regenerável com `specify init`)
+.claude/
+.specify/scripts/
+.specify/templates/
+.specify/workflows/
+.specify/integrations/
+
+# Segredos e ambientes
+.env
+.env.*
+!.env.example
+.venv/
+venv/
+
+# Dependências e build
+node_modules/
+.next/
+__pycache__/
