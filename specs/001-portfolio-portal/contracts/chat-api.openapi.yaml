@@ -1,0 +1,153 @@
+openapi: 3.1.0
+info:
+  title: Portal de Portfólio - API do Chat
+  version: 1.0.0
+  description: >
+    API pública do backend (FastAPI). O frontend a consome pelo mesmo domínio via
+    rewrite do Next.js (/api/*), evitando CORS. Sem autenticação de usuário; a
+    proteção é feita por guardrail, rate limit e teto diário de custo.
+servers:
+  - url: /api
+paths:
+  /chat:
+    post:
+      summary: Faz uma pergunta ao chat sobre a carreira do autor
+      description: >
+        Responde por streaming (Server-Sent Events). Aplica, nesta ordem: validação
+        de tamanho, teto diário, rate limit por visitante, guardrail de entrada,
+        recuperação de trechos e geração.
+      operationId: postChat
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ChatRequest'
+      responses:
+        '200':
+          description: Fluxo de eventos (text/event-stream)
+          content:
+            text/event-stream:
+              schema:
+                $ref: '#/components/schemas/ChatEventStream'
+        '400':
+          description: Pergunta vazia ou acima do tamanho máximo
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '429':
+          description: Limite por visitante atingido
+          headers:
+            Retry-After:
+              schema:
+                type: integer
+              description: Segundos até nova tentativa
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '503':
+          description: Chat pausado (teto diário) ou indisponível
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /health:
+    get:
+      summary: Verificação de saúde (usada pelo workflow agendado e por monitoramento)
+      operationId: getHealth
+      responses:
+        '200':
+          description: Serviço operante
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HealthResponse'
+components:
+  schemas:
+    ChatRequest:
+      type: object
+      required: [message, lang]
+      properties:
+        message:
+          type: string
+          minLength: 1
+          maxLength: 500
+          description: Pergunta do visitante (limite final definido em configuração)
+        lang:
+          type: string
+          enum: [pt-BR, en]
+        history:
+          type: array
+          maxItems: 4
+          description: Últimas trocas da conversa atual (memória curta, FR-013a)
+          items:
+            type: object
+            required: [role, content]
+            properties:
+              role:
+                type: string
+                enum: [user, assistant]
+              content:
+                type: string
+                maxLength: 1000
+    ChatEventStream:
+      description: >
+        Sequência de eventos SSE. `token` carrega fragmentos da resposta; `done`
+        encerra com metadados; `error` encerra com um código de erro.
+      type: object
+      properties:
+        event:
+          type: string
+          enum: [token, done, error]
+        data:
+          oneOf:
+            - $ref: '#/components/schemas/TokenEvent'
+            - $ref: '#/components/schemas/DoneEvent'
+            - $ref: '#/components/schemas/ErrorResponse'
+    TokenEvent:
+      type: object
+      required: [text]
+      properties:
+        text:
+          type: string
+    DoneEvent:
+      type: object
+      required: [outcome]
+      properties:
+        outcome:
+          type: string
+          enum: [answered, no_answer, refused]
+        suggestions:
+          type: array
+          description: Próximos passos sugeridos (ver projetos, baixar CV, contato)
+          items:
+            type: string
+            enum: [projects, cv, contact]
+    ErrorResponse:
+      type: object
+      required: [code, message]
+      properties:
+        code:
+          type: string
+          enum: [empty_message, message_too_long, rate_limited, chat_paused, unavailable]
+        message:
+          type: string
+          description: Mensagem cordial no idioma da requisição, com alternativa (contato/CV)
+    HealthResponse:
+      type: object
+      required: [status]
+      properties:
+        status:
+          type: string
+          enum: [ok]
+        guard:
+          type: string
+          enum: [normal, degraded]
+        chat:
+          type: string
+          enum: [active, paused]
+        kb_version:
+          type: string
+          description: Hash do manifesto da base de conhecimento carregada
