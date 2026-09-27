@@ -37,7 +37,7 @@ Portal bilíngue (PT-BR/EN) e responsivo, com tema claro/escuro, que apresenta o
 | I. Veracidade | Prompt restrito aos trechos recuperados; resposta "não sei" cordial; conjunto de avaliação de referência (SC-003) | Passa |
 | II. Custo mínimo | Camadas gratuitas (Vercel Hobby, Upstash, Langfuse Hobby, Gemini/Groq); rate limit, limite de tokens e teto diário de custo (FR-024); sem caching pago no MVP | Passa |
 | III. Segurança em camadas | Prompt Guard 2 (Groq) + tamanho + heurísticas + rate limit + prompt restrito; fail-open com timeout e circuit breaker | Passa |
-| IV. Privacidade | Sem IP bruto (hash com sal diário); Langfuse com 30 dias; aviso ao visitante | Passa, com ressalva O1 (Gemini gratuito) |
+| IV. Privacidade | Sem IP bruto (hash com sal diário); Langfuse com 30 dias; aviso ao visitante; Gemini em camada paga (conteúdo não usado para treino) | Passa |
 | V. Acessibilidade e desempenho | next-intl, next-themes, mobile-first, axe e Lighthouse CI | Passa |
 | VI. Código didático e substituível | Interfaces `LLMClient`, `VectorStore`, `InputGuard` ([contrato](contracts/provider-interfaces.md)); comentários úteis em React | Passa |
 | VII. CI/CD e automação | 6 workflows pequenos na ordem da constituição; deploy pela Vercel; `permissions:` mínimas; mitigação de desativação | Passa (ver nota N1) |
@@ -48,11 +48,11 @@ Portal bilíngue (PT-BR/EN) e responsivo, com tema claro/escuro, que apresenta o
 
 **Gate pós-design**: reavaliado após Phase 1 — nenhuma violação; Complexity Tracking vazio.
 
-## Decisões em aberto (para o autor)
+## Decisões confirmadas (2026-09-27)
 
-- **O1 - Camada de cobrança do Gemini e privacidade**: na camada gratuita, o Google pode usar o conteúdo enviado para melhorar seus produtos; na paga, não. O plano assume começar na camada gratuita **com aviso claro ao visitante**, e recomenda migrar para a paga com orçamento limitado se o autor quiser evitar isso (custo estimado de centavos por mês, protegido pelo teto diário).
-- **O2 - Disponibilidade do Prompt Guard 2 na Groq gratuita**: não confirmada na documentação. Se exigir cartão, o custo é irrisório; se não estiver disponível, usar o plano B (ONNX local) mantendo o fail-open.
-- **O3 - Valores numéricos**: tamanho máximo da pergunta (proposta: 500 caracteres) e teto diário em centavos (proposta: a definir, por exemplo US$ 0,50).
+- **O1 - Cobrança do Gemini**: **faturamento ativado, com orçamento limitado.** O Gemini roda na camada paga (não usa o conteúdo dos visitantes para treinar modelos do Google), com um teto de gasto configurado diretamente no Google Cloud/AI Studio, além do teto diário próprio do chat (FR-024). Custo esperado: poucos dólares por mês no tráfego típico de um portfólio.
+- **O2 - Prompt Guard 2 na Groq**: **cartão cadastrado na Groq.** Custo esperado irrisório (~US$ 0,04 por 25 M tokens). Mantém a arquitetura mais simples, com o modelo dedicado.
+- **O3 - Limites do chat**: tamanho máximo da pergunta = **500 caracteres**; teto diário de custo = **US$ 0,50** (`DAILY_COST_CAP_CENTS=50`). Ambos configuráveis por variável de ambiente.
 
 ## Project Structure
 

@@ -22,7 +22,7 @@ Pesquisa feita em 2026-09-26 na documentação oficial e em fontes secundárias.
 
 - **Decision**: Google Gemini via SDK `google-genai`, modelo `gemini-3.1-flash-lite` (configurável por variável de ambiente), atrás da interface `LLMClient`. Temperatura moderada (0,3 a 0,5), com o tom definido por prompt de sistema.
 - **Rationale**: o autor já tem a chave. Flash-Lite tem camada gratuita, e o pago custa em torno de US$ 0,25 / US$ 1,50 por 1 M tokens de entrada/saída (3.1) **(verificar)**. Já existe o `gemini-3.5-flash-lite` (US$ 0,30 / US$ 2,50), mais caro; ficam trocáveis por configuração ([preços](https://ai.google.dev/gemini-api/docs/pricing)).
-- **Risco de privacidade (importante)**: na camada **gratuita**, o Google informa que o conteúdo enviado **pode ser usado para melhorar seus produtos**; na paga, não. Ver decisão em aberto O1 no plano.
+- **Privacidade (decidido)**: opera-se na **camada paga** com orçamento limitado no Google Cloud/AI Studio (decisão O1 do plano), porque a camada gratuita permite o uso do conteúdo enviado para melhorar produtos do Google. Na paga isso não ocorre.
 - **Prompt caching**: o *context caching* dos modelos Flash-Lite é oferecido apenas na camada paga, e o prefixo estável (instruções) do nosso prompt é pequeno. **Decisão: não usar caching no MVP.** Reavaliar somente se o prompt de sistema ficar grande.
 - **Alternatives considered**: Groq para geração (modelos Llama 3.x saíram das camadas gratuita e Developer em 2026-08-16, e os modelos gratuitos atuais têm cotas baixas de tokens); manter como alternativa atrás da interface.
 
@@ -38,7 +38,7 @@ Pesquisa feita em 2026-09-26 na documentação oficial e em fontes secundárias.
 - **Decision**: **Llama Prompt Guard 2 86M via API da Groq** (`meta-llama/llama-prompt-guard-2-86m`), atrás da interface `InputGuard`, complementada por defesas locais (limite de tamanho, heurísticas, rate limit, prompt de sistema restrito). Política **fail-open com degradação**: timeout curto (cerca de 2 s), circuit breaker em memória e, quando o guardrail estiver fora, defesas locais mais restritas + evento registrado.
 - **Rationale**: o modelo tem 512 tokens de contexto e suporte multilíngue em 8 idiomas; na Groq custa cerca de US$ 0,04 por 25 M tokens ([Groq docs](https://console.groq.com/docs/model/meta-llama/llama-prompt-guard-2-86m)), praticamente zero para o volume do portfólio.
 - **MUDANÇA EM RELAÇÃO AO BRIEF**: o brief previa hospedar o classificador em um **Space do Hugging Face**. A documentação atual informa que Spaces Docker/Gradio **exigem plano pago (PRO)** para serem criados ([Spaces Overview](https://huggingface.co/docs/hub/en/spaces-overview)); só Spaces estáticos são gratuitos. Isso derruba a opção (c) do brief. Consequência positiva: sem Space, **não há cold start nem necessidade de "ping" para mantê-lo acordado**.
-- **Risco a verificar**: a documentação da Groq não confirma se o Prompt Guard 2 está incluído na camada gratuita (o catálogo de modelos gratuitos mudou em 2026-08). Se não estiver, o custo é de centavos com cartão. A política fail-open protege a experiência do visitante enquanto isso.
+- **Cobrança (decidido)**: cartão cadastrado na Groq (decisão O2 do plano), já que a documentação não confirma o Prompt Guard 2 na camada 100% gratuita. Custo esperado irrisório. A política fail-open protege a experiência do visitante em qualquer caso.
 - **Alternative (plano B)**: Prompt Guard 2 (22M/86M) em ONNX quantizado dentro da função Python da Vercel, possível pelo limite de 500 MB (ou 5 GB em *large functions*, beta), porém com mais trabalho de conversão, licença Llama e cold start. Também: LLM pequeno como classificador.
 - **Alternatives rejected**: Guardrails AI (foca validação de saída, dependências pesadas para serverless); Space pago no HF.
 
@@ -81,8 +81,8 @@ Pesquisa feita em 2026-09-26 na documentação oficial e em fontes secundárias.
 
 ## Resumo dos itens a verificar na implementação
 
-1. Prompt Guard 2 na camada gratuita da Groq (ou custo com cartão).
+1. Cadastro do cartão na Groq e confirmação do preço vigente do Prompt Guard 2.
 2. ID exato e cota do modelo de embedding do Gemini.
-3. Camada de cobrança do Gemini (gratuita vs paga) e privacidade (ver O1 no plano).
+3. Configuração do teto de orçamento na conta paga do Google Cloud/AI Studio.
 4. Compatibilidade `next-intl` + Next.js 16.
 5. Estrutura de entrada do FastAPI na Vercel (`backend/`).
