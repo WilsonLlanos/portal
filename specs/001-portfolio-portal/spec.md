@@ -8,6 +8,16 @@
 
 **Input**: User description: "Portal de portfólio profissional bilíngue (PT-BR e EN) para o autor se apresentar a recrutadores, com foco em experiências profissionais e acadêmicas em Inteligência Artificial, e permitir que o recrutador conheça o perfil de forma interativa por meio de um chat de IA."
 
+## Clarifications
+
+### Session 2026-09-26
+
+- Q: Na v1, o contato deve ser por formulário no portal ou apenas por links? → A: Somente links de contato (LinkedIn, GitHub, e-mail); formulário fica para uma versão futura.
+- Q: O chat deve lembrar perguntas anteriores para follow-ups? → A: Memória curta da conversa atual (últimas poucas trocas), apenas enquanto a página estiver aberta.
+- Q: Por quanto tempo os registros das interações do chat são mantidos? → A: 30 dias.
+- Q: Qual o limite de uso do chat por visitante? → A: Cerca de 20 perguntas por hora.
+- Q: O que acontece quando o custo total do chat atinge o teto diário? → A: O chat é pausado até o dia seguinte, com mensagem cordial apontando o contato do autor e o download do CV.
+
 ## User Scenarios & Testing *(mandatory)*
 
 ### User Story 1 - Conhecer o autor na tela inicial (Priority: P1)
@@ -113,23 +123,25 @@ O recrutador encontra na seção de contato os links do autor (LinkedIn, GitHub,
 - **FR-004**: O portal MUST apresentar projetos em cards com descrição, tecnologias usadas e link para o repositório no GitHub.
 - **FR-005**: O portal MUST apresentar as certificações do autor.
 - **FR-006**: O portal MUST oferecer o download do CV em PDF em português e em inglês, conforme o idioma selecionado.
-- **FR-007**: O portal MUST oferecer uma seção de contato com links para LinkedIn, GitHub e e-mail.
+- **FR-007**: O portal MUST oferecer uma seção de contato com links para LinkedIn, GitHub e e-mail, e MUST NOT incluir formulário de contato na primeira versão.
 - **FR-008**: O portal MUST estar disponível em PT-BR e EN, com um seletor de idioma que afeta todo o conteúdo, o CV e as respostas do chat.
 - **FR-009**: O portal MUST oferecer tema claro e escuro, adotando por padrão a preferência do sistema e permitindo troca manual, com a escolha mantida durante a navegação.
 - **FR-010**: O portal MUST funcionar bem de celulares a desktops (mobile-first e responsivo).
 - **FR-011**: O portal MUST atender requisitos de acessibilidade: contraste adequado, navegação completa por teclado e textos alternativos para imagens.
 - **FR-012**: O portal MUST incluir metadados adequados para compartilhamento em redes sociais e para mecanismos de busca.
 - **FR-013**: O chat MUST responder perguntas sobre a carreira do autor usando exclusivamente o conteúdo do autor (CV, projetos, certificações e formação, em PT e EN).
+- **FR-013a**: O chat MUST considerar as últimas poucas trocas da conversa atual para responder a perguntas de acompanhamento, mantendo essa memória apenas enquanto a página estiver aberta e sem preservá-la entre visitas; as regras de proteção (FR-017, FR-018) MUST valer também sobre esse contexto.
 - **FR-014**: O chat MUST admitir explicitamente quando não souber uma resposta, mantendo tom cordial e oferecendo o contato do autor, e MUST NOT inventar nem inflar experiências, resultados ou credenciais.
 - **FR-015**: O chat MUST adotar um tom simpático, acolhedor e profissional, destacando de forma honesta os pontos fortes do autor e sugerindo próximos passos (ver projetos, baixar o CV, entrar em contato) quando fizer sentido.
 - **FR-016**: O chat MUST responder no idioma selecionado no portal.
 - **FR-017**: O chat MUST recusar perguntas fora do tema e tentativas de manipulação (como prompt injection e jailbreak) sem quebrar a experiência, sem revelar nem alterar suas instruções internas.
-- **FR-018**: O chat MUST limitar o tamanho de cada pergunta e o número de requisições por visitante, exibindo mensagem clara quando um limite for atingido.
+- **FR-018**: O chat MUST limitar o tamanho de cada pergunta e o número de requisições por visitante a cerca de 20 perguntas por hora (valor a ser mais restrito enquanto o serviço de proteção estiver indisponível, conforme FR-020), exibindo mensagem clara quando um limite for atingido.
 - **FR-019**: O chat MUST exibir mensagem clara e uma alternativa (contato ou CV) em caso de erro ou indisponibilidade.
 - **FR-020**: Se um serviço auxiliar de proteção estiver indisponível, o chat MUST continuar funcionando com defesas locais mais restritas e MUST registrar o evento.
 - **FR-021**: O sistema MUST registrar as interações do chat (pergunta, trechos de conteúdo usados, resultado da proteção, latência, custo e erros) para melhoria do serviço e identificação de lacunas no conteúdo.
-- **FR-022**: O sistema MUST NOT coletar dados pessoais dos visitantes nesses registros, MUST informar claramente ao visitante que as perguntas do chat são registradas e MUST manter os registros por um período curto.
+- **FR-022**: O sistema MUST NOT coletar dados pessoais dos visitantes nesses registros, MUST informar claramente ao visitante que as perguntas do chat são registradas e MUST apagar automaticamente os registros após 30 dias.
 - **FR-023**: O custo variável do chat MUST ser limitado, de modo que o custo mensal permaneça próximo de zero para o tráfego típico de um portfólio.
+- **FR-024**: O sistema MUST aplicar um teto diário de custo do chat definido pelo autor; ao atingi-lo, o chat MUST ser pausado até o dia seguinte, exibindo mensagem cordial que aponte o contato do autor e o download do CV, sem afetar o restante do portal.
 
 ### Key Entities *(include if feature involves data)*
 
@@ -157,10 +169,9 @@ O recrutador encontra na seção de contato os links do autor (LinkedIn, GitHub,
 
 - O público principal são recrutadores e gestores de contratação que acessam por poucos minutos, com uso frequente do celular.
 - O conteúdo real (foto, CV, projetos, certificações e textos nos dois idiomas) é fornecido pelo autor; até lá, o desenvolvimento pode usar conteúdo provisório claramente identificado.
-- Na primeira versão, o contato é feito por links (LinkedIn, GitHub, e-mail); um formulário de contato próprio fica fora do escopo inicial por exigir tratamento de dados pessoais, podendo ser especificado depois.
 - O idioma padrão do portal é definido pela preferência do navegador do visitante, com PT-BR como alternativa quando não houver correspondência.
 - A escolha de idioma e tema é mantida durante a navegação no próprio dispositivo do visitante.
-- O chat não mantém histórico entre visitas e não exige login.
+- O chat mantém memória curta apenas durante a visita atual, não guarda histórico entre visitas e não exige login.
 - Referências visuais e domínio próprio ainda estão pendentes e não bloqueiam a especificação; o domínio pode ser inicialmente o fornecido pela hospedagem.
 - Os princípios da constituição do projeto (veracidade, custo mínimo, segurança em camadas, privacidade, acessibilidade, gestão de credenciais) se aplicam a esta funcionalidade.
-- Fora do escopo: blog, painel administrativo, login de usuários e analytics avançado de marketing.
+- Fora do escopo: blog, painel administrativo, login de usuários, analytics avançado de marketing e formulário de contato próprio (adiado por exigir tratamento de dados pessoais; pode ser especificado em versão futura).
