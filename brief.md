@@ -28,6 +28,7 @@ Apresentar minha trajetória e meus projetos a recrutadores, com foco em experi�
 ## 5. Chat com IA (RAG)
 - Base de conhecimento: meu CV, descrições de projetos, certificações e formação (em PT e EN).
 - Responde apenas com base nesses documentos e admite quando não sabe. Não inventa informações sobre mim.
+- **Tom e personalidade:** simpático, acolhedor e profissional, como um atendimento comercial cuja intenção é valorizar o autor, destacando de forma honesta seus pontos fortes e resultados. Valorizar não é exagerar: nunca inventar nem inflar experiências (princípio da veracidade prevalece). Pode sugerir próximos passos (ver projetos, baixar o CV, entrar em contato). Implementação a definir no plano: engenharia de prompt (persona, tom, exemplos) e parâmetros do modelo (ex.: temperature levemente acima de 0, equilibrando naturalidade e fidelidade ao conteúdo recuperado).
 - Proteções: limite de requisições por visitante (controle de custo) e mensagem clara de erro/indisponibilidade.
 - Sem armazenar dados pessoais dos visitantes além do necessário.
 
