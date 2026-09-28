@@ -30,6 +30,7 @@ Aplicação web com dois projetos (ver [plan.md](plan.md) § Project Structure):
 - [ ] T002 [P] Inicializar projeto Next.js 16 (App Router, TypeScript, Tailwind CSS 4) em `frontend/`, com `frontend/package.json` e `frontend/tsconfig.json`
 - [ ] T003 [P] Inicializar projeto Python com `uv` em `backend/` (`backend/pyproject.toml`), com dependências: `fastapi`, `google-genai`, `groq`, `numpy`, `upstash-redis`, `langfuse`, `pydantic`, `pydantic-settings`
 - [ ] T004 [P] Configurar ESLint, Prettier e `tsc --noEmit` em `frontend/` (`frontend/.eslintrc.json` ou `eslint.config.mjs`)
+- [ ] T004a [P] Configurar Vitest + Testing Library em `frontend/` (`frontend/vitest.config.ts`, script `test` em `frontend/package.json`), para os testes unitários de componentes e de lógica de conteúdo
 - [ ] T005 [P] Configurar `ruff` em `backend/pyproject.toml` (lint e format)
 - [ ] T006 Criar `backend/.env.example` com todas as variáveis: `GEMINI_API_KEY`, `GROQ_API_KEY`, `UPSTASH_REDIS_REST_URL`, `UPSTASH_REDIS_REST_TOKEN`, `LANGFUSE_PUBLIC_KEY`, `LANGFUSE_SECRET_KEY`, `LANGFUSE_HOST`, `MAX_MESSAGE_LENGTH=500`, `DAILY_COST_CAP_CENTS=50`, `RATE_LIMIT_PER_HOUR=20`, `GUARD_TIMEOUT_SECONDS=2` (sem valores reais; ver constituição IX)
 - [ ] T007 Atualizar o `.gitignore` da raiz com os artefatos de build de `frontend/` (`frontend/.next/`, `frontend/node_modules/`) e `backend/` (`backend/.venv/`, `backend/__pycache__/`), preservando as regras já existentes
@@ -49,8 +50,10 @@ Aplicação web com dois projetos (ver [plan.md](plan.md) § Project Structure):
 - [ ] T008 Definir o esquema de conteúdo (TypeScript) para `Profile`, `Experience`, `Project`, `Certification` em `frontend/lib/content/schema.ts`, replicando os campos e regras de [data-model.md](data-model.md) § 1 (ex.: `Experience.start`/`end` no formato `YYYY-MM`, `end = null` = em andamento, `start <= end`; `Project.technologies` com pelo menos 1 item; `alt` obrigatório em `profile.photo`)
 - [ ] T009 [P] Criar os arquivos de conteúdo provisório `frontend/content/pt-BR/{profile,timeline,projects,certifications}.json` e `frontend/content/pt-BR/cv.md`, claramente marcados como placeholder, seguindo o esquema de T008
 - [ ] T010 [P] Criar os arquivos equivalentes em `frontend/content/en/{profile,timeline,projects,certifications}.json` e `frontend/content/en/cv.md`, com os mesmos IDs de `T009` (necessário para o edge case "idioma sem tradução")
-- [ ] T010a [P] Criar os PDFs placeholder `frontend/public/cv/cv-pt-BR.pdf` e `frontend/public/cv/cv-en.pdf` (claramente marcados como provisórios), necessários para T025 e para o cenário 1 do [quickstart.md](quickstart.md) funcionarem antes do CV real do autor (FR-006)
+- [ ] T009b [P] Mover `FotoPerfil.png` (raiz do repositório) para `frontend/public/images/profile.png` e referenciá-la em `profile.json` (pt-BR e en, via `T009`/`T010`), com `alt` descritivo em cada idioma — conteúdo real já fornecido pelo autor, não é mais placeholder
+- [ ] T010a [P] Mover os CVs reais fornecidos na raiz do repositório para `frontend/public/cv/`, renomeando `CV_Wilson_Llanos_AI.pdf` → `cv-pt-BR.pdf` e `CV_Wilson_Llanos_AI-En.pdf` → `cv-en.pdf` (conteúdo real já fornecido pelo autor, não é mais placeholder; necessário para T025 e para o cenário 1 do [quickstart.md](quickstart.md)) (FR-006)
 - [ ] T011 Implementar o carregador e validador de conteúdo em `frontend/lib/content/loader.ts`, que falha o build se um idioma estiver com campos ausentes frente ao outro (edge case da spec)
+- [ ] T011a [P] Teste unitário (Vitest) do carregador de conteúdo em `frontend/tests/unit/content-loader.test.ts`, cobrindo o caso do edge case "idioma sem tradução" (falha quando um campo existe em um idioma e falta no outro) (depende de T011, T004a)
 - [ ] T012 Configurar roteamento `next-intl` para os locais `pt-BR` e `en` em `frontend/i18n/request.ts` e `frontend/middleware.ts`, com `pt-BR` como alternativa quando o navegador não corresponder (Assumptions da spec)
 - [ ] T013 Criar `frontend/app/[locale]/layout.tsx` com `next-themes` (tema padrão = preferência do sistema, com troca manual persistida) e os textos de interface de `frontend/messages/{pt-BR,en}.json`
 - [ ] T014 [P] Definir as configurações do backend (Pydantic `BaseSettings`) em `backend/app/core/config.py`, lendo as variáveis de `T006`
@@ -62,6 +65,8 @@ Aplicação web com dois projetos (ver [plan.md](plan.md) § Project Structure):
 - [ ] T020 Configurar o rewrite `/api/*` → backend em `frontend/next.config.ts`, para o frontend chamar o backend sem CORS
 - [ ] T021 [P] Configurar logging estruturado em JSON em `backend/app/observability/logging.py`
 - [ ] T022 [P] Implementar o cliente Langfuse (assíncrono, tolerante a falha de rede) em `backend/app/observability/langfuse_client.py`
+- [ ] T022a [P] Configurar `frontend/playwright.config.ts` com projetos para **mobile** (viewport ~375px, ex. dispositivo Pixel 5) e **desktop** (viewport ~1280px), para que todo teste E2E rode nos dois formatos automaticamente, sem precisar fixar viewport em cada arquivo de teste
+- [ ] T022b [P] Instalar `@axe-core/playwright` e criar o helper `frontend/tests/e2e/utils/axe.ts` (função reutilizável que roda a checagem de acessibilidade sobre a página atual), para ser chamado a partir de qualquer spec de E2E
 
 **Checkpoint**: fundação pronta — as histórias de usuário podem começar.
 
@@ -75,7 +80,7 @@ Aplicação web com dois projetos (ver [plan.md](plan.md) § Project Structure):
 
 ### Tests for User Story 1
 
-- [ ] T023 [P] [US1] Teste Playwright: hero visível sem rolagem em mobile (375px) e desktop (1280px) em `frontend/tests/e2e/hero.spec.ts` (Acceptance Scenario 1 da US1)
+- [ ] T023 [P] [US1] Teste Playwright: hero visível sem rolagem (mobile e desktop cobertos pelos projetos configurados em `T022a`) e sem violações de acessibilidade (via o helper de `T022b`) em `frontend/tests/e2e/hero.spec.ts` (Acceptance Scenario 1 da US1; depende de T022a, T022b)
 
 ### Implementation for User Story 1
 
@@ -97,7 +102,7 @@ Aplicação web com dois projetos (ver [plan.md](plan.md) § Project Structure):
 
 ### Tests for User Story 2
 
-- [ ] T029 [P] [US2] Teste Playwright: resumo, linha do tempo (ordem cronológica), projetos (link do GitHub) e certificações renderizam com os dados do conteúdo em `frontend/tests/e2e/content-sections.spec.ts`
+- [ ] T029 [P] [US2] Teste Playwright: resumo, linha do tempo (ordem cronológica), projetos (link do GitHub) e certificações renderizam com os dados do conteúdo, e sem violações de acessibilidade (via o helper de `T022b`), em `frontend/tests/e2e/content-sections.spec.ts` (mobile e desktop cobertos pelos projetos de `T022a`)
 
 ### Implementation for User Story 2
 
@@ -158,7 +163,7 @@ Aplicação web com dois projetos (ver [plan.md](plan.md) § Project Structure):
 
 ### Tests for User Story 4
 
-- [ ] T058 [P] [US4] Teste Playwright: trocar idioma e tema, navegar e recarregar, confirmando persistência e tema inicial = preferência do sistema, em `frontend/tests/e2e/locale-theme.spec.ts`
+- [ ] T058 [P] [US4] Teste Playwright: trocar idioma e tema, navegar e recarregar, confirmando persistência e tema inicial = preferência do sistema, em `frontend/tests/e2e/locale-theme.spec.ts` (mobile e desktop cobertos pelos projetos de `T022a`)
 
 ### Implementation for User Story 4
 
@@ -178,7 +183,7 @@ Aplicação web com dois projetos (ver [plan.md](plan.md) § Project Structure):
 
 ### Tests for User Story 5
 
-- [ ] T062 [P] [US5] Teste Playwright: os três links de contato levam ao destino correto, em `frontend/tests/e2e/contact.spec.ts`
+- [ ] T062 [P] [US5] Teste Playwright: os três links de contato levam ao destino correto, em `frontend/tests/e2e/contact.spec.ts` (mobile e desktop cobertos pelos projetos de `T022a`)
 
 ### Implementation for User Story 5
 
@@ -193,7 +198,7 @@ Aplicação web com dois projetos (ver [plan.md](plan.md) § Project Structure):
 
 **Purpose**: qualidade, automação e validação final, cobrindo os critérios de sucesso restantes
 
-- [ ] T065 [P] Corrigir achados de acessibilidade (contraste, foco de teclado, `alt`) apontados pelo axe em todas as seções (FR-011)
+- [ ] T065 [P] Corrigir achados de acessibilidade (contraste, foco de teclado, `alt`) apontados pelo axe (depende de T022b e das checagens já incluídas em T023, T029, T058, T062) em todas as seções (FR-011)
 - [ ] T066 [P] Configurar Lighthouse CI (`frontend/lighthouserc.js`) com meta > 90 em desempenho, acessibilidade e SEO (SC-004)
 - [ ] T067 Criar `.github/workflows/health-check.yml`: agendado (`schedule`) + `workflow_dispatch`, chama `GET /health` em produção, falha explicitamente se não houver 200 (substitui o "ping do Space" do brief; ver plan.md nota N1)
 - [ ] T068 [P] Criar `.github/workflows/frontend-ci.yml`: lint, `tsc`, testes (Vitest + Playwright), build e Lighthouse CI, com `permissions:` mínimas
@@ -229,7 +234,7 @@ Aplicação web com dois projetos (ver [plan.md](plan.md) § Project Structure):
 ### Parallel Opportunities
 
 - Setup: T002–T005 em paralelo
-- Foundational: T009–T010a, T014–T018, T021–T022 em paralelo
+- Foundational: T009–T011a, T014–T018, T021–T022b em paralelo
 - Dentro de cada história, as tarefas marcadas `[P]` (testes e componentes de arquivos distintos)
 - Depois da Fase 2, US1, US2 e US5 podem avançar em paralelo; US3 pode começar em paralelo e US4 só fecha depois de T054 (US3)
 

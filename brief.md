@@ -21,7 +21,7 @@ Apresentar minha trajetória e meus projetos a recrutadores, com foco em experi�
 - **Bilíngue:** português (PT-BR) e inglês, com seletor de idioma. O chat de IA responde no idioma escolhido.
 - **Responsivo:** mobile-first, funcionando de celular a desktop.
 - **Tema claro e escuro:** respeita a preferência do sistema e permite troca manual.
-- **Visual moderno:** limpo, tipografia forte, animações sutis. Referências visuais: *a definir*.
+- **Visual moderno:** limpo, tipografia forte, animações sutis. **Direção visual definida a partir da foto do autor** (retrato de estúdio, fundo escuro e quente, luz lateral âmbar): tema escuro como padrão de destaque, com uma cor de destaque âmbar/laranja (ex.: `#F5A623`) inspirada na luz da foto, usada nos botões e em um brilho sutil atrás da foto no hero; tipografia sem serifa forte (ex.: Inter ou Geist). No hero, layout dividido no desktop — foto grande (~40–45% da largura) em moldura arredondada com o brilho de destaque atrás, texto ao lado; no celular, foto centralizada acima do texto, sem o brilho (para não poluir). No tema claro, fundo neutro claro, a mesma cor de destaque, e a foto ganha uma moldura arredondada com sombra suave para continuar se destacando.
 - **Desempenho e SEO:** carregamento rápido, boas pontuações no Lighthouse, metadados para compartilhamento (Open Graph).
 - **Acessibilidade:** contraste adequado, navegação por teclado, textos alternativos.
 

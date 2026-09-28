@@ -24,6 +24,8 @@ Portal bilíngue (PT-BR/EN) e responsivo, com tema claro/escuro, que apresenta o
 
 **Performance Goals**: Lighthouse > 90 (desempenho, acessibilidade, SEO); tela inicial renderizada estaticamente; primeiro token do chat em poucos segundos, com streaming.
 
+**Direção visual**: definida a partir da foto real do autor (retrato de estúdio, fundo escuro e quente, luz lateral âmbar) — ver [brief.md](../../brief.md) § 4. Tema escuro como destaque, cor de acento âmbar/laranja, tipografia sem serifa (Inter ou Geist). Hero em layout dividido no desktop (foto grande com brilho de acento atrás) e empilhado no celular (foto centralizada, sem brilho).
+
 **Constraints**: custo mensal próximo de zero (camadas gratuitas); bundle Python ≤ 500 MB; corpo de requisição/resposta ≤ 4,5 MB; guardrail com contexto de 512 tokens (limite de tamanho da pergunta compatível); nenhuma credencial no repositório.
 
 **Scale/Scope**: tráfego de portfólio (dezenas a poucas centenas de visitas por mês); 1 página com 6 seções x 2 idiomas; base de conhecimento com dezenas a poucas centenas de trechos.
@@ -80,17 +82,26 @@ frontend/                          # Projeto Vercel 1 (Root Directory: frontend)
 │   └── [locale]/                  # /pt-BR e /en
 │       ├── layout.tsx
 │       └── page.tsx               # composição das seções
+├── i18n/
+│   └── request.ts                 # configuração do next-intl
+├── middleware.ts                  # roteamento de locale (next-intl)
 ├── components/
 │   ├── sections/                  # Hero, Summary, Timeline, Projects, Certifications, Contact
-│   ├── chat/                      # ChatPanel, mensagens, aviso de privacidade
+│   ├── chat/                      # ChatPanel, useChatSession (cliente SSE), avisos
 │   └── ui/                        # seletor de idioma, alternador de tema, botões
 ├── content/
 │   ├── pt-BR/                     # profile.json, timeline.json, projects.json, certifications.json, cv.md
 │   └── en/
 ├── messages/                      # pt-BR.json, en.json (textos de interface)
-├── lib/                           # carregamento/validação do conteúdo, cliente do chat (SSE)
-├── public/                        # foto, cv/cv-pt-BR.pdf, cv/cv-en.pdf, imagens Open Graph
-├── tests/                         # unit (Vitest) e e2e (Playwright)
+├── lib/                           # carregamento/validação do conteúdo (schema.ts, loader.ts)
+├── public/
+│   ├── images/                    # profile.png (foto real do autor) e imagens Open Graph
+│   └── cv/                        # cv-pt-BR.pdf, cv-en.pdf (CVs reais do autor)
+├── tests/
+│   ├── unit/                      # Vitest (ex.: content-loader.test.ts)
+│   └── e2e/                       # Playwright, com projetos mobile/desktop (playwright.config.ts) e helper de axe
+├── playwright.config.ts
+├── vitest.config.ts
 ├── next.config.ts                 # rewrite /api/* para o backend
 └── package.json
 
