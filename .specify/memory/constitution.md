@@ -1,10 +1,22 @@
 <!--
 Sync Impact Report
-- Version change: 1.0.0 → 1.1.0 (MINOR: new principle IX added)
-- Modified principles: none renamed
-- Added sections: Princípio IX (Gestão de Credenciais)
+- Version change: 1.1.0 → 1.1.1 (PATCH: correção de redação desatualizada, sem mudança de regra)
+- Modified principles:
+  - VII. CI/CD e Automação — "ping agendado" generalizado para "verificação de saúde/disponibilidade
+    agendada de um serviço externo crítico (quando aplicável)", pois a arquitetura vigente (Groq,
+    sem Hugging Face Space) não tem mais um serviço que "dorme" e precise de ping; a regra de fundo
+    (primeiro workflow = checagem agendada de disponibilidade) não mudou.
+  - IX. Gestão de Credenciais — removida a menção específica a "segredo do Space" e "Hugging Face
+    Secrets"; generalizada para "cofre nativo de qualquer serviço externo usado pelo projeto" e
+    "qualquer endpoint próprio exposto pelo projeto MUST exigir autenticação ou segredo
+    compartilhado", cobrindo tanto a arquitetura atual (sem Space) quanto futuras mudanças de
+    provedor sem exigir nova emenda a cada troca.
+- Added sections: none
 - Removed sections: none
 - Deferred TODOs: none
+- Motivação: achados C1 e C2 da análise `/speckit-analyze` de 2026-09-27 sobre
+  specs/001-portfolio-portal (texto da constituição referenciando um componente — Hugging Face
+  Space — descartado no plano de implementação em favor da API da Groq).
 -->
 # Portal de Portfólio (IA) Constitution
 
@@ -55,11 +67,14 @@ Toda mudança MUST passar por CI (lint, testes e build) antes de entrar na `main
 MUST ser protegida contra merge com CI falhando. O deploy na Vercel é automático a cada push
 na `main`; NÃO se cria pipeline de deploy próprio para o que a Vercel já faz. Workflows do
 GitHub Actions MUST ser pequenos, legíveis e proporcionais ao projeto, adotados em ordem
-crescente: ping agendado, CI do frontend, CI do backend, regeneração de embeddings, proteção da
-`main`. Workflows agendados MUST falhar de forma explícita e ter mitigação contra desativação
-por inatividade.
+crescente: verificação de saúde/disponibilidade agendada de um serviço externo crítico (quando
+aplicável — por exemplo, um ping ou uma checagem de `/health`), CI do frontend, CI do backend,
+regeneração de embeddings, proteção da `main`. Workflows agendados MUST falhar de forma
+explícita e ter mitigação contra desativação por inatividade.
 Rationale: automação confiável com o menor custo de manutenção, e prática de CI/CD como
-objetivo de aprendizado.
+objetivo de aprendizado. A redação não amarra o projeto a um serviço específico (ex.: um Space
+que "dorme"), para que a regra continue válida se o provedor de guardrail ou de hospedagem
+mudar.
 
 ### VIII. Observabilidade e Testes Proporcionais
 O chat MUST ser rastreado (pergunta, trechos recuperados, resultado do guardrail, latência,
@@ -70,16 +85,20 @@ Rationale: em sistemas de IA, sem visibilidade não há como detectar lacunas de
 abuso ou regressões de qualidade.
 
 ### IX. Gestão de Credenciais
-Credenciais (Google, Hugging Face, segredo do Space) MUST viver apenas em variáveis de
-ambiente ou nos cofres de cada plataforma (Vercel, GitHub Secrets, Hugging Face Secrets), com
-chaves separadas para desenvolvimento e produção. A chave do Google MUST ser restrita às APIs
-necessárias e ter teto de cota. O endpoint do Space MUST exigir segredo compartilhado. O
-repositório MUST ter secret scanning e push protection ativados e um `.env.example` sem valores
-reais. Workflows do GitHub Actions MUST declarar `permissions:` mínimas. Em caso de vazamento,
-a chave MUST ser revogada e substituída imediatamente.
+Credenciais de provedores externos (ex.: LLM, embeddings, guardrail, cache/rate limit,
+observabilidade) MUST viver apenas em variáveis de ambiente ou no cofre nativo de cada
+plataforma usada (ex.: Vercel, GitHub Secrets, ou o cofre do próprio provedor), com chaves
+separadas para desenvolvimento e produção. Toda chave de provedor externo MUST ser restrita ao
+mínimo necessário (escopo de API) e ter teto de cota ou de orçamento quando o provedor
+oferecer essa opção. Qualquer endpoint próprio exposto pelo projeto MUST exigir autenticação ou
+segredo compartilhado. O repositório MUST ter secret scanning e push protection ativados e um
+`.env.example` sem valores reais. Workflows do GitHub Actions MUST declarar `permissions:`
+mínimas. Em caso de vazamento, a chave MUST ser revogada e substituída imediatamente.
 Rationale: um vazamento de chave gera custo e abuso; as medidas acima são gratuitas e
 suficientes para o porte do projeto (rotação automatizada e regras para forks ficam fora do
-escopo por ora).
+escopo por ora). A redação não lista provedores específicos, para que a regra continue valendo
+sem emenda quando um provedor for trocado (ex.: a substituição do Hugging Face Space pela API
+da Groq no guardrail).
 
 ## Restrições Adicionais
 
@@ -108,4 +127,4 @@ remoção ou redefinição incompatível de princípios; MINOR para novo princí
 material; PATCH para esclarecimentos e correções de redação. Revisões de plano e de pull
 request MUST verificar a conformidade com estes princípios.
 
-**Version**: 1.1.0 | **Ratified**: 2026-09-26 | **Last Amended**: 2026-09-26
+**Version**: 1.1.1 | **Ratified**: 2026-09-26 | **Last Amended**: 2026-09-27

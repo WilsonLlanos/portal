@@ -128,4 +128,9 @@ brief.md
 
 ## Complexity Tracking
 
-Sem violações da constituição. Observação: dois projetos na Vercel (em vez de um) são justificados pelo objetivo de usar Python no backend e Next.js no frontend; a alternativa de um único projeto em TypeScript foi rejeitada por contrariar a preferência do autor e o objetivo de demonstrar Python/IA.
+| Desvio | Por que é necessário | Alternativa mais simples rejeitada porque |
+|---|---|---|
+| Dois projetos na Vercel (`frontend/` e `backend/`) em vez de um | Usar Python no backend (preferência do autor e objetivo de demonstrar IA) e Next.js no frontend | Um único projeto em TypeScript contrariaria a preferência do autor e o objetivo de aprendizado/demonstração em Python |
+| Gemini e Groq em **camada paga** (com teto de orçamento) em vez da camada gratuita padrão, aparente exceção ao Princípio II (camadas gratuitas MUST ser priorizadas) | Gemini: a camada gratuita permite ao Google usar o conteúdo enviado para melhorar seus produtos, o que expõe as perguntas dos visitantes (Princípio IV, privacidade). Groq: a documentação não confirma o Prompt Guard 2 na camada 100% gratuita; cadastrar cartão evita risco de indisponibilidade sem aviso | A camada gratuita do Gemini foi rejeitada por conflitar com a privacidade dos visitantes; um guardrail alternativo sem custo (ONNX local, plano B do research.md D5) foi rejeitado por exigir mais esforço de implementação sem necessidade, já que o custo pago é irrisório (~US$0,04/25M tokens) e protegido pelo teto diário (FR-024) e pelo orçamento configurado no provedor (decisões O1/O2) — mantendo o espírito de custo mínimo do Princípio II mesmo fora da camada gratuita |
+
+Nenhum outro desvio da constituição identificado; o restante do design passa nos 9 princípios sem exceção (ver Constitution Check acima).

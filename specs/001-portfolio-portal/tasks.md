@@ -33,6 +33,8 @@ Aplicação web com dois projetos (ver [plan.md](plan.md) § Project Structure):
 - [ ] T005 [P] Configurar `ruff` em `backend/pyproject.toml` (lint e format)
 - [ ] T006 Criar `backend/.env.example` com todas as variáveis: `GEMINI_API_KEY`, `GROQ_API_KEY`, `UPSTASH_REDIS_REST_URL`, `UPSTASH_REDIS_REST_TOKEN`, `LANGFUSE_PUBLIC_KEY`, `LANGFUSE_SECRET_KEY`, `LANGFUSE_HOST`, `MAX_MESSAGE_LENGTH=500`, `DAILY_COST_CAP_CENTS=50`, `RATE_LIMIT_PER_HOUR=20`, `GUARD_TIMEOUT_SECONDS=2` (sem valores reais; ver constituição IX)
 - [ ] T007 Atualizar o `.gitignore` da raiz com os artefatos de build de `frontend/` (`frontend/.next/`, `frontend/node_modules/`) e `backend/` (`backend/.venv/`, `backend/__pycache__/`), preservando as regras já existentes
+- [ ] T007a [P] Configurar um teto de orçamento (alerta e/ou corte) na conta paga do Google Cloud/AI Studio usada pelo `GEMINI_API_KEY`, conforme a decisão O1 do [plan.md](plan.md) (não é código; registrar no `README.md` que esse passo foi feito e o valor configurado)
+- [ ] T007b [P] Cadastrar um cartão na conta da Groq usada pelo `GROQ_API_KEY` e confirmar o preço vigente do `meta-llama/llama-prompt-guard-2-86m`, conforme a decisão O2 do [plan.md](plan.md) (não é código; registrar no `README.md` que esse passo foi feito)
 
 **Checkpoint**: os dois projetos instalam e rodam localmente (mesmo sem funcionalidade).
 
@@ -47,6 +49,7 @@ Aplicação web com dois projetos (ver [plan.md](plan.md) § Project Structure):
 - [ ] T008 Definir o esquema de conteúdo (TypeScript) para `Profile`, `Experience`, `Project`, `Certification` em `frontend/lib/content/schema.ts`, replicando os campos e regras de [data-model.md](data-model.md) § 1 (ex.: `Experience.start`/`end` no formato `YYYY-MM`, `end = null` = em andamento, `start <= end`; `Project.technologies` com pelo menos 1 item; `alt` obrigatório em `profile.photo`)
 - [ ] T009 [P] Criar os arquivos de conteúdo provisório `frontend/content/pt-BR/{profile,timeline,projects,certifications}.json` e `frontend/content/pt-BR/cv.md`, claramente marcados como placeholder, seguindo o esquema de T008
 - [ ] T010 [P] Criar os arquivos equivalentes em `frontend/content/en/{profile,timeline,projects,certifications}.json` e `frontend/content/en/cv.md`, com os mesmos IDs de `T009` (necessário para o edge case "idioma sem tradução")
+- [ ] T010a [P] Criar os PDFs placeholder `frontend/public/cv/cv-pt-BR.pdf` e `frontend/public/cv/cv-en.pdf` (claramente marcados como provisórios), necessários para T025 e para o cenário 1 do [quickstart.md](quickstart.md) funcionarem antes do CV real do autor (FR-006)
 - [ ] T011 Implementar o carregador e validador de conteúdo em `frontend/lib/content/loader.ts`, que falha o build se um idioma estiver com campos ausentes frente ao outro (edge case da spec)
 - [ ] T012 Configurar roteamento `next-intl` para os locais `pt-BR` e `en` em `frontend/i18n/request.ts` e `frontend/middleware.ts`, com `pt-BR` como alternativa quando o navegador não corresponder (Assumptions da spec)
 - [ ] T013 Criar `frontend/app/[locale]/layout.tsx` com `next-themes` (tema padrão = preferência do sistema, com troca manual persistida) e os textos de interface de `frontend/messages/{pt-BR,en}.json`
@@ -77,7 +80,7 @@ Aplicação web com dois projetos (ver [plan.md](plan.md) § Project Structure):
 ### Implementation for User Story 1
 
 - [ ] T024 [P] [US1] Criar o componente `Hero` em `frontend/components/sections/Hero.tsx` (foto com `alt`, nome, título, frase, botões "Baixar CV" e "Falar comigo"), consumindo `profile.json` via `T011`
-- [ ] T025 [US1] Ligar "Baixar CV" ao arquivo `frontend/public/cv/cv-{locale}.pdf` do idioma atual (FR-006)
+- [ ] T025 [US1] Ligar "Baixar CV" ao arquivo `frontend/public/cv/cv-{locale}.pdf` do idioma atual (depende de T010a; FR-006)
 - [ ] T026 [US1] Ligar "Falar comigo" à navegação até a seção de contato (Acceptance Scenario 3 da US1)
 - [ ] T027 [US1] Adicionar metadados Open Graph e de SEO por idioma em `frontend/app/[locale]/layout.tsx` (FR-012)
 - [ ] T028 [US1] Montar `frontend/app/[locale]/page.tsx`, posicionando o `Hero` como primeira seção
@@ -226,7 +229,7 @@ Aplicação web com dois projetos (ver [plan.md](plan.md) § Project Structure):
 ### Parallel Opportunities
 
 - Setup: T002–T005 em paralelo
-- Foundational: T009–T010, T014–T018, T021–T022 em paralelo
+- Foundational: T009–T010a, T014–T018, T021–T022 em paralelo
 - Dentro de cada história, as tarefas marcadas `[P]` (testes e componentes de arquivos distintos)
 - Depois da Fase 2, US1, US2 e US5 podem avançar em paralelo; US3 pode começar em paralelo e US4 só fecha depois de T054 (US3)
 
