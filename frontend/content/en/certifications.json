@@ -1,0 +1,13 @@
+{
+  "_placeholder": true,
+  "_note": "Provisional content (T010). Replace with the real certifications.",
+  "items": [
+    {
+      "id": "cert-placeholder-1",
+      "name": "[PLACEHOLDER] AI Certification",
+      "issuer": "[PLACEHOLDER] Issuer",
+      "date": "2024-06",
+      "verifyUrl": null
+    }
+  ]
+}

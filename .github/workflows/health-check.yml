@@ -1,0 +1,32 @@
+name: Health check
+
+# T067: substitui o "ping do Space" do brief — o guardrail agora é a API da
+# Groq, sem serviço que "dorme" (ver constitution.md Princípio VII e plan.md
+# nota N1). Falha explicitamente se /health não responder 200.
+on:
+  schedule:
+    - cron: "*/30 * * * *"
+  workflow_dispatch: {}
+
+permissions:
+  contents: read
+
+jobs:
+  health-check:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Chamar GET /health em produção
+        env:
+          HEALTH_URL: ${{ secrets.BACKEND_HEALTH_URL }}
+        run: |
+          if [ -z "$HEALTH_URL" ]; then
+            echo "BACKEND_HEALTH_URL não configurado nos GitHub Secrets." >&2
+            exit 1
+          fi
+          status=$(curl -s -o /tmp/health.json -w "%{http_code}" "$HEALTH_URL")
+          echo "HTTP $status"
+          cat /tmp/health.json
+          if [ "$status" != "200" ]; then
+            echo "Backend não respondeu 200." >&2
+            exit 1
+          fi

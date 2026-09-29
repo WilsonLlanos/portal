@@ -1,0 +1,26 @@
+{
+  "_placeholder": true,
+  "_note": "Conteúdo provisório (T009). Substituir pelos itens reais do CV.",
+  "items": [
+    {
+      "id": "exp-placeholder-1",
+      "kind": "professional",
+      "organization": "[PLACEHOLDER] Empresa",
+      "role": "[PLACEHOLDER] Cargo em IA",
+      "start": "2024-01",
+      "end": null,
+      "description": "[PLACEHOLDER] Descrição curta da experiência profissional em IA.",
+      "highlights": ["[PLACEHOLDER] Resultado 1", "[PLACEHOLDER] Resultado 2"]
+    },
+    {
+      "id": "edu-placeholder-1",
+      "kind": "academic",
+      "organization": "[PLACEHOLDER] Instituição",
+      "role": "[PLACEHOLDER] Curso/Formação em IA",
+      "start": "2022-01",
+      "end": "2023-12",
+      "description": "[PLACEHOLDER] Descrição curta da formação acadêmica.",
+      "highlights": []
+    }
+  ]
+}

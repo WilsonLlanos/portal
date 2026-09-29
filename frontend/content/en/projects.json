@@ -1,0 +1,14 @@
+{
+  "_placeholder": true,
+  "_note": "Provisional content (T010). Replace with the real projects.",
+  "items": [
+    {
+      "id": "proj-placeholder-1",
+      "name": "[PLACEHOLDER] AI Project",
+      "description": "[PLACEHOLDER] Short description of the project, the problem solved and the result.",
+      "technologies": ["Python", "FastAPI"],
+      "repoUrl": "https://github.com/PLACEHOLDER/project",
+      "demoUrl": null
+    }
+  ]
+}

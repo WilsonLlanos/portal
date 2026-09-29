@@ -1,0 +1,26 @@
+{
+  "_placeholder": true,
+  "_note": "Provisional content (T010). Replace with the real CV items.",
+  "items": [
+    {
+      "id": "exp-placeholder-1",
+      "kind": "professional",
+      "organization": "[PLACEHOLDER] Company",
+      "role": "[PLACEHOLDER] AI Role",
+      "start": "2024-01",
+      "end": null,
+      "description": "[PLACEHOLDER] Short description of the professional AI experience.",
+      "highlights": ["[PLACEHOLDER] Result 1", "[PLACEHOLDER] Result 2"]
+    },
+    {
+      "id": "edu-placeholder-1",
+      "kind": "academic",
+      "organization": "[PLACEHOLDER] Institution",
+      "role": "[PLACEHOLDER] AI Degree/Program",
+      "start": "2022-01",
+      "end": "2023-12",
+      "description": "[PLACEHOLDER] Short description of the academic background.",
+      "highlights": []
+    }
+  ]
+}

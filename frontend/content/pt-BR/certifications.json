@@ -1,0 +1,13 @@
+{
+  "_placeholder": true,
+  "_note": "Conteúdo provisório (T009). Substituir pelas certificações reais.",
+  "items": [
+    {
+      "id": "cert-placeholder-1",
+      "name": "[PLACEHOLDER] Certificação em IA",
+      "issuer": "[PLACEHOLDER] Emissor",
+      "date": "2024-06",
+      "verifyUrl": null
+    }
+  ]
+}

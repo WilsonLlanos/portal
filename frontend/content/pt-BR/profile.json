@@ -1,0 +1,17 @@
+{
+  "_placeholder": true,
+  "_note": "Conteúdo provisório (T009). Revisar com o texto real do CV_Wilson_Llanos_AI.pdf antes de publicar.",
+  "name": "Wilson Llanos",
+  "headline": "Engenheiro de IA",
+  "tagline": "Construo sistemas de IA aplicada, do protótipo à produção.",
+  "summary": "[PLACEHOLDER] Resumo de carreira com foco em Inteligência Artificial — substituir por um resumo curto baseado no CV real, destacando experiência profissional e acadêmica em IA.",
+  "photo": {
+    "src": "/images/profile.png",
+    "alt": "Foto de Wilson Llanos, retrato de estúdio"
+  },
+  "links": {
+    "linkedin": "https://www.linkedin.com/in/PLACEHOLDER",
+    "github": "https://github.com/PLACEHOLDER",
+    "email": "wilson.alexandre.llanos@gmail.com"
+  }
+}

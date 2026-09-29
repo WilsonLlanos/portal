@@ -1,0 +1,33 @@
+name: Backend CI
+
+# T069
+on:
+  pull_request:
+    paths: ["backend/**", ".github/workflows/backend-ci.yml"]
+  push:
+    branches: [main]
+    paths: ["backend/**", ".github/workflows/backend-ci.yml"]
+
+permissions:
+  contents: read
+
+defaults:
+  run:
+    working-directory: backend
+
+jobs:
+  lint-and-test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: astral-sh/setup-uv@v3
+        with:
+          version: "latest"
+
+      - run: uv python install 3.12
+      - run: uv sync --all-extras --dev
+
+      - run: uv run ruff check .
+      - name: Testes (sem eval — dependem de credenciais reais)
+        run: uv run pytest --ignore=tests/eval

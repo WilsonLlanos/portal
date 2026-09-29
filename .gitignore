@@ -15,4 +15,16 @@ venv/
 # Dependências e build
 node_modules/
 .next/
+out/
 __pycache__/
+*.pyc
+*.egg-info/
+.pytest_cache/
+.ruff_cache/
+*.tsbuildinfo
+
+# Artefatos de teste (T007)
+coverage/
+playwright-report/
+test-results/
+.lighthouseci/

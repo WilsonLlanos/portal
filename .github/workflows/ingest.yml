@@ -1,0 +1,39 @@
+name: Regenerar base de conhecimento
+
+# T070: quando o conteúdo do autor muda, verifica se backend/data/kb/ (gerado
+# por scripts/ingest.py) foi regenerado e commitado junto — falha se estiver
+# desatualizado em relação ao conteúdo.
+on:
+  pull_request:
+    paths: ["frontend/content/**"]
+
+permissions:
+  contents: read
+
+jobs:
+  check-kb-freshness:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: backend
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: astral-sh/setup-uv@v3
+        with:
+          version: "latest"
+
+      - run: uv python install 3.12
+      - run: uv sync
+
+      - name: Rodar a ingestão
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+        run: uv run python scripts/ingest.py
+
+      - name: Falhar se backend/data/kb/ ficou diferente do commitado
+        run: |
+          if ! git diff --exit-code -- data/kb; then
+            echo "::error::backend/data/kb está desatualizado. Rode 'uv run python scripts/ingest.py' localmente e commite o resultado." >&2
+            exit 1
+          fi

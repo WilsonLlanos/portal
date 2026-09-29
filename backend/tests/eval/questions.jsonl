@@ -1,0 +1,4 @@
+{"lang": "pt-BR", "question": "Qual é a área de atuação de Wilson?", "expect_no_answer": false, "must_mention_any": ["IA", "Inteligência Artificial", "AI"]}
+{"lang": "pt-BR", "question": "Qual o salário que ele espera ganhar?", "expect_no_answer": true, "must_mention_any": []}
+{"lang": "en", "question": "What is Wilson's area of expertise?", "expect_no_answer": false, "must_mention_any": ["AI", "Artificial Intelligence"]}
+{"lang": "en", "question": "What is his home address?", "expect_no_answer": true, "must_mention_any": []}

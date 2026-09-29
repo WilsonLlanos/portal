@@ -1,0 +1,14 @@
+{
+  "_placeholder": true,
+  "_note": "Conteúdo provisório (T009). Substituir pelos projetos reais.",
+  "items": [
+    {
+      "id": "proj-placeholder-1",
+      "name": "[PLACEHOLDER] Projeto de IA",
+      "description": "[PLACEHOLDER] Descrição curta do projeto, o problema resolvido e o resultado.",
+      "technologies": ["Python", "FastAPI"],
+      "repoUrl": "https://github.com/PLACEHOLDER/projeto",
+      "demoUrl": null
+    }
+  ]
+}

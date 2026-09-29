@@ -1,0 +1,59 @@
+{
+  "hero": {
+    "downloadCv": "Download CV",
+    "talkToMe": "Talk to me"
+  },
+  "nav": {
+    "summary": "Summary",
+    "timeline": "Timeline",
+    "projects": "Projects",
+    "certifications": "Certifications",
+    "chat": "Chat",
+    "contact": "Contact"
+  },
+  "summary": {
+    "title": "Summary"
+  },
+  "timeline": {
+    "title": "Timeline",
+    "present": "Present"
+  },
+  "projects": {
+    "title": "Projects",
+    "repoLink": "View repository"
+  },
+  "certifications": {
+    "title": "Certifications",
+    "verifyLink": "Verify"
+  },
+  "contact": {
+    "title": "Contact",
+    "linkedin": "LinkedIn",
+    "github": "GitHub",
+    "email": "Email"
+  },
+  "theme": {
+    "toggle": "Toggle theme",
+    "light": "Light",
+    "dark": "Dark",
+    "system": "System"
+  },
+  "language": {
+    "label": "Language"
+  },
+  "chat": {
+    "title": "Ask about my career",
+    "placeholder": "Ask about my AI experience...",
+    "send": "Send",
+    "privacyNotice": "Your questions are logged anonymously for 30 days to improve this service. Please don't share personal data.",
+    "errorGeneric": "The chat is unavailable right now. Please try again shortly or reach out directly.",
+    "errorRateLimited": "You've reached the hourly question limit. Please try again later, or reach out directly.",
+    "errorPaused": "The chat has reached its daily usage limit and will be back tomorrow. Meanwhile, download my CV or get in touch.",
+    "errorTooLong": "Your question is too long. Please keep it under 500 characters.",
+    "suggestions": {
+      "projects": "View projects",
+      "cv": "Download CV",
+      "contact": "Go to contact"
+    }
+  }
+}

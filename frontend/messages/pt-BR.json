@@ -1,0 +1,59 @@
+{
+  "hero": {
+    "downloadCv": "Baixar CV",
+    "talkToMe": "Falar comigo"
+  },
+  "nav": {
+    "summary": "Resumo",
+    "timeline": "Trajetória",
+    "projects": "Projetos",
+    "certifications": "Certificações",
+    "chat": "Chat",
+    "contact": "Contato"
+  },
+  "summary": {
+    "title": "Resumo"
+  },
+  "timeline": {
+    "title": "Trajetória",
+    "present": "Atual"
+  },
+  "projects": {
+    "title": "Projetos",
+    "repoLink": "Ver repositório"
+  },
+  "certifications": {
+    "title": "Certificações",
+    "verifyLink": "Verificar"
+  },
+  "contact": {
+    "title": "Contato",
+    "linkedin": "LinkedIn",
+    "github": "GitHub",
+    "email": "E-mail"
+  },
+  "theme": {
+    "toggle": "Alternar tema",
+    "light": "Claro",
+    "dark": "Escuro",
+    "system": "Sistema"
+  },
+  "language": {
+    "label": "Idioma"
+  },
+  "chat": {
+    "title": "Converse sobre minha carreira",
+    "placeholder": "Pergunte sobre minha experiência em IA...",
+    "send": "Enviar",
+    "privacyNotice": "Suas perguntas são registradas de forma anônima por 30 dias para melhorar este serviço. Não envie dados pessoais.",
+    "errorGeneric": "O chat está indisponível no momento. Tente novamente em instantes ou entre em contato diretamente.",
+    "errorRateLimited": "Você atingiu o limite de perguntas por hora. Tente novamente mais tarde, ou entre em contato diretamente.",
+    "errorPaused": "O chat atingiu o limite diário de uso e volta a funcionar amanhã. Enquanto isso, baixe meu CV ou entre em contato.",
+    "errorTooLong": "Sua pergunta é longa demais. Tente resumir em até 500 caracteres.",
+    "suggestions": {
+      "projects": "Ver projetos",
+      "cv": "Baixar CV",
+      "contact": "Ir para contato"
+    }
+  }
+}
