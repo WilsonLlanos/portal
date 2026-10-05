@@ -18,6 +18,8 @@ export interface Profile {
     linkedin: string;
     github: string;
     email: string;
+    /** Telefone no formato internacional para exibição, ex.: "+55 11 97522-5763". */
+    phone: string;
     /** Link wa.me com mensagem inicial pronta (escolha do autor publicar o número). */
     whatsapp: string;
   };

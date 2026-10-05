@@ -28,7 +28,7 @@ export async function Hero({ locale }: { locale: Locale }) {
         </p>
         <p className="mt-4 text-base sm:text-lg">{profile.tagline}</p>
 
-        <div className="mt-8 flex justify-center md:justify-start">
+        <div className="mt-8 flex flex-col items-center gap-3 sm:flex-row sm:justify-center md:justify-start">
           {/* T025: CV real do idioma atual (frontend/public/cv/) */}
           <a
             href={`/cv/cv-${locale}.pdf`}
@@ -37,6 +37,13 @@ export async function Hero({ locale }: { locale: Locale }) {
           >
             {t("downloadCv")}
           </a>
+          {/* Telefone em texto puro, com código do país, para o recrutador
+              copiar (quem é de fora pode não usar WhatsApp). select-all: um
+              clique seleciona o número inteiro. */}
+          <p className="px-2 py-3 text-center font-medium">
+            {t("callMe")}:{" "}
+            <span className="select-all whitespace-nowrap">{profile.links.phone}</span>
+          </p>
         </div>
       </div>
 

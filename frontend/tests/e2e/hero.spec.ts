@@ -13,6 +13,10 @@ test.describe("Hero", () => {
     await expect(hero.getByRole("link", { name: /baixar cv/i })).toBeVisible();
     await expect(hero.getByRole("link", { name: "WhatsApp" })).toBeVisible();
     await expect(hero.getByRole("link", { name: /falar comigo/i })).toHaveCount(0);
+    // Telefone por extenso ao lado do "Baixar CV", para quem não usa WhatsApp.
+    // Texto puro (sem link), para copiar o número.
+    await expect(hero.getByText("Fale comigo: +55 11 97522-5763")).toBeVisible();
+    await expect(hero.getByRole("link", { name: /97522/ })).toHaveCount(0);
 
     // "Sem rolagem": o hero preenche a viewport inicial (min-h-[100svh]).
     const box = await hero.boundingBox();

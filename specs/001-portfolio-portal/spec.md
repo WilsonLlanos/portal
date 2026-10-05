@@ -123,7 +123,7 @@ O recrutador encontra na seção de contato os links do autor (LinkedIn, GitHub,
 - **FR-004**: O portal MUST apresentar projetos em cards com descrição, tecnologias usadas e link para o repositório no GitHub.
 - **FR-005**: O portal MUST apresentar as certificações do autor.
 - **FR-006**: O portal MUST oferecer o download do CV em PDF em português e em inglês, conforme o idioma selecionado.
-- **FR-007**: O portal MUST oferecer contatos na tela inicial, logo abaixo da foto, como ícones com nome acessível, para LinkedIn, GitHub, e-mail e WhatsApp, e MUST NOT incluir formulário de contato na primeira versão. (Revisado em 2026-10: a seção de contato foi substituída por ícones abaixo da foto; o botão "Falar comigo" foi removido e o WhatsApp foi incluído, por decisão do autor.)
+- **FR-007**: O portal MUST oferecer contatos na tela inicial, logo abaixo da foto, como ícones com nome acessível, para LinkedIn, GitHub, e-mail e WhatsApp, além do telefone por extenso com código do país, em texto puro para ser copiado, ao lado do botão "Baixar CV", e MUST NOT incluir formulário de contato na primeira versão. (Revisado em 2026-10: a seção de contato foi substituída por ícones abaixo da foto; o botão "Falar comigo" foi removido e o WhatsApp foi incluído, por decisão do autor.)
 - **FR-008**: O portal MUST estar disponível em PT-BR e EN, com um seletor de idioma que afeta todo o conteúdo, o CV e as respostas do chat.
 - **FR-009**: O portal MUST oferecer tema claro e escuro, adotando por padrão a preferência do sistema e permitindo troca manual, com a escolha mantida durante a navegação.
 - **FR-010**: O portal MUST funcionar bem de celulares a desktops (mobile-first e responsivo).

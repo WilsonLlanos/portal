@@ -1,6 +1,7 @@
 {
   "hero": {
-    "downloadCv": "Baixar CV"
+    "downloadCv": "Baixar CV",
+    "callMe": "Fale comigo"
   },
   "nav": {
     "summary": "Resumo",
