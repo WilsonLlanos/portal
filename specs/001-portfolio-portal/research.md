@@ -38,7 +38,9 @@ Pesquisa feita em 2026-09-26 na documentação oficial e em fontes secundárias.
 - **Decision**: **Llama Prompt Guard 2 86M via API da Groq** (`meta-llama/llama-prompt-guard-2-86m`), atrás da interface `InputGuard`, complementada por defesas locais (limite de tamanho, heurísticas, rate limit, prompt de sistema restrito). Política **fail-open com degradação**: timeout curto (cerca de 2 s), circuit breaker em memória e, quando o guardrail estiver fora, defesas locais mais restritas + evento registrado.
 - **Rationale**: o modelo tem 512 tokens de contexto e suporte multilíngue em 8 idiomas; na Groq custa cerca de US$ 0,04 por 25 M tokens ([Groq docs](https://console.groq.com/docs/model/meta-llama/llama-prompt-guard-2-86m)), praticamente zero para o volume do portfólio.
 - **MUDANÇA EM RELAÇÃO AO BRIEF**: o brief previa hospedar o classificador em um **Space do Hugging Face**. A documentação atual informa que Spaces Docker/Gradio **exigem plano pago (PRO)** para serem criados ([Spaces Overview](https://huggingface.co/docs/hub/en/spaces-overview)); só Spaces estáticos são gratuitos. Isso derruba a opção (c) do brief. Consequência positiva: sem Space, **não há cold start nem necessidade de "ping" para mantê-lo acordado**.
-- **Cobrança (decidido)**: cartão cadastrado na Groq (decisão O2 do plano), já que a documentação não confirma o Prompt Guard 2 na camada 100% gratuita. Custo esperado irrisório. A política fail-open protege a experiência do visitante em qualquer caso.
+- **Cobrança (decidido, revisado em 2026-10-04)**: camada gratuita da Groq (30 req/min, 14,4 mil req/dia, 500 mil tokens/dia para o Prompt Guard 2), sem cartão — o upgrade para o plano Developer está indisponível ("temporarily unavailable due to high demand") e não é necessário para o volume de um portfólio. A política fail-open protege a experiência do visitante se a cota estourar.
+- **Formato de saída**: na Groq, `message.content` traz a probabilidade de ataque como texto (ex.: `"0.999"`), não um rótulo. O backend converte em score e bloqueia a partir de `GUARD_BLOCK_THRESHOLD` (padrão 0,5).
+- **Jev (TypeSafe) — descartado por ora**: modelo de decisão tipada lançado em 15/09/2026. A própria documentação avisa que ele é vulnerável a prompt injection e deve ficar ao lado de checagens determinísticas, não no lugar delas; preço não documentado. Possível experimento futuro para classificar perguntas fora do tema, nunca como guarda de injection.
 - **Alternative (plano B)**: Prompt Guard 2 (22M/86M) em ONNX quantizado dentro da função Python da Vercel, possível pelo limite de 500 MB (ou 5 GB em *large functions*, beta), porém com mais trabalho de conversão, licença Llama e cold start. Também: LLM pequeno como classificador.
 - **Alternatives rejected**: Guardrails AI (foca validação de saída, dependências pesadas para serverless); Space pago no HF.
 
@@ -81,7 +83,7 @@ Pesquisa feita em 2026-09-26 na documentação oficial e em fontes secundárias.
 
 ## Resumo dos itens a verificar na implementação
 
-1. Cadastro do cartão na Groq e confirmação do preço vigente do Prompt Guard 2.
+1. ~~Cadastro do cartão na Groq~~ — substituído pela camada gratuita (2026-10-04); acesso ao Prompt Guard 2 confirmado com chamadas reais.
 2. ID exato e cota do modelo de embedding do Gemini.
 3. Configuração do teto de orçamento na conta paga do Google Cloud/AI Studio.
 4. Compatibilidade `next-intl` + Next.js 16.

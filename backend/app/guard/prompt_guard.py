@@ -49,16 +49,42 @@ class GroqPromptGuard:
                 model=self._settings.groq_guard_model,
                 messages=[{"role": "user", "content": text[:_MAX_CHARS_SENT_TO_GUARD]}],
             )
-            self._circuit_breaker.record_success()
-            label = response.choices[0].message.content.strip().upper()
-            # Convenção do Prompt Guard 2: rótulo positivo indica injection/jailbreak.
-            is_malicious = "MALICIOUS" in label or label == "1" or label == "LABEL_1"
-            return GuardVerdict(
-                decision="block" if is_malicious else "allow",
-                score=1.0 if is_malicious else 0.0,
-                source="model",
-            )
         except Exception:  # noqa: BLE001 — fail-open é intencional
             logger.exception("guard.groq_call_failed")
             self._circuit_breaker.record_failure()
             return GuardVerdict(decision="allow", score=None, source="skipped_degraded")
+
+        self._circuit_breaker.record_success()
+        content = response.choices[0].message.content or ""
+        score = _parse_guard_output(content)
+        if score is None:
+            # O serviço respondeu, mas num formato inesperado: não é queda (o
+            # circuito não abre), apenas não dá para confiar no veredito.
+            logger.warning("guard.unparseable_output", extra={"guard_output": content[:50]})
+            return GuardVerdict(decision="allow", score=None, source="skipped_degraded")
+
+        return GuardVerdict(
+            decision="block" if score >= self._settings.guard_block_threshold else "allow",
+            score=score,
+            source="model",
+        )
+
+
+def _parse_guard_output(content: str) -> float | None:
+    """Converte a saída do Prompt Guard 2 em score de 0 a 1.
+
+    Na Groq, o modelo devolve a probabilidade de ataque como texto (ex.: "0.999"
+    para injection, "0.001" para texto benigno). Rótulos são aceitos como
+    reserva, caso o provedor mude o formato.
+    """
+    value = content.strip()
+    try:
+        return float(value)
+    except ValueError:
+        pass
+    label = value.upper()
+    if label in ("MALICIOUS", "LABEL_1"):
+        return 1.0
+    if label in ("BENIGN", "LABEL_0"):
+        return 0.0
+    return None

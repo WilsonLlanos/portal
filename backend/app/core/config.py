@@ -19,10 +19,12 @@ class Settings(BaseSettings):
     gemini_model: str = Field(default="gemini-3.1-flash-lite")
     gemini_embedding_model: str = Field(default="gemini-embedding-001")
 
-    # Guardrail (decisão O2 do plan.md: Groq com cartão cadastrado)
+    # Guardrail (decisão O2 do plan.md: Groq, camada gratuita)
     groq_api_key: str = Field(default="")
     groq_guard_model: str = Field(default="meta-llama/llama-prompt-guard-2-86m")
     guard_timeout_seconds: float = Field(default=2.0)
+    # Score do Prompt Guard 2 a partir do qual a pergunta é bloqueada.
+    guard_block_threshold: float = Field(default=0.5)
 
     # Estado compartilhado (Upstash Redis)
     upstash_redis_rest_url: str = Field(default="")

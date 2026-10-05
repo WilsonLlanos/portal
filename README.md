@@ -50,8 +50,8 @@ Antes do chat funcionar em produção, configure manualmente (ver
 `specs/001-portfolio-portal/tasks.md` T007a/T007b e `plan.md` decisões O1/O2):
 
 - [x] Teto de orçamento configurado no Google Cloud/AI Studio (`GEMINI_API_KEY`)
-- [ ] Cartão cadastrado na conta da Groq (`GROQ_API_KEY`) e preço do
-      `meta-llama/llama-prompt-guard-2-86m` confirmado
+- [x] `GROQ_API_KEY` criada na camada gratuita da Groq, com acesso ao
+      `meta-llama/llama-prompt-guard-2-86m` confirmado (sem cartão)
 
 ## Qualidade e CI/CD
 

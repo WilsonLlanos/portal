@@ -54,8 +54,7 @@ _ERROR_MESSAGES: dict[str, dict[str, str]] = {
             "Tente novamente em instantes ou entre em contato diretamente."
         ),
         "en": (
-            "The chat is unavailable right now. "
-            "Please try again shortly or reach out directly."
+            "The chat is unavailable right now. Please try again shortly or reach out directly."
         ),
     },
 }

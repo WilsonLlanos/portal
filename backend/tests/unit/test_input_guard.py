@@ -4,11 +4,12 @@ abertura/fechamento do circuit breaker (contracts/provider-interfaces.md).
 
 from app.core.config import Settings
 from app.guard.circuit_breaker import CircuitBreaker
-from app.guard.prompt_guard import GroqPromptGuard
+from app.guard.prompt_guard import GroqPromptGuard, _parse_guard_output
 
 
 class _FakeCompletions:
-    def __init__(self, *, raise_error: bool = False, label: str = "SAFE"):
+    # Na Groq, o Prompt Guard 2 devolve o score de ataque como texto ("0.001").
+    def __init__(self, *, raise_error: bool = False, label: str = "0.001"):
         self.raise_error = raise_error
         self.label = label
         self.calls = 0
@@ -79,16 +80,42 @@ def test_open_circuit_skips_model_call_entirely():
     assert fake_completions.calls == 0  # nunca chegou a chamar o modelo
 
 
-def test_model_blocks_malicious_label():
-    breaker = CircuitBreaker(failure_threshold=3, reset_seconds=60)
-    settings = Settings(groq_api_key="fake-key")
-    guard = GroqPromptGuard(settings, breaker)
+def _guard_returning(output: str, breaker: CircuitBreaker | None = None) -> GroqPromptGuard:
+    guard = GroqPromptGuard(
+        Settings(groq_api_key="fake-key"),
+        breaker or CircuitBreaker(failure_threshold=1, reset_seconds=60),
+    )
     guard._client = type(
         "FakeClient",
         (),
-        {"chat": type("Chat", (), {"completions": _FakeCompletions(label="MALICIOUS")})()},
+        {"chat": type("Chat", (), {"completions": _FakeCompletions(label=output)})()},
     )()
+    return guard
 
-    verdict = guard.check("pergunta qualquer, sem padrão heurístico óbvio")
+
+def test_model_blocks_high_score():
+    # Formato real da Groq: score numérico alto para ataque.
+    verdict = _guard_returning("0.999").check("pergunta qualquer, sem padrão heurístico óbvio")
     assert verdict.decision == "block"
     assert verdict.source == "model"
+    assert verdict.score == 0.999
+
+
+def test_model_allows_low_score():
+    verdict = _guard_returning("0.001").check("Quais projetos de IA o Wilson fez?")
+    assert verdict.decision == "allow"
+    assert verdict.source == "model"
+
+
+def test_unparseable_output_fails_open_without_opening_circuit():
+    breaker = CircuitBreaker(failure_threshold=1, reset_seconds=60)
+    verdict = _guard_returning("???", breaker).check("pergunta normal")
+    assert verdict.source == "skipped_degraded"
+    assert breaker.is_open() is False  # resposta estranha não é queda do serviço
+
+
+def test_parse_guard_output():
+    assert _parse_guard_output(" 0.75 ") == 0.75
+    assert _parse_guard_output("MALICIOUS") == 1.0
+    assert _parse_guard_output("label_0") == 0.0
+    assert _parse_guard_output("???") is None
