@@ -1,5 +1,4 @@
-<!-- Este arquivo alimenta a base de conhecimento do chat (ingest.py); não é exibido na página.
-     Datas de certificações e da experiência profissional ainda pendentes de confirmação. -->
+<!-- Este arquivo alimenta a base de conhecimento do chat (ingest.py); não é exibido na página. -->
 
 # CV — Wilson Llanos (PT-BR)
 
@@ -14,11 +13,21 @@ Além desse projeto, este próprio portal é outro exemplo de projeto relevante:
 um agente de IA que ajuda o visitante a tirar dúvidas sobre a carreira de Wilson e destaca
 informações relevantes que o visitante compartilhar na conversa.
 
+## Progressão na EISA - Empresa Interagrícola
+
+Wilson construiu sua carreira de tecnologia na EISA - Empresa Interagrícola, com promoções
+sucessivas: começou como Analista de Suporte (abr/2022 a jan/2025), passou a Analista
+Programador (fev/2025 a dez/2025) e foi promovido a Desenvolvedor de Sistemas (desde jan/2026)
+após superar metas e concluir entregas antecipadamente. Hoje desenvolve o sistema multiagente
+com RAG híbrido no Azure para o suporte N1 de uma plataforma de logística de café, além de
+cuidar de integrações críticas entre o ERP e os sistemas logísticos.
+
 ## Formação e certificações
 
-Wilson possui MBA em Inteligência Artificial e é formado em Engenharia Civil (2016). Tem
-certificados em IA, incluindo um em Machine Learning pela Data Science Academy e a certificação
-Microsoft Certified: Azure Data Fundamentals (DP-900).
+Wilson possui MBA em Inteligência Artificial e Big Data pelo ICMC/USP (2025-2026) e é bacharel
+em Engenharia Civil pela Uninove (2012-2016). Tem as certificações "Pipeline ETL e Machine
+Learning com Apache Spark", pela Data Science Academy, e Microsoft Certified: Azure Data
+Fundamentals (DP-900).
 
 ## Filosofia de trabalho
 

@@ -1,32 +1,62 @@
 {
   "items": [
     {
-      "id": "exp-ai-engineer",
+      "id": "exp-eisa-dev-sistemas",
       "kind": "professional",
       "organization": "EISA - Empresa Interagrícola",
-      "role": "Systems Developer (AI Engineer)",
-      "start": "2022-04",
+      "role": "Systems Developer",
+      "start": "2026-01",
       "end": null,
-      "description": "Systems development with a growing focus on production Artificial Intelligence solutions, including an ongoing project to automate support for a company's internal system on Azure.",
+      "description": "Building AI solutions and system integrations on the Azure ecosystem.",
       "highlights": [
-        "Implemented an automated support system integrating an LLM with vector and relational databases"
+        "Building an AI solution with a multi-agent system (LangGraph) and hybrid RAG on Azure to automate tier-1 support for a coffee logistics platform",
+        "Built event-driven communication (Azure Service Bus + .NET), improving integration monitoring",
+        "Manage critical ERP-to-logistics integrations, syncing 50k+ records/day with 99.9% accuracy",
+        "Optimized an SSIS ETL pipeline, drastically reducing processing time",
+        "Implemented bidirectional flows to migrate 70+ processes with zero downtime"
+      ]
+    },
+    {
+      "id": "exp-eisa-analista-programador",
+      "kind": "professional",
+      "organization": "EISA - Empresa Interagrícola",
+      "role": "Programmer Analyst",
+      "start": "2025-02",
+      "end": "2025-12",
+      "description": "ETL processes and analytical reports for commodity logistics.",
+      "highlights": [
+        "Built ETL processes (Azure Functions, SSIS) handling 1M+ records/month with 99.8% accuracy",
+        "Created analytical reports (Reporting Services, Crystal Reports) covering the entire commodity logistics process",
+        "Promoted to Systems Developer after exceeding goals and delivering ahead of schedule"
+      ]
+    },
+    {
+      "id": "exp-eisa-analista-suporte",
+      "kind": "professional",
+      "organization": "EISA - Empresa Interagrícola",
+      "role": "Support Analyst",
+      "start": "2022-04",
+      "end": "2025-01",
+      "description": "Technical support for users across systems, databases and infrastructure.",
+      "highlights": [
+        "Provided technical support to users, diagnosing and solving system, database and infrastructure issues, reducing recurring tickets"
       ]
     },
     {
       "id": "edu-mba-ia",
       "kind": "academic",
-      "organization": "USP",
-      "role": "MBA in Artificial Intelligence",
+      "organization": "ICMC / USP",
+      "role": "MBA in Artificial Intelligence and Big Data",
       "start": "2025-07",
       "end": "2026-10",
-      "description": "MBA focused on Artificial Intelligence.",
+      "description": "MBA focused on Artificial Intelligence and Big Data.",
       "highlights": []
     },
     {
       "id": "edu-civil-engineering",
       "kind": "academic",
       "organization": "Uninove",
-      "role": "Civil Engineering",
+      "role": "Bachelor's in Civil Engineering",
       "start": "2012-01",
       "end": "2016-12",
       "description": "Civil Engineering degree.",

@@ -1,32 +1,62 @@
 {
   "items": [
     {
-      "id": "exp-ai-engineer",
+      "id": "exp-eisa-dev-sistemas",
       "kind": "professional",
       "organization": "EISA - Empresa Interagrícola",
-      "role": "Desenvolvedor de Sistemas (AI Engineer)",
-      "start": "2022-04",
+      "role": "Desenvolvedor de Sistemas",
+      "start": "2026-01",
       "end": null,
-      "description": "Desenvolvimento de sistemas com foco crescente em soluções de Inteligência Artificial em produção, incluindo um projeto atual de automação de suporte para um sistema interno de uma empresa, em ambiente Azure.",
+      "description": "Desenvolvimento de soluções de IA e integração de sistemas no ecossistema Azure.",
       "highlights": [
-        "Implementação de um sistema de suporte automatizado com integração de LLM a bancos de dados vetorial e relacional"
+        "Desenvolvendo solução de IA com sistema multiagente (LangGraph) e RAG híbrido no Azure para automatizar o suporte N1 de uma plataforma de logística de café",
+        "Desenvolvi comunicação orientada a eventos (Azure Service Bus + .NET), aprimorando o monitoramento das integrações",
+        "Gerencio integrações críticas ERP-sistemas logísticos, sincronizando 50k+ registros/dia com 99,9% de precisão",
+        "Otimizei pipeline ETL com SSIS, reduzindo drasticamente o tempo de processamento",
+        "Implementei fluxos bidirecionais para migração de 70+ processos com zero downtime"
+      ]
+    },
+    {
+      "id": "exp-eisa-analista-programador",
+      "kind": "professional",
+      "organization": "EISA - Empresa Interagrícola",
+      "role": "Analista Programador",
+      "start": "2025-02",
+      "end": "2025-12",
+      "description": "Processos de ETL e relatórios analíticos para a logística da commodity.",
+      "highlights": [
+        "Desenvolvi processos ETL (Azure Functions, SSIS) processando 1M+ registros/mês com 99,8% de precisão",
+        "Criei relatórios analíticos (Reporting Services, Crystal Reports) para todo o processo logístico da commodity",
+        "Promovido a Desenvolvedor de Sistemas após superar metas, concluindo entregas antecipadamente"
+      ]
+    },
+    {
+      "id": "exp-eisa-analista-suporte",
+      "kind": "professional",
+      "organization": "EISA - Empresa Interagrícola",
+      "role": "Analista de Suporte",
+      "start": "2022-04",
+      "end": "2025-01",
+      "description": "Suporte técnico a usuários de sistemas, banco de dados e infraestrutura.",
+      "highlights": [
+        "Prestei suporte técnico a usuários, diagnosticando e resolvendo problemas de sistemas, banco de dados e infraestrutura, reduzindo tickets recorrentes"
       ]
     },
     {
       "id": "edu-mba-ia",
       "kind": "academic",
-      "organization": "USP",
-      "role": "MBA em Inteligência Artificial",
+      "organization": "ICMC / USP",
+      "role": "MBA em Inteligência Artificial e Big Data",
       "start": "2025-07",
       "end": "2026-10",
-      "description": "MBA com foco em Inteligência Artificial.",
+      "description": "MBA com foco em Inteligência Artificial e Big Data.",
       "highlights": []
     },
     {
       "id": "edu-civil-engineering",
       "kind": "academic",
       "organization": "Uninove",
-      "role": "Engenharia Civil",
+      "role": "Bacharelado em Engenharia Civil",
       "start": "2012-01",
       "end": "2016-12",
       "description": "Graduação em Engenharia Civil.",

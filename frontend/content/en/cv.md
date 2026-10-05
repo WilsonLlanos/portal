@@ -1,5 +1,4 @@
-<!-- This file feeds the chat's knowledge base (ingest.py); it is not shown on the page.
-     Certification and professional-experience dates are still pending confirmation. -->
+<!-- This file feeds the chat's knowledge base (ingest.py); it is not shown on the page. -->
 
 # CV — Wilson Llanos (EN)
 
@@ -14,11 +13,21 @@ Besides that project, this very portal is another example of relevant work: it o
 that helps visitors ask questions about Wilson's career and highlights relevant information the
 visitor shares during the conversation.
 
+## Career progression at EISA - Empresa Interagrícola
+
+Wilson built his tech career at EISA - Empresa Interagrícola, with successive promotions: he
+started as a Support Analyst (Apr 2022 to Jan 2025), became a Programmer Analyst (Feb 2025 to
+Dec 2025) and was promoted to Systems Developer (since Jan 2026) after exceeding goals and
+delivering ahead of schedule. He now builds the multi-agent, hybrid-RAG system on Azure for
+tier-1 support of a coffee logistics platform, and also owns critical integrations between the
+ERP and the logistics systems.
+
 ## Education and certifications
 
-Wilson holds an MBA in Artificial Intelligence and a degree in Civil Engineering (2016). He holds
-AI certifications, including one in Machine Learning from Data Science Academy and the Microsoft
-Certified: Azure Data Fundamentals (DP-900) certification.
+Wilson holds an MBA in Artificial Intelligence and Big Data from ICMC/USP (2025-2026) and a
+Bachelor's in Civil Engineering from Uninove (2012-2016). His certifications are "ETL Pipelines
+and Machine Learning with Apache Spark", from Data Science Academy, and Microsoft Certified: Azure
+Data Fundamentals (DP-900).
 
 ## Working philosophy
 

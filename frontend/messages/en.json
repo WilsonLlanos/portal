@@ -16,7 +16,8 @@
   },
   "timeline": {
     "title": "Timeline",
-    "present": "Present"
+    "present": "Present",
+    "scrollHint": "Scroll to see more ↓"
   },
   "projects": {
     "title": "Projects",

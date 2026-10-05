@@ -8,6 +8,16 @@ test("resumo, trajetória, projetos e certificações renderizam com o conteúdo
   await expect(page.locator("#summary")).toContainText(/./);
   await expect(page.locator("#timeline li").first()).toBeVisible();
 
+  // Trajetória: os três cargos na EISA, numa janela rolável e focável por teclado.
+  const timeline = page.locator("#timeline");
+  for (const role of ["Desenvolvedor de Sistemas", "Analista Programador", "Analista de Suporte"]) {
+    await expect(timeline.getByRole("heading", { name: new RegExp(role) })).toHaveCount(1);
+  }
+  const scrollWindow = timeline.getByRole("region");
+  await expect(scrollWindow).toHaveAttribute("tabindex", "0");
+  const isScrollable = await scrollWindow.evaluate((el) => el.scrollHeight > el.clientHeight);
+  expect(isScrollable).toBe(true);
+
   const firstProjectLink = page.locator("#projects a", { hasText: "Ver repositório" }).first();
   await expect(firstProjectLink).toHaveAttribute("href", /^https:\/\/github\.com\//);
 

@@ -33,7 +33,7 @@ para o guia completo de validação. Resumo:
 cd backend
 uv sync
 uv run python scripts/ingest.py   # gera backend/data/kb/ a partir de frontend/content
-uv run fastapi dev app/main.py    # http://localhost:8000
+uv run uvicorn app.main:app --reload --port 8000 # http://localhost:8000
 
 # frontend (outro terminal)
 cd frontend

@@ -2,7 +2,7 @@
   "items": [
     {
       "id": "cert-ml-dsa",
-      "name": "Machine Learning",
+      "name": "ETL Pipelines and Machine Learning with Apache Spark",
       "issuer": "Data Science Academy",
       "date": "2025-01",
       "verifyUrl": null

@@ -16,7 +16,8 @@
   },
   "timeline": {
     "title": "Trajetória",
-    "present": "Atual"
+    "present": "Atual",
+    "scrollHint": "Role para ver mais ↓"
   },
   "projects": {
     "title": "Projetos",
