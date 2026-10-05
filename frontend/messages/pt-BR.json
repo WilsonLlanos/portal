@@ -1,7 +1,6 @@
 {
   "hero": {
-    "downloadCv": "Baixar CV",
-    "talkToMe": "Falar comigo"
+    "downloadCv": "Baixar CV"
   },
   "nav": {
     "summary": "Resumo",

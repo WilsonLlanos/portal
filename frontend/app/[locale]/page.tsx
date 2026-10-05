@@ -14,7 +14,7 @@ export function generateStaticParams() {
 }
 
 // T028/T034/T057/T064: composição das seções: hero, resumo, trajetória,
-// projetos e certificações. Os contatos ficam no header e o chat é um widget
+// projetos e certificações. Os contatos ficam no hero, abaixo da foto, e o chat é um widget
 // flutuante, independente das seções.
 export default async function Home({
   params,
@@ -27,7 +27,7 @@ export default async function Home({
 
   return (
     <>
-      <Header locale={loc} />
+      <Header />
       <main className="space-y-6 px-3 py-6 sm:px-6 md:space-y-8">
         <Hero locale={loc} />
         <Summary locale={loc} />

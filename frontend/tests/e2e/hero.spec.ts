@@ -4,14 +4,15 @@ import { expectNoSeriousAccessibilityViolations } from "./utils/axe";
 // T023 (Acceptance Scenario 1 da US1). Roda em mobile e desktop via os
 // projetos configurados em playwright.config.ts (T022a).
 test.describe("Hero", () => {
-  test("mostra foto, nome, título, frase e os dois botões sem rolagem", async ({ page }) => {
+  test("mostra foto, nome, título, frase, botão do CV e contatos sem rolagem", async ({ page }) => {
     await page.goto("/pt-BR");
 
     const hero = page.locator("#hero");
     await expect(hero.getByRole("img")).toBeVisible();
     await expect(hero.getByRole("heading", { level: 1 })).toBeVisible();
     await expect(hero.getByRole("link", { name: /baixar cv/i })).toBeVisible();
-    await expect(hero.getByRole("link", { name: /falar comigo/i })).toBeVisible();
+    await expect(hero.getByRole("link", { name: "WhatsApp" })).toBeVisible();
+    await expect(hero.getByRole("link", { name: /falar comigo/i })).toHaveCount(0);
 
     // "Sem rolagem": o hero preenche a viewport inicial (min-h-[100svh]).
     const box = await hero.boundingBox();
@@ -31,10 +32,4 @@ test.describe("Hero", () => {
     await expect(link).toHaveAttribute("href", "/cv/cv-pt-BR.pdf");
   });
 
-  test("Falar comigo abre o WhatsApp em nova aba", async ({ page }) => {
-    await page.goto("/pt-BR");
-    const talk = page.locator("#hero").getByRole("link", { name: /falar comigo/i });
-    await expect(talk).toHaveAttribute("href", /^https:\/\/wa\.me\/5511975225763\?text=/);
-    await expect(talk).toHaveAttribute("target", "_blank");
-  });
 });
