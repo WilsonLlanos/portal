@@ -33,9 +33,10 @@ export default async function Home({
         <Timeline locale={loc} />
         <Projects locale={loc} />
         <Certifications locale={loc} />
-        <ChatPanel />
         <Contact locale={loc} />
       </main>
+      {/* Chat flutuante, independente das seções. */}
+      <ChatPanel />
     </>
   );
 }

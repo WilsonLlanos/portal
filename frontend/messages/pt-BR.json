@@ -57,6 +57,9 @@
       "projects": "Ver projetos",
       "cv": "Baixar CV",
       "contact": "Ir para contato"
-    }
+    },
+    "launcher": "Pergunte à IA sobre minha carreira",
+    "close": "Fechar o chat",
+    "greeting": "Olá! Sou o assistente de IA do Wilson. Pergunte sobre a experiência, os projetos ou as certificações dele."
   }
 }

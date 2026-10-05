@@ -57,6 +57,9 @@
       "projects": "View projects",
       "cv": "Download CV",
       "contact": "Go to contact"
-    }
+    },
+    "launcher": "Ask the AI about my career",
+    "close": "Close the chat",
+    "greeting": "Hi! I am Wilson’s AI assistant. Ask about his experience, projects or certifications."
   }
 }
