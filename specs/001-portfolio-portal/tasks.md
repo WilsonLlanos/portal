@@ -143,10 +143,10 @@ Aplicação web com dois projetos (ver [plan.md](plan.md) § Project Structure):
 - [x] T048 [P] [US3] Implementar o acumulador de custo diário e o teto de US$ 0,50 (`DailyCost`, estado `pausado`↔`ativo`) em `backend/app/limits/daily_cost.py`
 - [x] T049 [US3] Implementar o limitador de memória local como reserva se o Redis falhar, em `backend/app/limits/fallback.py`
 - [x] T050 [US3] Escrever o prompt de sistema (persona simpática/comercial, regras de veracidade, recusa de manipulação sem revelar instruções, sugestão de próximos passos) em `backend/app/core/prompt.py` (FR-014, FR-015, FR-017)
-- [x] T051 [US3] Compor o pipeline do chat em `backend/app/core/pipeline.py`, na ordem de [contracts/provider-interfaces.md](contracts/provider-interfaces.md): validar tamanho (500 caracteres) → teto diário → rate limit → `InputGuard` → `VectorStore.search` → montar prompt com histórico validado (até 4 trocas) → `LLMClient.stream` → registrar interação
+- [x] T051 [US3] Compor o pipeline do chat em `backend/app/core/pipeline.py`, na ordem de [contracts/provider-interfaces.md](contracts/provider-interfaces.md): validar tamanho (500 caracteres) → teto diário → rate limit → `InputGuard` → `VectorStore.search` → montar prompt com histórico validado (até 4 mensagens) → `LLMClient.stream` → registrar interação
 - [x] T052 [US3] Implementar `POST /api/chat` (SSE) em `backend/app/api/chat.py`, conforme [contracts/chat-api.openapi.yaml](contracts/chat-api.openapi.yaml) (eventos `token`/`done`/`error`; respostas 400/429/503 cordiais com alternativa de contato/CV)
 - [x] T053 [US3] Registrar cada `ChatInteraction` no Langfuse (pergunta sanitizada, idioma, `retrieved_chunk_ids`, `guard_result`, tokens, custo, latência, `outcome`), sem dados pessoais, dentro do pipeline (depende de T051, T022)
-- [x] T054 [P] [US3] Criar o cliente de chat (SSE) e o estado de sessão (últimas 4 trocas, só em memória do navegador) em `frontend/components/chat/useChatSession.ts`
+- [x] T054 [P] [US3] Criar o cliente de chat (SSE) e o estado de sessão (últimas 4 mensagens, só em memória do navegador) em `frontend/components/chat/useChatSession.ts`
 - [x] T055 [P] [US3] Criar o componente `ChatPanel` (streaming, sugestões de próximo passo) em `frontend/components/chat/ChatPanel.tsx`
 - [x] T056 [US3] Criar o aviso de privacidade e as mensagens de limite/pausa/indisponibilidade em `frontend/components/chat/ChatNotices.tsx` (FR-019, FR-022)
 - [x] T057 [US3] Adicionar o `ChatPanel` a `frontend/app/[locale]/page.tsx` (depende de T034)

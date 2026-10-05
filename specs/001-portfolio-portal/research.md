@@ -78,7 +78,7 @@ Pesquisa feita em 2026-09-26 na documentação oficial e em fontes secundárias.
 
 ## D11. Memória curta e streaming do chat
 
-- **Decision**: o cliente envia as últimas N=4 trocas junto com a pergunta; o servidor é sem estado, valida e trunca o histórico e aplica as mesmas proteções sobre ele. Respostas por *streaming* (Server-Sent Events).
+- **Decision**: o cliente envia as últimas N=4 mensagens (~2 trocas) junto com a pergunta; o servidor é sem estado, valida e trunca o histórico e aplica as mesmas proteções sobre ele. Respostas por *streaming* (Server-Sent Events).
 - **Rationale**: cumpre FR-013a sem persistir conversas; o streaming melhora a percepção de velocidade.
 
 ## Resumo dos itens a verificar na implementação

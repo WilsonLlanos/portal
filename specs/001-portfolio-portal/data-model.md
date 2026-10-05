@@ -83,7 +83,7 @@ Chave = data (UTC). Acumula custo estimado em centavos a partir dos tokens usado
 **Transições do chat**: `ativo` → (teto atingido) → `pausado até o dia seguinte` → (virada do dia) → `ativo`. Independentemente, o guardrail tem `normal` ↔ `degradado` (circuit breaker por falhas consecutivas do serviço de proteção).
 
 ### ChatRequest (em memória, por requisição; não persistido)
-`message` (máx. em caracteres definido em configuração e no limite de contexto do guardrail), `lang`, `history` (até 4 trocas anteriores, validadas e truncadas no servidor).
+`message` (máx. em caracteres definido em configuração e no limite de contexto do guardrail), `lang`, `history` (até 4 mensagens anteriores, ou seja, cerca de 2 trocas pergunta+resposta, cada uma cortada em 1000 caracteres; o excedente é truncado no servidor, não recusado).
 
 ### ChatInteraction (Langfuse, retenção de 30 dias)
 | Campo | Regra |
