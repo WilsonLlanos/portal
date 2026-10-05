@@ -59,6 +59,62 @@ body {
   font-family: var(--font-sans, ui-sans-serif, system-ui, sans-serif);
 }
 
+/*
+ * Seções em blocos com profundidade. A rolagem continua sendo do visitante:
+ * `proximity` só encaixa o bloco no centro quando ele para perto, sem prender;
+ * scroll-padding-top desconta o header fixo (âncoras como #contact).
+ */
+html {
+  scroll-snap-type: y proximity;
+  scroll-padding-top: 4.5rem;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+.section-block {
+  margin-inline: auto;
+  width: 100%;
+  max-width: 56rem; /* max-w-4xl: largura comum a todos os blocos */
+  border: 1px solid var(--border);
+  border-radius: 1.75rem;
+  background: var(--card);
+  box-shadow: 0 10px 30px -18px rgb(0 0 0 / 0.35);
+  scroll-snap-align: center;
+  /* Contexto de empilhamento próprio: o brilho do hero (-z-10) fica atrás
+     do conteúdo, mas acima do fundo do bloco. */
+  isolation: isolate;
+}
+
+/*
+ * Ao sair por cima, o bloco encolhe e esmaece: dá a sensação de "puxar" o
+ * próximo para o centro. A faixa começa só quando o fim do bloco já passou da
+ * metade da tela, para seções altas não sumirem enquanto ainda são lidas.
+ */
+@keyframes section-exit {
+  from {
+    transform: none;
+    opacity: 1;
+  }
+  to {
+    transform: scale(0.93) translateY(-3%);
+    opacity: 0.3;
+  }
+}
+
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .section-block {
+      animation: section-exit linear both;
+      animation-timeline: view();
+      animation-range: exit 40% exit 100%;
+    }
+  }
+}
+
 /* Navegação por teclado visível (FR-011) */
 :focus-visible {
   outline: 2px solid var(--focus-ring);

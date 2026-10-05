@@ -7,14 +7,8 @@
       "role": "Desenvolvedor de Sistemas",
       "start": "2026-01",
       "end": null,
-      "description": "Desenvolvimento de soluções de IA e integração de sistemas no ecossistema Azure.",
-      "highlights": [
-        "Desenvolvendo solução de IA com sistema multiagente (LangGraph) e RAG híbrido no Azure para automatizar o suporte N1 de uma plataforma de logística de café",
-        "Desenvolvi comunicação orientada a eventos (Azure Service Bus + .NET), aprimorando o monitoramento das integrações",
-        "Gerencio integrações críticas ERP-sistemas logísticos, sincronizando 50k+ registros/dia com 99,9% de precisão",
-        "Otimizei pipeline ETL com SSIS, reduzindo drasticamente o tempo de processamento",
-        "Implementei fluxos bidirecionais para migração de 70+ processos com zero downtime"
-      ]
+      "description": "Desenvolvo soluções de IA generativa no Azure, como um sistema multiagente com RAG híbrido para o suporte N1, e integrações críticas entre ERP e logística.",
+      "highlights": []
     },
     {
       "id": "exp-eisa-analista-programador",
@@ -23,12 +17,8 @@
       "role": "Analista Programador",
       "start": "2025-02",
       "end": "2025-12",
-      "description": "Processos de ETL e relatórios analíticos para a logística da commodity.",
-      "highlights": [
-        "Desenvolvi processos ETL (Azure Functions, SSIS) processando 1M+ registros/mês com 99,8% de precisão",
-        "Criei relatórios analíticos (Reporting Services, Crystal Reports) para todo o processo logístico da commodity",
-        "Promovido a Desenvolvedor de Sistemas após superar metas, concluindo entregas antecipadamente"
-      ]
+      "description": "Construí pipelines de ETL e relatórios analíticos para a logística de commodities, o que me levou à promoção a Desenvolvedor de Sistemas.",
+      "highlights": []
     },
     {
       "id": "exp-eisa-analista-suporte",
@@ -37,10 +27,8 @@
       "role": "Analista de Suporte",
       "start": "2022-04",
       "end": "2025-01",
-      "description": "Suporte técnico a usuários de sistemas, banco de dados e infraestrutura.",
-      "highlights": [
-        "Prestei suporte técnico a usuários, diagnosticando e resolvendo problemas de sistemas, banco de dados e infraestrutura, reduzindo tickets recorrentes"
-      ]
+      "description": "Suporte técnico a usuários em sistemas, banco de dados e infraestrutura, reduzindo tickets recorrentes.",
+      "highlights": []
     },
     {
       "id": "edu-mba-ia",
@@ -49,7 +37,7 @@
       "role": "MBA em Inteligência Artificial e Big Data",
       "start": "2025-07",
       "end": "2026-10",
-      "description": "MBA com foco em Inteligência Artificial e Big Data.",
+      "description": "Em andamento, com conclusão prevista para outubro de 2026.",
       "highlights": []
     },
     {

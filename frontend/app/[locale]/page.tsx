@@ -27,7 +27,7 @@ export default async function Home({
   return (
     <>
       <Header />
-      <main>
+      <main className="space-y-6 px-3 py-6 sm:px-6 md:space-y-8">
         <Hero locale={loc} />
         <Summary locale={loc} />
         <Timeline locale={loc} />

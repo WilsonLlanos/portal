@@ -17,7 +17,7 @@ export async function Contact({ locale }: { locale: Locale }) {
   ];
 
   return (
-    <section id="contact" className="mx-auto max-w-3xl px-6 py-8 md:py-12 text-center">
+    <section id="contact" className="section-block px-6 py-8 md:px-10 md:py-10 text-center">
       <h2 className="text-2xl font-semibold sm:text-3xl">{t("title")}</h2>
       <div className="mt-8 flex flex-col items-center gap-3 sm:flex-row sm:justify-center">
         {links.map((link) => (

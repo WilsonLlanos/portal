@@ -1,33 +1,69 @@
-<!-- This file feeds the chat's knowledge base (ingest.py); it is not shown on the page. -->
+<!-- This file feeds the chat's knowledge base (ingest.py); it is not shown on the page.
+     It keeps the details that the page's timeline only summarizes. -->
 
 # CV — Wilson Llanos (EN)
 
 ## Background
 
-Wilson has 5 years of software development experience and, for almost 3 years, has been building
-Artificial Intelligence solutions. He has worked, and continues to work, on AI projects in
-production, not just prototypes. One example is his most recent project: a solution to automate
-support for a company's internal system, built on Azure.
+Wilson is a Systems Developer at EISA - Empresa Interagrícola, building production generative AI
+solutions on the Azure ecosystem with a focus on data security and governance. He has built a
+multi-agent system with LangGraph and MCP for IT incident triage and is currently building a
+multi-agent system with hybrid RAG to automate tier-1 support for a coffee logistics platform. He
+also works on data integration across four systems, including legacy ones, eliminating recurring
+errors, and has Machine Learning projects with Apache Spark on Databricks.
 
-Besides that project, this very portal is another example of relevant work: it offers an AI agent
-that helps visitors ask questions about Wilson's career and highlights relevant information the
-visitor shares during the conversation.
+Besides that, this very portal is another example of relevant work: it offers an AI agent that
+helps visitors ask questions about Wilson's career and highlights relevant information the visitor
+shares during the conversation.
+
+## Main projects
+
+### Multi-agent system for IT incidents (completed, 2026)
+Python, LangGraph, MCP, Azure AI Foundry, Azure AI Search, Azure SQL. Wilson built a multi-agent
+system focused on automatic IT incident triage and on reducing response time (MTTR). He implemented
+asynchronous route orchestration and state control with LangGraph, with secure communication
+through the MCP (Model Context Protocol) pattern. He connected Azure AI Foundry reasoning to the
+operational context via RAG with Azure AI Search, using Azure SQL for memory persistence and
+auditing. He adopted Spec-Driven Development (SDD) to govern agent behavior, with explicit tool
+contracts and layered human approval to restrict agent scope and mitigate unsupervised execution
+risks.
+
+### Multi-agent hybrid RAG for tier-1 support automation (in progress, 2026)
+LangGraph, Azure AI Foundry, Azure AI Search, Azure SQL. A multi-agent system with hybrid RAG to
+automate tier-1 support for a coffee logistics platform, combining vector search (Azure AI Search)
+and relational database queries (Azure SQL) via tool calling, with reasoning on Azure AI Foundry.
+It includes a governance and security layer with Microsoft Presidio for dynamic anonymization of
+personal data (LGPD), plus telemetry and cost tracking (FinOps) on Azure Application Insights.
 
 ## Career progression at EISA - Empresa Interagrícola
 
-Wilson built his tech career at EISA - Empresa Interagrícola, with successive promotions: he
-started as a Support Analyst (Apr 2022 to Jan 2025), became a Programmer Analyst (Feb 2025 to
-Dec 2025) and was promoted to Systems Developer (since Jan 2026) after exceeding goals and
-delivering ahead of schedule. He now builds the multi-agent, hybrid-RAG system on Azure for
-tier-1 support of a coffee logistics platform, and also owns critical integrations between the
-ERP and the logistics systems.
+Wilson built his tech career at EISA with successive promotions.
+
+### Systems Developer (since Jan 2026)
+- Building an AI solution with a multi-agent system (LangGraph) and hybrid RAG on Azure to automate
+  tier-1 support for a coffee logistics platform.
+- Built event-driven communication (Azure Service Bus + .NET), improving integration monitoring.
+- Manages critical integrations between the ERP and logistics systems, syncing 50k+ records per day
+  with 99.9% accuracy.
+- Optimized an SSIS ETL pipeline, drastically reducing processing time.
+- Implemented bidirectional flows to migrate 70+ processes with zero downtime.
+
+### Programmer Analyst (Feb 2025 to Dec 2025)
+- Built ETL processes (Azure Functions, SSIS) handling 1M+ records per month with 99.8% accuracy.
+- Created analytical reports (Reporting Services, Crystal Reports) covering the entire commodity
+  logistics process.
+- Was promoted to Systems Developer after exceeding goals and delivering ahead of schedule.
+
+### Support Analyst (Apr 2022 to Jan 2025)
+- Provided technical support to users, diagnosing and solving system, database and infrastructure
+  issues, reducing recurring tickets.
 
 ## Education and certifications
 
-Wilson holds an MBA in Artificial Intelligence and Big Data from ICMC/USP (2025-2026) and a
-Bachelor's in Civil Engineering from Uninove (2012-2016). His certifications are "ETL Pipelines
-and Machine Learning with Apache Spark", from Data Science Academy, and Microsoft Certified: Azure
-Data Fundamentals (DP-900).
+Wilson is pursuing an MBA in Artificial Intelligence and Big Data at ICMC/USP (2025-2026, expected
+completion in October 2026) and holds a Bachelor's in Civil Engineering from Uninove (2012-2016).
+His certifications are Microsoft Certified: Azure Data Fundamentals (DP-900) and "ETL Pipelines and
+Machine Learning with Apache Spark", from Data Science Academy.
 
 ## Working philosophy
 

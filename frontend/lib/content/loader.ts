@@ -133,5 +133,6 @@ export function getProjects(locale: Locale): Project[] {
 }
 
 export function getCertifications(locale: Locale): Certification[] {
-  return RAW[locale].certifications.items;
+  // Mais recente primeiro, mesmo critério da trajetória.
+  return [...RAW[locale].certifications.items].sort((a, b) => b.date.localeCompare(a.date));
 }

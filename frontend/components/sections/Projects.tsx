@@ -8,7 +8,7 @@ export async function Projects({ locale }: { locale: Locale }) {
   const t = await getTranslations({ locale, namespace: "projects" });
 
   return (
-    <section id="projects" className="mx-auto max-w-5xl px-6 py-8 md:py-12">
+    <section id="projects" className="section-block px-6 py-8 md:px-10 md:py-10">
       <h2 className="text-2xl font-semibold sm:text-3xl">{t("title")}</h2>
       <div className="mt-8 grid gap-6 sm:grid-cols-2">
         {items.map((project) => (

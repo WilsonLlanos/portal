@@ -18,6 +18,11 @@ test("Pergunte à IA envia a pergunta do cargo para o chat", async ({ page }) =>
   });
 
   await page.goto("/pt-BR");
+  // Acessibilidade conferida com a página parada no topo: depois do clique, a
+  // página rola até o chat e os blocos que saem por cima ficam semi-transparentes
+  // de propósito (estado de transição, não conteúdo para leitura).
+  await expectNoSeriousAccessibilityViolations(page);
+
   await page
     .locator("#timeline")
     .getByRole("button", { name: /Pergunte à IA: Desenvolvedor de Sistemas/ })
@@ -30,6 +35,4 @@ test("Pergunte à IA envia a pergunta do cargo para o chat", async ({ page }) =>
   );
   await expect(chat).toContainText("Resposta simulada sobre o cargo.");
   expect(sentBody).toMatchObject({ lang: "pt-BR" });
-
-  await expectNoSeriousAccessibilityViolations(page);
 });

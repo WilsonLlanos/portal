@@ -7,14 +7,8 @@
       "role": "Systems Developer",
       "start": "2026-01",
       "end": null,
-      "description": "Building AI solutions and system integrations on the Azure ecosystem.",
-      "highlights": [
-        "Building an AI solution with a multi-agent system (LangGraph) and hybrid RAG on Azure to automate tier-1 support for a coffee logistics platform",
-        "Built event-driven communication (Azure Service Bus + .NET), improving integration monitoring",
-        "Manage critical ERP-to-logistics integrations, syncing 50k+ records/day with 99.9% accuracy",
-        "Optimized an SSIS ETL pipeline, drastically reducing processing time",
-        "Implemented bidirectional flows to migrate 70+ processes with zero downtime"
-      ]
+      "description": "I build generative AI solutions on Azure, such as a multi-agent system with hybrid RAG for tier-1 support, and critical integrations between the ERP and logistics.",
+      "highlights": []
     },
     {
       "id": "exp-eisa-analista-programador",
@@ -23,12 +17,8 @@
       "role": "Programmer Analyst",
       "start": "2025-02",
       "end": "2025-12",
-      "description": "ETL processes and analytical reports for commodity logistics.",
-      "highlights": [
-        "Built ETL processes (Azure Functions, SSIS) handling 1M+ records/month with 99.8% accuracy",
-        "Created analytical reports (Reporting Services, Crystal Reports) covering the entire commodity logistics process",
-        "Promoted to Systems Developer after exceeding goals and delivering ahead of schedule"
-      ]
+      "description": "Built ETL pipelines and analytical reports for commodity logistics, which led to my promotion to Systems Developer.",
+      "highlights": []
     },
     {
       "id": "exp-eisa-analista-suporte",
@@ -37,10 +27,8 @@
       "role": "Support Analyst",
       "start": "2022-04",
       "end": "2025-01",
-      "description": "Technical support for users across systems, databases and infrastructure.",
-      "highlights": [
-        "Provided technical support to users, diagnosing and solving system, database and infrastructure issues, reducing recurring tickets"
-      ]
+      "description": "Technical support for users across systems, databases and infrastructure, reducing recurring tickets.",
+      "highlights": []
     },
     {
       "id": "edu-mba-ia",
@@ -49,7 +37,7 @@
       "role": "MBA in Artificial Intelligence and Big Data",
       "start": "2025-07",
       "end": "2026-10",
-      "description": "MBA focused on Artificial Intelligence and Big Data.",
+      "description": "In progress, expected completion in October 2026.",
       "highlights": []
     },
     {

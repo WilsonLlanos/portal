@@ -29,6 +29,16 @@ test("resumo, trajetória, projetos e certificações renderizam com o conteúdo
   await expect(firstProjectLink).toHaveAttribute("href", /^https:\/\/github\.com\//);
 
   await expect(page.locator("#certifications li").first()).toBeVisible();
+  // Mais recente primeiro: a certificação da Microsoft vem antes da de ML.
+  await expect(page.locator("#certifications li").first()).toContainText("Microsoft");
+
+  // Blocos com profundidade: encaixe suave na rolagem e animação de saída (Chromium).
+  const snapType = await page.evaluate(() => getComputedStyle(document.documentElement).scrollSnapType);
+  expect(snapType).toContain("y");
+  const sectionAnimation = await page
+    .locator("#summary")
+    .evaluate((el) => getComputedStyle(el).animationName);
+  expect(sectionAnimation).toBe("section-exit");
 
   await expectNoSeriousAccessibilityViolations(page);
 });

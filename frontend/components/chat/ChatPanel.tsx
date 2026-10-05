@@ -36,11 +36,11 @@ export function ChatPanel() {
   }, [isStreaming, send]);
 
   return (
-    <section id="chat" className="mx-auto max-w-2xl px-6 py-8 md:py-12">
+    <section id="chat" className="section-block px-6 py-8 md:px-10 md:py-10">
       <h2 className="text-2xl font-semibold sm:text-3xl">{t("title")}</h2>
 
       <div
-        className="mt-6 flex max-h-96 flex-col gap-3 overflow-y-auto rounded-2xl border border-[var(--border)] bg-[var(--card)] p-4"
+        className="mt-6 flex max-h-96 flex-col gap-3 overflow-y-auto rounded-2xl border border-[var(--border)] bg-[var(--background)] p-4"
         aria-live="polite"
       >
         {messages.map((message, index) => (
@@ -49,7 +49,7 @@ export function ChatPanel() {
             className={
               message.role === "user"
                 ? "self-end rounded-2xl rounded-br-sm bg-[var(--accent)] px-4 py-2 text-[var(--accent-foreground)]"
-                : "self-start rounded-2xl rounded-bl-sm bg-[var(--background)] px-4 py-2"
+                : "self-start rounded-2xl rounded-bl-sm border border-[var(--border)] bg-[var(--card)] px-4 py-2"
             }
           >
             {message.content || (isStreaming && index === messages.length - 1 ? "…" : "")}

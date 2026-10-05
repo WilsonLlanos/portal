@@ -2,7 +2,7 @@
   "name": "Wilson Llanos",
   "headline": "Engenheiro de IA",
   "tagline": "Construo sistemas de IA aplicada, do protótipo à produção.",
-  "summary": "Com 5 anos de experiência em desenvolvimento de sistemas, atuo há quase 3 anos com soluções de Inteligência Artificial em produção — do protótipo à automação de suporte em ambiente Azure. MBA em Inteligência Artificial e formação em Engenharia Civil (2016).",
+  "summary": "Sou Desenvolvedor de Sistemas na EISA e construo soluções de IA generativa em produção no ecossistema Azure, com foco em segurança e governança de dados. Desenvolvi um sistema multiagente com LangGraph e MCP para a triagem de incidentes de TI, reduzindo o tempo de resposta, e hoje desenvolvo um sistema multiagente com RAG híbrido para automatizar o suporte N1. Também atuo na integração de dados entre quatro sistemas, incluindo legados, eliminando erros recorrentes, e tenho projetos de Machine Learning com Apache Spark no Databricks. MBA em IA e Big Data pelo ICMC/USP (conclusão em outubro de 2026) e formado em Engenharia Civil.",
   "photo": {
     "src": "/images/profile.png",
     "alt": "Foto de Wilson Llanos, retrato de estúdio"
