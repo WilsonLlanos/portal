@@ -15,7 +15,7 @@ export async function Hero({ locale }: { locale: Locale }) {
   return (
     <section
       id="hero"
-      className="flex min-h-[100svh] flex-col-reverse items-center justify-center gap-8 px-6 py-12 md:flex-row md:gap-16 md:px-16"
+      className="flex min-h-[calc(100svh-4rem)] flex-col-reverse items-center justify-center gap-8 px-6 py-12 md:flex-row md:gap-16 md:px-16"
     >
       <div className="max-w-xl text-center md:text-left">
         <h1 className="text-3xl font-bold tracking-tight sm:text-4xl md:text-5xl">

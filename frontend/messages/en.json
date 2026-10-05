@@ -17,7 +17,9 @@
   "timeline": {
     "title": "Timeline",
     "present": "Present",
-    "scrollHint": "Scroll to see more ↓"
+    "scrollHint": "Scroll to see more ↓",
+    "askAi": "Ask the AI",
+    "askAiQuestion": "What did Wilson do as {role} at {organization}?"
   },
   "projects": {
     "title": "Projects",

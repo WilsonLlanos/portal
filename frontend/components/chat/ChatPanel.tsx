@@ -1,7 +1,8 @@
 "use client";
 
 import { useLocale, useTranslations } from "next-intl";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { ASK_AI_EVENT } from "./AskAiButton";
 import { ChatError, ChatSuggestions, PrivacyNotice } from "./ChatNotices";
 import { useChatSession } from "./useChatSession";
 
@@ -23,8 +24,19 @@ export function ChatPanel() {
     void send(text);
   };
 
+  // Perguntas prontas vindas dos botões "Pergunte à IA" da trajetória.
+  useEffect(() => {
+    const onAskAi = (event: Event) => {
+      const question = (event as CustomEvent<string>).detail;
+      if (!question || isStreaming) return;
+      void send(question);
+    };
+    window.addEventListener(ASK_AI_EVENT, onAskAi);
+    return () => window.removeEventListener(ASK_AI_EVENT, onAskAi);
+  }, [isStreaming, send]);
+
   return (
-    <section id="chat" className="mx-auto max-w-2xl px-6 py-16">
+    <section id="chat" className="mx-auto max-w-2xl px-6 py-8 md:py-12">
       <h2 className="text-2xl font-semibold sm:text-3xl">{t("title")}</h2>
 
       <div

@@ -18,6 +18,13 @@ test("resumo, trajetória, projetos e certificações renderizam com o conteúdo
   const isScrollable = await scrollWindow.evaluate((el) => el.scrollHeight > el.clientHeight);
   expect(isScrollable).toBe(true);
 
+  // Efeito de cilindro ativo onde há suporte a scroll-driven animations (Chromium).
+  const animationName = await timeline
+    .locator("li.timeline-cylinder-item")
+    .first()
+    .evaluate((el) => getComputedStyle(el).animationName);
+  expect(animationName).toBe("timeline-cylinder");
+
   const firstProjectLink = page.locator("#projects a", { hasText: "Ver repositório" }).first();
   await expect(firstProjectLink).toHaveAttribute("href", /^https:\/\/github\.com\//);
 

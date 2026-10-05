@@ -8,7 +8,7 @@ export async function Certifications({ locale }: { locale: Locale }) {
   const t = await getTranslations({ locale, namespace: "certifications" });
 
   return (
-    <section id="certifications" className="mx-auto max-w-3xl px-6 py-16">
+    <section id="certifications" className="mx-auto max-w-3xl px-6 py-8 md:py-12">
       <h2 className="text-2xl font-semibold sm:text-3xl">{t("title")}</h2>
       <ul className="mt-8 space-y-4">
         {items.map((cert) => (

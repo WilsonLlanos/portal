@@ -17,7 +17,9 @@
   "timeline": {
     "title": "Trajetória",
     "present": "Atual",
-    "scrollHint": "Role para ver mais ↓"
+    "scrollHint": "Role para ver mais ↓",
+    "askAi": "Pergunte à IA",
+    "askAiQuestion": "O que o Wilson fez como {role} na {organization}?"
   },
   "projects": {
     "title": "Projetos",

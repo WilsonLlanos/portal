@@ -64,3 +64,33 @@ body {
   outline: 2px solid var(--focus-ring);
   outline-offset: 2px;
 }
+
+/*
+ * Trajetória em "cilindro": cada item é animado conforme a sua posição dentro
+ * da janela rolável (scroll-driven animation, sem JavaScript). No centro fica
+ * em tamanho normal; nas bordas, levemente menor e inclinado.
+ * Sem `opacity` de propósito: o axe conta opacidade no contraste, e o
+ * esmaecimento das bordas já vem do mask-image da janela.
+ * Navegadores sem suporte, ou com "reduzir movimento", ficam sem o efeito.
+ */
+@keyframes timeline-cylinder {
+  0% {
+    transform: perspective(900px) rotateX(28deg) scale(0.88);
+  }
+  50% {
+    transform: none;
+  }
+  100% {
+    transform: perspective(900px) rotateX(-28deg) scale(0.88);
+  }
+}
+
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .timeline-cylinder-item {
+      animation: timeline-cylinder linear both;
+      animation-timeline: view();
+      animation-range: cover;
+    }
+  }
+}

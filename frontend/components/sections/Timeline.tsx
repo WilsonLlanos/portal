@@ -1,4 +1,5 @@
 import { getTranslations } from "next-intl/server";
+import { AskAiButton } from "@/components/chat/AskAiButton";
 import { getTimeline } from "@/lib/content/loader";
 import type { Locale } from "@/lib/content/schema";
 
@@ -15,7 +16,7 @@ export async function Timeline({ locale }: { locale: Locale }) {
   const t = await getTranslations({ locale, namespace: "timeline" });
 
   return (
-    <section id="timeline" className="mx-auto max-w-3xl px-6 py-16">
+    <section id="timeline" className="mx-auto max-w-3xl px-6 py-8 md:py-12">
       <h2 className="text-2xl font-semibold sm:text-3xl">{t("title")}</h2>
 
       {/* tabIndex/role/aria-label: região rolável precisa ser alcançável por
@@ -24,11 +25,11 @@ export async function Timeline({ locale }: { locale: Locale }) {
         tabIndex={0}
         role="region"
         aria-label={t("title")}
-        className="mt-6 h-[28rem] overflow-y-auto rounded-lg py-16 [mask-image:linear-gradient(to_bottom,transparent,black_15%,black_85%,transparent)] [scrollbar-width:thin] md:h-[32rem]"
+        className="mt-6 h-[28rem] overflow-y-auto rounded-lg py-10 [mask-image:linear-gradient(to_bottom,transparent,black_15%,black_85%,transparent)] [scrollbar-width:thin] md:h-[32rem]"
       >
         <ol className="ml-2 space-y-8 border-l border-[var(--border)] pl-6">
           {items.map((item) => (
-            <li key={item.id} className="relative">
+            <li key={item.id} className="timeline-cylinder-item relative">
               <span
                 aria-hidden
                 className="absolute -left-[1.6rem] top-1.5 h-3 w-3 rounded-full bg-[var(--accent)]"
@@ -48,6 +49,16 @@ export async function Timeline({ locale }: { locale: Locale }) {
                     <li key={highlight}>{highlight}</li>
                   ))}
                 </ul>
+              )}
+              {item.kind === "professional" && (
+                <AskAiButton
+                  label={t("askAi")}
+                  ariaLabel={`${t("askAi")}: ${item.role}`}
+                  question={t("askAiQuestion", {
+                    role: item.role,
+                    organization: item.organization,
+                  })}
+                />
               )}
             </li>
           ))}
