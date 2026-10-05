@@ -1,20 +1,24 @@
 import { expect, test } from "@playwright/test";
 
-// T062 (US5): os três links de contato levam ao destino correto.
-test("os links de contato apontam para LinkedIn, GitHub e e-mail", async ({ page }) => {
+// T062 (US5): contatos como ícones no header fixo (LinkedIn, GitHub, e-mail, WhatsApp).
+test("os ícones de contato do header apontam para os destinos certos", async ({ page }) => {
   await page.goto("/pt-BR");
-  const contact = page.locator("#contact");
+  const header = page.locator("header#contact");
 
-  await expect(contact.getByRole("link", { name: "LinkedIn" })).toHaveAttribute(
+  await expect(header.getByRole("link", { name: "LinkedIn" })).toHaveAttribute(
     "href",
-    /linkedin\.com/,
+    /linkedin\.com\/in\/wilson-llanos/,
   );
-  await expect(contact.getByRole("link", { name: "GitHub" })).toHaveAttribute(
+  await expect(header.getByRole("link", { name: "GitHub" })).toHaveAttribute(
     "href",
-    /github\.com/,
+    /github\.com\/WilsonLlanos/,
   );
-  await expect(contact.getByRole("link", { name: "E-mail" })).toHaveAttribute(
+  await expect(header.getByRole("link", { name: "E-mail" })).toHaveAttribute(
     "href",
-    /^mailto:/,
+    "mailto:wilson.llanos@outlook.com",
+  );
+  await expect(header.getByRole("link", { name: "WhatsApp" })).toHaveAttribute(
+    "href",
+    /^https:\/\/wa\.me\/5511975225763\?text=/,
   );
 });

@@ -18,6 +18,8 @@ export interface Profile {
     linkedin: string;
     github: string;
     email: string;
+    /** Link wa.me com mensagem inicial pronta (escolha do autor publicar o número). */
+    whatsapp: string;
   };
 }
 

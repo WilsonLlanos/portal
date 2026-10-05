@@ -31,9 +31,10 @@ test.describe("Hero", () => {
     await expect(link).toHaveAttribute("href", "/cv/cv-pt-BR.pdf");
   });
 
-  test("Falar comigo leva à seção de contato", async ({ page }) => {
+  test("Falar comigo abre o WhatsApp em nova aba", async ({ page }) => {
     await page.goto("/pt-BR");
-    await page.getByRole("link", { name: /falar comigo/i }).click();
-    await expect(page.locator("#contact")).toBeInViewport();
+    const talk = page.locator("#hero").getByRole("link", { name: /falar comigo/i });
+    await expect(talk).toHaveAttribute("href", /^https:\/\/wa\.me\/5511975225763\?text=/);
+    await expect(talk).toHaveAttribute("target", "_blank");
   });
 });

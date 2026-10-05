@@ -52,6 +52,7 @@ Wilson built his tech career at EISA with successive promotions.
 - Built ETL processes (Azure Functions, SSIS) handling 1M+ records per month with 99.8% accuracy.
 - Created analytical reports (Reporting Services, Crystal Reports) covering the entire commodity
   logistics process.
+- Started his first generative AI prototypes with RAG and LLMs.
 - Was promoted to Systems Developer after exceeding goals and delivering ahead of schedule.
 
 ### Support Analyst (Apr 2022 to Jan 2025)
@@ -59,6 +60,9 @@ Wilson built his tech career at EISA with successive promotions.
   issues, reducing recurring tickets.
 
 ## Education and certifications
+
+The "ETL Pipelines and Machine Learning with Apache Spark" course from Data Science Academy
+(completed in January 2025) was Wilson's starting point in the AI world.
 
 Wilson is pursuing an MBA in Artificial Intelligence and Big Data at ICMC/USP (2025-2026, expected
 completion in October 2026) and holds a Bachelor's in Civil Engineering from Uninove (2012-2016).

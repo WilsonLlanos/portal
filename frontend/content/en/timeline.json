@@ -7,7 +7,7 @@
       "role": "Systems Developer",
       "start": "2026-01",
       "end": null,
-      "description": "I build generative AI solutions on Azure, such as a multi-agent system with hybrid RAG for tier-1 support, and critical integrations between the ERP and logistics.",
+      "description": "Promoted after exceeding goals, I brought RAG and LLMs to the team: I am building a multi-agent system to automate tier-1 support, aiming to reduce ticket volume and the IT team’s response time.",
       "highlights": []
     },
     {
@@ -17,7 +17,7 @@
       "role": "Programmer Analyst",
       "start": "2025-02",
       "end": "2025-12",
-      "description": "Built ETL pipelines and analytical reports for commodity logistics, which led to my promotion to Systems Developer.",
+      "description": "First promotion, earned by delivering under demanding deadlines. I advanced in data integration, with ETL pipelines and analytical reports for the coffee business, and started my first generative AI prototypes with RAG and LLMs.",
       "highlights": []
     },
     {
@@ -27,7 +27,7 @@
       "role": "Support Analyst",
       "start": "2022-04",
       "end": "2025-01",
-      "description": "Technical support for users across systems, databases and infrastructure, reducing recurring tickets.",
+      "description": "My start in IT: supporting users across systems, databases and infrastructure, reducing recurring tickets, while building up SQL, C#, CI/CD and Azure skills for the move into development.",
       "highlights": []
     },
     {
@@ -37,7 +37,17 @@
       "role": "MBA in Artificial Intelligence and Big Data",
       "start": "2025-07",
       "end": "2026-10",
-      "description": "In progress, expected completion in October 2026.",
+      "description": "A strategic decision to deepen my AI education: machine learning, deep learning and generative AI, plus Big Data. Expected completion in October 2026.",
+      "highlights": []
+    },
+    {
+      "id": "edu-ml-dsa",
+      "kind": "academic",
+      "organization": "Data Science Academy",
+      "role": "ETL Pipelines and Machine Learning with Apache Spark",
+      "start": "2025-01",
+      "end": "2025-01",
+      "description": "My starting point in the AI world: ETL pipelines and Machine Learning models with Apache Spark.",
       "highlights": []
     },
     {
@@ -47,7 +57,7 @@
       "role": "Bachelor's in Civil Engineering",
       "start": "2012-01",
       "end": "2016-12",
-      "description": "Civil Engineering degree.",
+      "description": "The math and statistics foundation that eased my move into technology and still supports my AI studies.",
       "highlights": []
     }
   ]

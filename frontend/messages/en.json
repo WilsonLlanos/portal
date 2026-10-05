@@ -19,7 +19,8 @@
     "present": "Present",
     "scrollHint": "Scroll to see more ↓",
     "askAi": "Ask the AI",
-    "askAiQuestion": "What did Wilson do as {role} at {organization}?"
+    "askAiQuestion": "What did Wilson do as {role} at {organization}?",
+    "cvCta": "See full details in my résumé (PDF)"
   },
   "projects": {
     "title": "Projects",
@@ -33,7 +34,8 @@
     "title": "Contact",
     "linkedin": "LinkedIn",
     "github": "GitHub",
-    "email": "Email"
+    "email": "Email",
+    "whatsapp": "WhatsApp"
   },
   "theme": {
     "toggle": "Toggle theme",

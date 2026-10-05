@@ -35,7 +35,8 @@ export async function Timeline({ locale }: { locale: Locale }) {
                 className="absolute -left-[1.6rem] top-1.5 h-3 w-3 rounded-full bg-[var(--accent)]"
               />
               <p className="text-sm text-[var(--muted-foreground)]">
-                {item.start} — {item.end ?? t("present")}
+                {/* Curso de data única (início = fim) mostra só uma data. */}
+                {item.start === item.end ? item.start : `${item.start} — ${item.end ?? t("present")}`}
                 {" · "}
                 {item.kind === "academic" ? "🎓" : "💼"}
               </p>
@@ -68,6 +69,17 @@ export async function Timeline({ locale }: { locale: Locale }) {
       <p className="mt-3 text-center text-sm text-[var(--muted-foreground)]">
         {t("scrollHint")}
       </p>
+
+      {/* A trajetória é um resumo; o CV completo tem os detalhes. */}
+      <div className="mt-4 flex justify-center">
+        <a
+          href={`/cv/cv-${locale}.pdf`}
+          download
+          className="rounded-full border border-[var(--accent)] px-5 py-2 text-sm font-medium text-[var(--accent)] transition-colors hover:bg-[var(--accent)] hover:text-[var(--accent-foreground)]"
+        >
+          {t("cvCta")}
+        </a>
+      </div>
     </section>
   );
 }

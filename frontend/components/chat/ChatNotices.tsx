@@ -33,27 +33,42 @@ export function ChatError({ code }: { code: ChatErrorCode }) {
   );
 }
 
-export function ChatSuggestions({ items }: { items: string[] }) {
+export function ChatSuggestions({
+  items,
+  contactHref,
+  cvHref,
+}: {
+  items: string[];
+  contactHref: string;
+  cvHref: string;
+}) {
   const t = useTranslations("chat.suggestions");
-  const hrefFor: Record<string, string> = {
-    projects: "#projects",
-    cv: "#hero",
-    contact: "#contact",
+  // Próximos passos: projetos (âncora na página), CV (download) e contato (WhatsApp).
+  const linkFor: Record<string, { href: string; external?: boolean; download?: boolean }> = {
+    projects: { href: "#projects" },
+    cv: { href: cvHref, download: true },
+    contact: { href: contactHref, external: true },
   };
 
   if (items.length === 0) return null;
 
   return (
     <div className="flex flex-wrap gap-2 pt-1">
-      {items.map((item) => (
-        <a
-          key={item}
-          href={hrefFor[item] ?? "#"}
-          className="rounded-full border border-[var(--border)] px-3 py-1 text-xs hover:border-[var(--accent)]"
-        >
-          {t(item)}
-        </a>
-      ))}
+      {items.map((item) => {
+        const link = linkFor[item] ?? { href: "#" };
+        return (
+          <a
+            key={item}
+            href={link.href}
+            download={link.download || undefined}
+            target={link.external ? "_blank" : undefined}
+            rel={link.external ? "noopener noreferrer" : undefined}
+            className="rounded-full border border-[var(--border)] px-3 py-1 text-xs hover:border-[var(--accent)]"
+          >
+            {t(item)}
+          </a>
+        );
+      })}
     </div>
   );
 }

@@ -56,6 +56,7 @@ Wilson construiu sua carreira de tecnologia na EISA com promoções sucessivas.
   mês com 99,8% de precisão.
 - Criou relatórios analíticos (Reporting Services, Crystal Reports) para todo o processo logístico
   da commodity.
+- Iniciou os primeiros protótipos de IA generativa com RAG e LLMs.
 - Foi promovido a Desenvolvedor de Sistemas após superar metas, concluindo entregas antecipadamente.
 
 ### Analista de Suporte (abr/2022 a jan/2025)
@@ -63,6 +64,9 @@ Wilson construiu sua carreira de tecnologia na EISA com promoções sucessivas.
   dados e infraestrutura, reduzindo tickets recorrentes.
 
 ## Formação e certificações
+
+O curso "Pipeline ETL e Machine Learning com Apache Spark", da Data Science Academy
+(concluído em janeiro de 2025), foi o ponto de partida de Wilson no universo da IA.
 
 Wilson faz MBA em Inteligência Artificial e Big Data pelo ICMC/USP (2025-2026, conclusão prevista
 para outubro de 2026) e é bacharel em Engenharia Civil pela Uninove (2012-2016). Tem as

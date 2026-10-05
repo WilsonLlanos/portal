@@ -11,7 +11,7 @@ import { useChatSession } from "./useChatSession";
  * um botão abre o painel, que fica disponível em qualquer ponto da página.
  * No celular o painel ocupa a tela inteira; no desktop, um cartão no canto.
  */
-export function ChatPanel() {
+export function ChatPanel({ contactHref, cvHref }: { contactHref: string; cvHref: string }) {
   const locale = useLocale();
   const t = useTranslations("chat");
   const { messages, isStreaming, error, suggestions, send } = useChatSession(locale);
@@ -110,7 +110,7 @@ export function ChatPanel() {
         {error && <ChatError code={error.code} />}
         {/* Sugestões levam a seções da página: fecha o painel para mostrá-las. */}
         <div onClick={() => setOpen(false)}>
-          <ChatSuggestions items={suggestions} />
+          <ChatSuggestions items={suggestions} contactHref={contactHref} cvHref={cvHref} />
         </div>
       </div>
 

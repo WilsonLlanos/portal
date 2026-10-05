@@ -7,7 +7,7 @@
       "role": "Desenvolvedor de Sistemas",
       "start": "2026-01",
       "end": null,
-      "description": "Desenvolvo soluções de IA generativa no Azure, como um sistema multiagente com RAG híbrido para o suporte N1, e integrações críticas entre ERP e logística.",
+      "description": "Promovido após superar as metas, levei RAG e LLMs para a equipe: desenvolvo um sistema multiagente para automatizar o suporte N1, com o objetivo de reduzir o volume de chamados e o tempo de resposta do time de TI.",
       "highlights": []
     },
     {
@@ -17,7 +17,7 @@
       "role": "Analista Programador",
       "start": "2025-02",
       "end": "2025-12",
-      "description": "Construí pipelines de ETL e relatórios analíticos para a logística de commodities, o que me levou à promoção a Desenvolvedor de Sistemas.",
+      "description": "Primeira promoção, conquistada com entregas dentro de prazos exigentes. Avancei em integração de dados, com pipelines de ETL e relatórios analíticos para o negócio do café, e iniciei os primeiros protótipos de IA generativa com RAG e LLMs.",
       "highlights": []
     },
     {
@@ -27,7 +27,7 @@
       "role": "Analista de Suporte",
       "start": "2022-04",
       "end": "2025-01",
-      "description": "Suporte técnico a usuários em sistemas, banco de dados e infraestrutura, reduzindo tickets recorrentes.",
+      "description": "Início na TI: suporte a usuários em sistemas, banco de dados e infraestrutura, reduzindo tickets recorrentes, enquanto desenvolvia SQL, C#, CI/CD e Azure para a transição ao desenvolvimento.",
       "highlights": []
     },
     {
@@ -37,7 +37,17 @@
       "role": "MBA em Inteligência Artificial e Big Data",
       "start": "2025-07",
       "end": "2026-10",
-      "description": "Em andamento, com conclusão prevista para outubro de 2026.",
+      "description": "Decisão estratégica para aprofundar a formação em IA: aprendizado de máquina, deep learning e IA generativa, além de Big Data. Conclusão prevista para outubro de 2026.",
+      "highlights": []
+    },
+    {
+      "id": "edu-ml-dsa",
+      "kind": "academic",
+      "organization": "Data Science Academy",
+      "role": "Pipeline ETL e Machine Learning com Apache Spark",
+      "start": "2025-01",
+      "end": "2025-01",
+      "description": "O ponto de partida no universo da IA: pipelines de ETL e modelos de Machine Learning com Apache Spark.",
       "highlights": []
     },
     {
@@ -47,7 +57,7 @@
       "role": "Bacharelado em Engenharia Civil",
       "start": "2012-01",
       "end": "2016-12",
-      "description": "Graduação em Engenharia Civil.",
+      "description": "A base em matemática e estatística que facilitou a transição para a tecnologia e hoje sustenta os estudos em IA.",
       "highlights": []
     }
   ]

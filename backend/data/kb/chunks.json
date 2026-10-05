@@ -11,35 +11,42 @@
     "lang": "pt-BR",
     "source": "experience",
     "source_id": "exp-eisa-dev-sistemas",
-    "text": "Desenvolvedor de Sistemas em/at EISA - Empresa Interagrícola (2026-01 - presente/present). Desenvolvo soluções de IA generativa no Azure, como um sistema multiagente com RAG híbrido para o suporte N1, e integrações críticas entre ERP e logística."
+    "text": "Desenvolvedor de Sistemas em/at EISA - Empresa Interagrícola (2026-01 - presente/present). Promovido após superar as metas, levei RAG e LLMs para a equipe: desenvolvo um sistema multiagente para automatizar o suporte N1, com o objetivo de reduzir o volume de chamados e o tempo de resposta do time de TI."
   },
   {
     "id": "pt-BR:experience:exp-eisa-analista-programador:0",
     "lang": "pt-BR",
     "source": "experience",
     "source_id": "exp-eisa-analista-programador",
-    "text": "Analista Programador em/at EISA - Empresa Interagrícola (2025-02 - 2025-12). Construí pipelines de ETL e relatórios analíticos para a logística de commodities, o que me levou à promoção a Desenvolvedor de Sistemas."
+    "text": "Analista Programador em/at EISA - Empresa Interagrícola (2025-02 - 2025-12). Primeira promoção, conquistada com entregas dentro de prazos exigentes. Avancei em integração de dados, com pipelines de ETL e relatórios analíticos para o negócio do café, e iniciei os primeiros protótipos de IA generativa com RAG e LLMs."
   },
   {
     "id": "pt-BR:experience:exp-eisa-analista-suporte:0",
     "lang": "pt-BR",
     "source": "experience",
     "source_id": "exp-eisa-analista-suporte",
-    "text": "Analista de Suporte em/at EISA - Empresa Interagrícola (2022-04 - 2025-01). Suporte técnico a usuários em sistemas, banco de dados e infraestrutura, reduzindo tickets recorrentes."
+    "text": "Analista de Suporte em/at EISA - Empresa Interagrícola (2022-04 - 2025-01). Início na TI: suporte a usuários em sistemas, banco de dados e infraestrutura, reduzindo tickets recorrentes, enquanto desenvolvia SQL, C#, CI/CD e Azure para a transição ao desenvolvimento."
   },
   {
     "id": "pt-BR:experience:edu-mba-ia:0",
     "lang": "pt-BR",
     "source": "experience",
     "source_id": "edu-mba-ia",
-    "text": "MBA em Inteligência Artificial e Big Data em/at ICMC / USP (2025-07 - 2026-10). Em andamento, com conclusão prevista para outubro de 2026."
+    "text": "MBA em Inteligência Artificial e Big Data em/at ICMC / USP (2025-07 - 2026-10). Decisão estratégica para aprofundar a formação em IA: aprendizado de máquina, deep learning e IA generativa, além de Big Data. Conclusão prevista para outubro de 2026."
+  },
+  {
+    "id": "pt-BR:experience:edu-ml-dsa:0",
+    "lang": "pt-BR",
+    "source": "experience",
+    "source_id": "edu-ml-dsa",
+    "text": "Pipeline ETL e Machine Learning com Apache Spark em/at Data Science Academy (2025-01 - 2025-01). O ponto de partida no universo da IA: pipelines de ETL e modelos de Machine Learning com Apache Spark."
   },
   {
     "id": "pt-BR:experience:edu-civil-engineering:0",
     "lang": "pt-BR",
     "source": "experience",
     "source_id": "edu-civil-engineering",
-    "text": "Bacharelado em Engenharia Civil em/at Uninove (2012-01 - 2016-12). Graduação em Engenharia Civil."
+    "text": "Bacharelado em Engenharia Civil em/at Uninove (2012-01 - 2016-12). A base em matemática e estatística que facilitou a transição para a tecnologia e hoje sustenta os estudos em IA."
   },
   {
     "id": "pt-BR:project:proj-placeholder-1:0",
@@ -81,14 +88,21 @@
     "lang": "pt-BR",
     "source": "cv",
     "source_id": "cv",
-    "text": "para anonimização dinâmica de dados pessoais (LGPD), além de telemetria e rastreamento de custos (FinOps) no Azure Application Insights. ## Progressão na EISA - Empresa Interagrícola Wilson construiu sua carreira de tecnologia na EISA com promoções sucessivas. ### Desenvolvedor de Sistemas (desde jan/2026) - Desenvolvendo solução de IA com sistema multiagente (LangGraph) e RAG híbrido no Azure para automatizar o suporte N1 de uma plataforma de logística de café. - Desenvolveu comunicação orientada a eventos (Azure Service Bus + .NET), aprimorando o monitoramento das integrações. - Gerencia integrações críticas entre o ERP e os sistemas logísticos, sincronizando mais de 50 mil registros por dia com 99,9% de precisão. - Otimizou um pipeline ETL com SSIS, reduzindo drasticamente o tempo de processamento. - Implementou fluxos bidirecionais para a migração de mais de 70 processos com zero downtime. ### Analista Programador (fev/2025 a dez/2025) - Desenvolveu processos ETL (Azure Functions, SSIS) processando mais de 1 milhão de registros por mês com 99,8% de precisão. - Criou relatórios analíticos (Reporting Services, Crystal Reports) para todo o processo logístico da commodity. - Foi promovido"
+    "text": "para anonimização dinâmica de dados pessoais (LGPD), além de telemetria e rastreamento de custos (FinOps) no Azure Application Insights. ## Progressão na EISA - Empresa Interagrícola Wilson construiu sua carreira de tecnologia na EISA com promoções sucessivas. ### Desenvolvedor de Sistemas (desde jan/2026) - Desenvolvendo solução de IA com sistema multiagente (LangGraph) e RAG híbrido no Azure para automatizar o suporte N1 de uma plataforma de logística de café. - Desenvolveu comunicação orientada a eventos (Azure Service Bus + .NET), aprimorando o monitoramento das integrações. - Gerencia integrações críticas entre o ERP e os sistemas logísticos, sincronizando mais de 50 mil registros por dia com 99,9% de precisão. - Otimizou um pipeline ETL com SSIS, reduzindo drasticamente o tempo de processamento. - Implementou fluxos bidirecionais para a migração de mais de 70 processos com zero downtime. ### Analista Programador (fev/2025 a dez/2025) - Desenvolveu processos ETL (Azure Functions, SSIS) processando mais de 1 milhão de registros por mês com 99,8% de precisão. - Criou relatórios analíticos (Reporting Services, Crystal Reports) para todo o processo logístico da commodity. - Iniciou os"
   },
   {
     "id": "pt-BR:cv:cv:3",
     "lang": "pt-BR",
     "source": "cv",
     "source_id": "cv",
-    "text": "a Desenvolvedor de Sistemas após superar metas, concluindo entregas antecipadamente. ### Analista de Suporte (abr/2022 a jan/2025) - Prestou suporte técnico a usuários, diagnosticando e resolvendo problemas de sistemas, banco de dados e infraestrutura, reduzindo tickets recorrentes. ## Formação e certificações Wilson faz MBA em Inteligência Artificial e Big Data pelo ICMC/USP (2025-2026, conclusão prevista para outubro de 2026) e é bacharel em Engenharia Civil pela Uninove (2012-2016). Tem as certificações Microsoft Certified: Azure Data Fundamentals (DP-900) e \"Pipeline ETL e Machine Learning com Apache Spark\", pela Data Science Academy. ## Filosofia de trabalho \"A questão não é desenvolver, mas sim, desenvolver e manter com eficiência e segurança, pensando o melhor para cada projeto. E é exatamente isso que adoto em minhas soluções. Em um projeto mais recente, onde estou implementando uma solução de suporte automatizado para usuários de um sistema complexo em ambiente Azure, onde haverá uma integração do LLM com dois tipos de bancos diferentes (vetorial e relacional), um desafio de engenharia que foi superado.\""
+    "text": "primeiros protótipos de IA generativa com RAG e LLMs. - Foi promovido a Desenvolvedor de Sistemas após superar metas, concluindo entregas antecipadamente. ### Analista de Suporte (abr/2022 a jan/2025) - Prestou suporte técnico a usuários, diagnosticando e resolvendo problemas de sistemas, banco de dados e infraestrutura, reduzindo tickets recorrentes. ## Formação e certificações O curso \"Pipeline ETL e Machine Learning com Apache Spark\", da Data Science Academy (concluído em janeiro de 2025), foi o ponto de partida de Wilson no universo da IA. Wilson faz MBA em Inteligência Artificial e Big Data pelo ICMC/USP (2025-2026, conclusão prevista para outubro de 2026) e é bacharel em Engenharia Civil pela Uninove (2012-2016). Tem as certificações Microsoft Certified: Azure Data Fundamentals (DP-900) e \"Pipeline ETL e Machine Learning com Apache Spark\", pela Data Science Academy. ## Filosofia de trabalho \"A questão não é desenvolver, mas sim, desenvolver e manter com eficiência e segurança, pensando o melhor para cada projeto. E é exatamente isso que adoto em minhas soluções. Em um projeto mais recente, onde estou implementando uma solução de suporte automatizado para usuários"
+  },
+  {
+    "id": "pt-BR:cv:cv:4",
+    "lang": "pt-BR",
+    "source": "cv",
+    "source_id": "cv",
+    "text": "de um sistema complexo em ambiente Azure, onde haverá uma integração do LLM com dois tipos de bancos diferentes (vetorial e relacional), um desafio de engenharia que foi superado.\""
   },
   {
     "id": "en:profile:profile:0",
@@ -102,35 +116,42 @@
     "lang": "en",
     "source": "experience",
     "source_id": "exp-eisa-dev-sistemas",
-    "text": "Systems Developer em/at EISA - Empresa Interagrícola (2026-01 - presente/present). I build generative AI solutions on Azure, such as a multi-agent system with hybrid RAG for tier-1 support, and critical integrations between the ERP and logistics."
+    "text": "Systems Developer em/at EISA - Empresa Interagrícola (2026-01 - presente/present). Promoted after exceeding goals, I brought RAG and LLMs to the team: I am building a multi-agent system to automate tier-1 support, aiming to reduce ticket volume and the IT team’s response time."
   },
   {
     "id": "en:experience:exp-eisa-analista-programador:0",
     "lang": "en",
     "source": "experience",
     "source_id": "exp-eisa-analista-programador",
-    "text": "Programmer Analyst em/at EISA - Empresa Interagrícola (2025-02 - 2025-12). Built ETL pipelines and analytical reports for commodity logistics, which led to my promotion to Systems Developer."
+    "text": "Programmer Analyst em/at EISA - Empresa Interagrícola (2025-02 - 2025-12). First promotion, earned by delivering under demanding deadlines. I advanced in data integration, with ETL pipelines and analytical reports for the coffee business, and started my first generative AI prototypes with RAG and LLMs."
   },
   {
     "id": "en:experience:exp-eisa-analista-suporte:0",
     "lang": "en",
     "source": "experience",
     "source_id": "exp-eisa-analista-suporte",
-    "text": "Support Analyst em/at EISA - Empresa Interagrícola (2022-04 - 2025-01). Technical support for users across systems, databases and infrastructure, reducing recurring tickets."
+    "text": "Support Analyst em/at EISA - Empresa Interagrícola (2022-04 - 2025-01). My start in IT: supporting users across systems, databases and infrastructure, reducing recurring tickets, while building up SQL, C#, CI/CD and Azure skills for the move into development."
   },
   {
     "id": "en:experience:edu-mba-ia:0",
     "lang": "en",
     "source": "experience",
     "source_id": "edu-mba-ia",
-    "text": "MBA in Artificial Intelligence and Big Data em/at ICMC / USP (2025-07 - 2026-10). In progress, expected completion in October 2026."
+    "text": "MBA in Artificial Intelligence and Big Data em/at ICMC / USP (2025-07 - 2026-10). A strategic decision to deepen my AI education: machine learning, deep learning and generative AI, plus Big Data. Expected completion in October 2026."
+  },
+  {
+    "id": "en:experience:edu-ml-dsa:0",
+    "lang": "en",
+    "source": "experience",
+    "source_id": "edu-ml-dsa",
+    "text": "ETL Pipelines and Machine Learning with Apache Spark em/at Data Science Academy (2025-01 - 2025-01). My starting point in the AI world: ETL pipelines and Machine Learning models with Apache Spark."
   },
   {
     "id": "en:experience:edu-civil-engineering:0",
     "lang": "en",
     "source": "experience",
     "source_id": "edu-civil-engineering",
-    "text": "Bachelor's in Civil Engineering em/at Uninove (2012-01 - 2016-12). Civil Engineering degree."
+    "text": "Bachelor's in Civil Engineering em/at Uninove (2012-01 - 2016-12). The math and statistics foundation that eased my move into technology and still supports my AI studies."
   },
   {
     "id": "en:project:proj-placeholder-1:0",
@@ -172,13 +193,13 @@
     "lang": "en",
     "source": "cv",
     "source_id": "cv",
-    "text": "EISA with successive promotions. ### Systems Developer (since Jan 2026) - Building an AI solution with a multi-agent system (LangGraph) and hybrid RAG on Azure to automate tier-1 support for a coffee logistics platform. - Built event-driven communication (Azure Service Bus + .NET), improving integration monitoring. - Manages critical integrations between the ERP and logistics systems, syncing 50k+ records per day with 99.9% accuracy. - Optimized an SSIS ETL pipeline, drastically reducing processing time. - Implemented bidirectional flows to migrate 70+ processes with zero downtime. ### Programmer Analyst (Feb 2025 to Dec 2025) - Built ETL processes (Azure Functions, SSIS) handling 1M+ records per month with 99.8% accuracy. - Created analytical reports (Reporting Services, Crystal Reports) covering the entire commodity logistics process. - Was promoted to Systems Developer after exceeding goals and delivering ahead of schedule. ### Support Analyst (Apr 2022 to Jan 2025) - Provided technical support to users, diagnosing and solving system, database and infrastructure issues, reducing recurring tickets. ## Education and certifications Wilson is pursuing an MBA in Artificial Intelligence and Big Data at ICMC/USP (2025-2026, expected"
+    "text": "EISA with successive promotions. ### Systems Developer (since Jan 2026) - Building an AI solution with a multi-agent system (LangGraph) and hybrid RAG on Azure to automate tier-1 support for a coffee logistics platform. - Built event-driven communication (Azure Service Bus + .NET), improving integration monitoring. - Manages critical integrations between the ERP and logistics systems, syncing 50k+ records per day with 99.9% accuracy. - Optimized an SSIS ETL pipeline, drastically reducing processing time. - Implemented bidirectional flows to migrate 70+ processes with zero downtime. ### Programmer Analyst (Feb 2025 to Dec 2025) - Built ETL processes (Azure Functions, SSIS) handling 1M+ records per month with 99.8% accuracy. - Created analytical reports (Reporting Services, Crystal Reports) covering the entire commodity logistics process. - Started his first generative AI prototypes with RAG and LLMs. - Was promoted to Systems Developer after exceeding goals and delivering ahead of schedule. ### Support Analyst (Apr 2022 to Jan 2025) - Provided technical support to users, diagnosing and solving system, database and infrastructure issues, reducing recurring tickets. ## Education and certifications The \"ETL Pipelines and"
   },
   {
     "id": "en:cv:cv:3",
     "lang": "en",
     "source": "cv",
     "source_id": "cv",
-    "text": "completion in October 2026) and holds a Bachelor's in Civil Engineering from Uninove (2012-2016). His certifications are Microsoft Certified: Azure Data Fundamentals (DP-900) and \"ETL Pipelines and Machine Learning with Apache Spark\", from Data Science Academy. ## Working philosophy \"The question isn't just building software, but building and maintaining it efficiently and securely, always thinking about what's best for each project. That's exactly what I bring to my solutions. In a recent project, where I'm implementing an automated support solution for users of a complex system on Azure, there will be an integration of the LLM with two different types of databases (vector and relational) — an engineering challenge that has been overcome.\""
+    "text": "Machine Learning with Apache Spark\" course from Data Science Academy (completed in January 2025) was Wilson's starting point in the AI world. Wilson is pursuing an MBA in Artificial Intelligence and Big Data at ICMC/USP (2025-2026, expected completion in October 2026) and holds a Bachelor's in Civil Engineering from Uninove (2012-2016). His certifications are Microsoft Certified: Azure Data Fundamentals (DP-900) and \"ETL Pipelines and Machine Learning with Apache Spark\", from Data Science Academy. ## Working philosophy \"The question isn't just building software, but building and maintaining it efficiently and securely, always thinking about what's best for each project. That's exactly what I bring to my solutions. In a recent project, where I'm implementing an automated support solution for users of a complex system on Azure, there will be an integration of the LLM with two different types of databases (vector and relational) — an engineering challenge that has been overcome.\""
   }
 ]

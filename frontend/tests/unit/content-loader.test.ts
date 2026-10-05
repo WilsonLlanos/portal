@@ -12,7 +12,7 @@ function makeProfile(overrides: Partial<Profile> = {}): Profile {
     tagline: "Tagline",
     summary: "Summary",
     photo: { src: "/x.png", alt: "alt text" },
-    links: { linkedin: "", github: "", email: "" },
+    links: { linkedin: "", github: "", email: "", whatsapp: "" },
     ...overrides,
   };
 }

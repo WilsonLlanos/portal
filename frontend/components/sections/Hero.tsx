@@ -35,9 +35,11 @@ export async function Hero({ locale }: { locale: Locale }) {
           >
             {t("downloadCv")}
           </a>
-          {/* T026: leva à seção de contato (US5) */}
+          {/* T026: "Falar comigo" abre o WhatsApp (decisão do autor) */}
           <a
-            href="#contact"
+            href={profile.links.whatsapp}
+            target="_blank"
+            rel="noopener noreferrer"
             className="rounded-full border border-[var(--border)] px-6 py-3 text-center font-medium transition-colors hover:border-[var(--accent)]"
           >
             {t("talkToMe")}

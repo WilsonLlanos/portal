@@ -13,6 +13,14 @@ test("resumo, trajetória, projetos e certificações renderizam com o conteúdo
   for (const role of ["Desenvolvedor de Sistemas", "Analista Programador", "Analista de Suporte"]) {
     await expect(timeline.getByRole("heading", { name: new RegExp(role) })).toHaveCount(1);
   }
+  // O curso de ML aparece como o "start" na IA, com data única (só a conclusão).
+  await expect(timeline).toContainText("Pipeline ETL e Machine Learning com Apache Spark");
+  // Botão para o CV logo abaixo da trajetória.
+  await expect(timeline.getByRole("link", { name: /Ver detalhes no currículo/ })).toHaveAttribute(
+    "href",
+    "/cv/cv-pt-BR.pdf",
+  );
+
   const scrollWindow = timeline.getByRole("region");
   await expect(scrollWindow).toHaveAttribute("tabindex", "0");
   const isScrollable = await scrollWindow.evaluate((el) => el.scrollHeight > el.clientHeight);
