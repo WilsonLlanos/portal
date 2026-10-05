@@ -22,6 +22,7 @@ interface ChatState {
 }
 
 const MAX_HISTORY_TURNS = 4; // FR-013a: memória curta, só durante a visita
+const MAX_HISTORY_TURN_CHARS = 1000; // mesmo limite do backend (app/api/schemas.py)
 
 /**
  * T054: cliente do chat via SSE, com memória curta em memória do navegador
@@ -43,7 +44,11 @@ export function useChatSession(locale: string) {
       const controller = new AbortController();
       abortRef.current = controller;
 
-      const history = state.messages.slice(-MAX_HISTORY_TURNS);
+      // O servidor também trunca, mas cortar aqui evita enviar texto à toa.
+      const history = state.messages
+        .filter((m) => m.content.trim() !== "")
+        .slice(-MAX_HISTORY_TURNS)
+        .map((m) => ({ ...m, content: m.content.slice(0, MAX_HISTORY_TURN_CHARS) }));
       const userMessage: ChatMessage = { role: "user", content: text };
 
       setState((prev) => ({

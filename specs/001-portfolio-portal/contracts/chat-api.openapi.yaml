@@ -80,8 +80,10 @@ components:
           enum: [pt-BR, en]
         history:
           type: array
-          maxItems: 4
-          description: Últimas trocas da conversa atual (memória curta, FR-013a)
+          description: >
+            Últimas trocas da conversa atual (memória curta, FR-013a). O servidor
+            mantém só as 4 mais recentes e corta cada conteúdo em 1000 caracteres;
+            excedentes são truncados, não recusados (não geram 422).
           items:
             type: object
             required: [role, content]
@@ -91,7 +93,7 @@ components:
                 enum: [user, assistant]
               content:
                 type: string
-                maxLength: 1000
+                description: Truncado pelo servidor em 1000 caracteres
     ChatEventStream:
       description: >
         Sequência de eventos SSE. `token` carrega fragmentos da resposta; `done`

@@ -4,7 +4,13 @@ specs/001-portfolio-portal/contracts/chat-api.openapi.yaml.
 
 from typing import Literal
 
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, Field, field_validator
+
+# Memória curta (FR-013a, data-model.md § 3): o histórico é truncado no
+# servidor em vez de recusado — uma resposta longa da IA não pode derrubar a
+# pergunta seguinte do visitante com 422.
+MAX_HISTORY_TURNS = 4
+MAX_HISTORY_TURN_CHARS = 1000
 
 Lang = Literal["pt-BR", "en"]
 ErrorCode = Literal[
@@ -20,13 +26,23 @@ Suggestion = Literal["projects", "cv", "contact"]
 
 class HistoryTurn(BaseModel):
     role: Literal["user", "assistant"]
-    content: str = Field(max_length=1000)
+    content: str
+
+    @field_validator("content")
+    @classmethod
+    def _truncate_content(cls, value: str) -> str:
+        return value[:MAX_HISTORY_TURN_CHARS]
 
 
 class ChatRequest(BaseModel):
     message: str = Field(min_length=1)
     lang: Lang
-    history: list[HistoryTurn] = Field(default_factory=list, max_length=4)
+    history: list[HistoryTurn] = Field(default_factory=list)
+
+    @field_validator("history")
+    @classmethod
+    def _keep_recent_turns(cls, value: list[HistoryTurn]) -> list[HistoryTurn]:
+        return value[-MAX_HISTORY_TURNS:]
 
 
 class ErrorResponse(BaseModel):

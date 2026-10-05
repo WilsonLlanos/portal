@@ -79,3 +79,25 @@ def test_chat_success_streams_tokens_and_done(monkeypatch):
     assert "event: token" in body
     assert "event: done" in body
     assert "answered" in body
+
+
+def test_long_history_is_truncated_not_rejected(monkeypatch):
+    """Regressão: uma resposta longa da IA no histórico causava 422 na pergunta seguinte."""
+    captured: dict = {}
+
+    def _capturing_pipeline(**kwargs):
+        captured.update(kwargs)
+        yield PipelineEvent(type="done", outcome="answered", suggestions=[])
+
+    client = _client(monkeypatch, [])
+    monkeypatch.setattr(chat_module, "run_chat_pipeline", _capturing_pipeline)
+
+    history = [{"role": "user", "content": f"pergunta {i}"} for i in range(5)]
+    history.append({"role": "assistant", "content": "x" * 2500})
+    response = client.post(
+        "/chat", json={"message": "e depois?", "lang": "pt-BR", "history": history}
+    )
+
+    assert response.status_code == 200
+    assert len(captured["history"]) == 4  # só as trocas mais recentes
+    assert len(captured["history"][-1].content) == 1000  # truncado, não recusado
