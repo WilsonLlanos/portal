@@ -1,17 +1,15 @@
 {
-  "_placeholder": true,
-  "_note": "Conteúdo provisório (T009). Revisar com o texto real do CV_Wilson_Llanos_AI.pdf antes de publicar.",
   "name": "Wilson Llanos",
   "headline": "Engenheiro de IA",
   "tagline": "Construo sistemas de IA aplicada, do protótipo à produção.",
-  "summary": "[PLACEHOLDER] Resumo de carreira com foco em Inteligência Artificial — substituir por um resumo curto baseado no CV real, destacando experiência profissional e acadêmica em IA.",
+  "summary": "Com 5 anos de experiência em desenvolvimento de sistemas, atuo há quase 3 anos com soluções de Inteligência Artificial em produção — do protótipo à automação de suporte em ambiente Azure. MBA em Inteligência Artificial e formação em Engenharia Civil (2016).",
   "photo": {
     "src": "/images/profile.png",
     "alt": "Foto de Wilson Llanos, retrato de estúdio"
   },
   "links": {
-    "linkedin": "https://www.linkedin.com/in/PLACEHOLDER",
-    "github": "https://github.com/PLACEHOLDER",
+    "linkedin": "https://www.linkedin.com/in/wilson-llanos/",
+    "github": "https://github.com/WilsonLlanos",
     "email": "wilson.alexandre.llanos@gmail.com"
   }
 }

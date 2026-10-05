@@ -1,25 +1,35 @@
 {
-  "_placeholder": true,
-  "_note": "Conteúdo provisório (T009). Substituir pelos itens reais do CV.",
   "items": [
     {
-      "id": "exp-placeholder-1",
+      "id": "exp-ai-engineer",
       "kind": "professional",
-      "organization": "[PLACEHOLDER] Empresa",
-      "role": "[PLACEHOLDER] Cargo em IA",
-      "start": "2024-01",
+      "organization": "EISA - Empresa Interagrícola",
+      "role": "Desenvolvedor de Sistemas (AI Engineer)",
+      "start": "2022-04",
       "end": null,
-      "description": "[PLACEHOLDER] Descrição curta da experiência profissional em IA.",
-      "highlights": ["[PLACEHOLDER] Resultado 1", "[PLACEHOLDER] Resultado 2"]
+      "description": "Desenvolvimento de sistemas com foco crescente em soluções de Inteligência Artificial em produção, incluindo um projeto atual de automação de suporte para um sistema interno de uma empresa, em ambiente Azure.",
+      "highlights": [
+        "Implementação de um sistema de suporte automatizado com integração de LLM a bancos de dados vetorial e relacional"
+      ]
     },
     {
-      "id": "edu-placeholder-1",
+      "id": "edu-mba-ia",
       "kind": "academic",
-      "organization": "[PLACEHOLDER] Instituição",
-      "role": "[PLACEHOLDER] Curso/Formação em IA",
-      "start": "2022-01",
-      "end": "2023-12",
-      "description": "[PLACEHOLDER] Descrição curta da formação acadêmica.",
+      "organization": "USP",
+      "role": "MBA em Inteligência Artificial",
+      "start": "2025-07",
+      "end": "2026-10",
+      "description": "MBA com foco em Inteligência Artificial.",
+      "highlights": []
+    },
+    {
+      "id": "edu-civil-engineering",
+      "kind": "academic",
+      "organization": "Uninove",
+      "role": "Engenharia Civil",
+      "start": "2012-01",
+      "end": "2016-12",
+      "description": "Graduação em Engenharia Civil.",
       "highlights": []
     }
   ]

@@ -34,7 +34,7 @@ Aplicação web com dois projetos (ver [plan.md](plan.md) § Project Structure):
 - [x] T005 [P] Configurar `ruff` em `backend/pyproject.toml` (lint e format)
 - [x] T006 Criar `backend/.env.example` com todas as variáveis: `GEMINI_API_KEY`, `GROQ_API_KEY`, `UPSTASH_REDIS_REST_URL`, `UPSTASH_REDIS_REST_TOKEN`, `LANGFUSE_PUBLIC_KEY`, `LANGFUSE_SECRET_KEY`, `LANGFUSE_HOST`, `MAX_MESSAGE_LENGTH=500`, `DAILY_COST_CAP_CENTS=50`, `RATE_LIMIT_PER_HOUR=20`, `GUARD_TIMEOUT_SECONDS=2` (sem valores reais; ver constituição IX)
 - [x] T007 Atualizar o `.gitignore` da raiz com os artefatos de build de `frontend/` (`frontend/.next/`, `frontend/node_modules/`) e `backend/` (`backend/.venv/`, `backend/__pycache__/`), preservando as regras já existentes
-- [ ] T007a [P] Configurar um teto de orçamento (alerta e/ou corte) na conta paga do Google Cloud/AI Studio usada pelo `GEMINI_API_KEY`, conforme a decisão O1 do [plan.md](plan.md) (não é código; registrar no `README.md` que esse passo foi feito e o valor configurado)
+- [x] T007a [P] Configurar um teto de orçamento (alerta e/ou corte) na conta paga do Google Cloud/AI Studio usada pelo `GEMINI_API_KEY`, conforme a decisão O1 do [plan.md](plan.md) (não é código; registrar no `README.md` que esse passo foi feito e o valor configurado)
 - [ ] T007b [P] Cadastrar um cartão na conta da Groq usada pelo `GROQ_API_KEY` e confirmar o preço vigente do `meta-llama/llama-prompt-guard-2-86m`, conforme a decisão O2 do [plan.md](plan.md) (não é código; registrar no `README.md` que esse passo foi feito)
 
 **Checkpoint**: os dois projetos instalam e rodam localmente (mesmo sem funcionalidade).

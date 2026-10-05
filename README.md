@@ -49,7 +49,7 @@ Copie `backend/.env.example` para `backend/.env` e preencha com suas chaves
 Antes do chat funcionar em produção, configure manualmente (ver
 `specs/001-portfolio-portal/tasks.md` T007a/T007b e `plan.md` decisões O1/O2):
 
-- [ ] Teto de orçamento configurado no Google Cloud/AI Studio (`GEMINI_API_KEY`)
+- [x] Teto de orçamento configurado no Google Cloud/AI Studio (`GEMINI_API_KEY`)
 - [ ] Cartão cadastrado na conta da Groq (`GROQ_API_KEY`) e preço do
       `meta-llama/llama-prompt-guard-2-86m` confirmado
 

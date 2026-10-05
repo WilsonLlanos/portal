@@ -1,17 +1,15 @@
 {
-  "_placeholder": true,
-  "_note": "Provisional content (T010). Review against the real CV_Wilson_Llanos_AI-En.pdf before publishing.",
   "name": "Wilson Llanos",
   "headline": "AI Engineer",
   "tagline": "I build applied AI systems, from prototype to production.",
-  "summary": "[PLACEHOLDER] Short career summary focused on Artificial Intelligence — replace with a real summary based on the CV, highlighting professional and academic experience in AI.",
+  "summary": "With 5 years of software development experience, I've spent the last 3 years building production AI solutions — from prototype to automated support in Azure environments. MBA in Artificial Intelligence and a background in Civil Engineering (2016).",
   "photo": {
     "src": "/images/profile.png",
     "alt": "Portrait photo of Wilson Llanos, studio shot"
   },
   "links": {
-    "linkedin": "https://www.linkedin.com/in/PLACEHOLDER",
-    "github": "https://github.com/PLACEHOLDER",
+    "linkedin": "https://www.linkedin.com/in/wilson-llanos/",
+    "github": "https://github.com/WilsonLlanos",
     "email": "wilson.alexandre.llanos@gmail.com"
   }
 }

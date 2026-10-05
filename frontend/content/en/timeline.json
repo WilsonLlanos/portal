@@ -1,25 +1,35 @@
 {
-  "_placeholder": true,
-  "_note": "Provisional content (T010). Replace with the real CV items.",
   "items": [
     {
-      "id": "exp-placeholder-1",
+      "id": "exp-ai-engineer",
       "kind": "professional",
-      "organization": "[PLACEHOLDER] Company",
-      "role": "[PLACEHOLDER] AI Role",
-      "start": "2024-01",
+      "organization": "EISA - Empresa Interagrícola",
+      "role": "Systems Developer (AI Engineer)",
+      "start": "2022-04",
       "end": null,
-      "description": "[PLACEHOLDER] Short description of the professional AI experience.",
-      "highlights": ["[PLACEHOLDER] Result 1", "[PLACEHOLDER] Result 2"]
+      "description": "Systems development with a growing focus on production Artificial Intelligence solutions, including an ongoing project to automate support for a company's internal system on Azure.",
+      "highlights": [
+        "Implemented an automated support system integrating an LLM with vector and relational databases"
+      ]
     },
     {
-      "id": "edu-placeholder-1",
+      "id": "edu-mba-ia",
       "kind": "academic",
-      "organization": "[PLACEHOLDER] Institution",
-      "role": "[PLACEHOLDER] AI Degree/Program",
-      "start": "2022-01",
-      "end": "2023-12",
-      "description": "[PLACEHOLDER] Short description of the academic background.",
+      "organization": "USP",
+      "role": "MBA in Artificial Intelligence",
+      "start": "2025-07",
+      "end": "2026-10",
+      "description": "MBA focused on Artificial Intelligence.",
+      "highlights": []
+    },
+    {
+      "id": "edu-civil-engineering",
+      "kind": "academic",
+      "organization": "Uninove",
+      "role": "Civil Engineering",
+      "start": "2012-01",
+      "end": "2016-12",
+      "description": "Civil Engineering degree.",
       "highlights": []
     }
   ]
