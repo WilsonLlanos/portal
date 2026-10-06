@@ -81,6 +81,26 @@ def test_chat_success_streams_tokens_and_done(monkeypatch):
     assert "answered" in body
 
 
+def test_rate_limit_key_uses_forwarded_visitor_ip(monkeypatch):
+    """Atrás do proxy da Vercel, cada visitante precisa de uma chave própria de rate limit."""
+    keys: list[str] = []
+
+    def _capturing_pipeline(**kwargs):
+        keys.append(kwargs["visitor_key"])
+        yield PipelineEvent(type="done", outcome="answered", suggestions=[])
+
+    client = _client(monkeypatch, [])
+    monkeypatch.setattr(chat_module, "run_chat_pipeline", _capturing_pipeline)
+
+    body = {"message": "oi", "lang": "pt-BR"}
+    client.post("/chat", json=body, headers={"x-forwarded-for": "203.0.113.10, 10.0.0.1"})
+    client.post("/chat", json=body, headers={"x-forwarded-for": "198.51.100.7, 10.0.0.1"})
+    client.post("/chat", json=body, headers={"x-real-ip": "203.0.113.10"})
+
+    assert keys[0] != keys[1]  # visitantes diferentes, chaves diferentes
+    assert keys[0] == keys[2]  # mesmo visitante, mesma chave (x-real-ip ou x-forwarded-for)
+
+
 def test_long_history_is_truncated_not_rejected(monkeypatch):
     """Regressão: uma resposta longa da IA no histórico causava 422 na pergunta seguinte."""
     captured: dict = {}

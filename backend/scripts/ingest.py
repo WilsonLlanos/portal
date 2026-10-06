@@ -96,14 +96,44 @@ def collect_source_records(lang: str) -> list[tuple[str, str, str]]:
 
 
 def compute_content_hash() -> str:
+    """Hash do conteúdo do autor, estável entre Windows e Linux.
+
+    Normaliza CRLF -> LF (o Git converte quebras de linha no Windows) e inclui o
+    caminho relativo de cada arquivo, para detectar renomeações.
+    """
     hasher = hashlib.sha256()
     for path in sorted(FRONTEND_CONTENT_DIR.rglob("*")):
         if path.is_file():
-            hasher.update(path.read_bytes())
+            hasher.update(path.relative_to(FRONTEND_CONTENT_DIR).as_posix().encode())
+            hasher.update(path.read_bytes().replace(b"\r\n", b"\n"))
     return hasher.hexdigest()
 
 
+def check_freshness() -> int:
+    """`--check`: confere se backend/data/kb corresponde ao conteúdo atual.
+
+    Não chama nenhuma API (sem custo, sem chave): só compara o hash do conteúdo
+    com o registrado no manifest. Usado pelo workflow .github/workflows/ingest.yml.
+    """
+    manifest_path = KB_DIR / "manifest.json"
+    if not manifest_path.exists():
+        print("ERRO: backend/data/kb/manifest.json não existe. Rode a ingestão.")
+        return 1
+    manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+    if manifest.get("content_hash") != compute_content_hash():
+        print(
+            "ERRO: backend/data/kb está desatualizado em relação a frontend/content.\n"
+            "Rode `uv run python scripts/ingest.py` e commite backend/data/kb."
+        )
+        return 1
+    print("OK: base de conhecimento em dia com o conteúdo.")
+    return 0
+
+
 def main() -> None:
+    if "--check" in sys.argv:
+        raise SystemExit(check_freshness())
+
     settings = get_settings()
     llm = GeminiLLMClient(settings)
 

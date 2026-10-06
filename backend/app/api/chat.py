@@ -88,6 +88,24 @@ def _to_sse(events: Iterator[PipelineEvent], lang: str) -> Iterator[str]:
             yield _sse_line("error", {"code": code, "message": message})
 
 
+def _client_ip(request: Request) -> str:
+    """IP do visitante para o rate limit (FR-018).
+
+    Em produção a requisição chega pelo proxy da Vercel (rewrite /api/* do
+    frontend), então `request.client.host` é o IP do proxy, igual para todos.
+    A Vercel informa o IP real do visitante em `x-real-ip` / `x-forwarded-for`
+    (primeiro endereço da lista). Localmente esses cabeçalhos não existem e o
+    IP da conexão é usado.
+    """
+    real_ip = request.headers.get("x-real-ip")
+    if real_ip:
+        return real_ip.strip()
+    forwarded = request.headers.get("x-forwarded-for")
+    if forwarded:
+        return forwarded.split(",")[0].strip()
+    return request.client.host if request.client else "unknown"
+
+
 def _chain(first: PipelineEvent, rest: Iterator[PipelineEvent]) -> Iterator[PipelineEvent]:
     yield first
     yield from rest
@@ -95,7 +113,7 @@ def _chain(first: PipelineEvent, rest: Iterator[PipelineEvent]) -> Iterator[Pipe
 
 @router.post("/chat")
 async def post_chat(payload: ChatRequest, request: Request):
-    client_ip = request.client.host if request.client else "unknown"
+    client_ip = _client_ip(request)
     user_agent = request.headers.get("user-agent", "unknown")
     visitor_key = make_visitor_key(client_ip, user_agent)
 
