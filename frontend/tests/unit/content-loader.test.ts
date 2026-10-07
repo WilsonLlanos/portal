@@ -51,6 +51,7 @@ describe("validateContentParity", () => {
       {
         id: "only-pt",
         name: "Nome",
+        context: "Pessoal",
         description: "Desc",
         technologies: ["Python"],
         repoUrl: "https://example.com",

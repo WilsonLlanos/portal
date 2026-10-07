@@ -33,8 +33,14 @@ test("resumo, trajetória, projetos e certificações renderizam com o conteúdo
     .evaluate((el) => getComputedStyle(el).animationName);
   expect(animationName).toBe("timeline-cylinder");
 
-  const firstProjectLink = page.locator("#projects a", { hasText: "Ver repositório" }).first();
-  await expect(firstProjectLink).toHaveAttribute("href", /^https:\/\/github\.com\//);
+  // Projetos: três cards reais, cada um com link do GitHub e "Pergunte à IA".
+  const projects = page.locator("#projects article");
+  await expect(projects).toHaveCount(3);
+  const repoLinks = page.locator("#projects a", { hasText: "Ver no GitHub" });
+  await expect(repoLinks).toHaveCount(3);
+  await expect(repoLinks.first()).toHaveAttribute("href", /^https:\/\/github\.com\/WilsonLlanos\//);
+  await expect(page.locator("#projects").getByRole("button", { name: /Pergunte à IA/ })).toHaveCount(3);
+  await expect(page.locator("#projects")).toContainText("Desafio técnico (case Getnet)");
 
   await expect(page.locator("#certifications li").first()).toBeVisible();
   // Mais recente primeiro: a certificação da Microsoft vem antes da de ML.

@@ -1,13 +1,56 @@
 {
-  "_placeholder": true,
-  "_note": "Conteúdo provisório (T009). Substituir pelos projetos reais.",
   "items": [
     {
-      "id": "proj-placeholder-1",
-      "name": "[PLACEHOLDER] Projeto de IA",
-      "description": "[PLACEHOLDER] Descrição curta do projeto, o problema resolvido e o resultado.",
-      "technologies": ["Python", "FastAPI"],
-      "repoUrl": "https://github.com/PLACEHOLDER/projeto",
+      "id": "proj-portal",
+      "name": "Portal de Portfólio com Chat de IA",
+      "context": "Pessoal · código aberto",
+      "description": "Este site: um portfólio bilíngue com um assistente de IA que responde sobre a minha carreira usando RAG sobre o meu próprio currículo, com guardrail contra prompt injection, limites de custo e CI/CD. Desenvolvido com Spec-Driven Development.",
+      "technologies": [
+        "Next.js",
+        "TypeScript",
+        "FastAPI",
+        "Gemini",
+        "RAG",
+        "Prompt Guard 2",
+        "Upstash Redis",
+        "GitHub Actions",
+        "Vercel"
+      ],
+      "repoUrl": "https://github.com/WilsonLlanos/portal",
+      "demoUrl": null
+    },
+    {
+      "id": "proj-getnet",
+      "name": "Suporte Multiagente para Lojistas",
+      "context": "Desafio técnico (case Getnet) · código aberto",
+      "description": "Um roteador em LangGraph direciona cada mensagem a agentes especializados: RAG sobre fontes aprovadas, dados do próprio lojista via tools e APIs externas, com guardrails, redação de dados pessoais e observabilidade. Sem contexto suficiente, admite a limitação em vez de inventar.",
+      "technologies": [
+        "Python",
+        "FastAPI",
+        "LangGraph",
+        "LangChain",
+        "Claude",
+        "Chroma",
+        "Sentence Transformers",
+        "Docker"
+      ],
+      "repoUrl": "https://github.com/WilsonLlanos/getnet-multi-agent-support-system",
+      "demoUrl": null
+    },
+    {
+      "id": "proj-rag-doc-quality",
+      "name": "Avaliação de Qualidade de Retrieval",
+      "context": "Usado na EISA · código aberto",
+      "description": "Ferramenta de linha de comando que mede a qualidade da busca de um corpus de documentação antes de publicá-lo no Azure AI Search: compara busca vetorial e híbrida (BM25 + RRF) num golden set, com Recall@k e MRR contra um baseline.",
+      "technologies": [
+        "Python",
+        "Azure OpenAI",
+        "Qdrant",
+        "BM25",
+        "fastembed",
+        "Typer"
+      ],
+      "repoUrl": "https://github.com/WilsonLlanos/rag-doc-quality",
       "demoUrl": null
     }
   ]

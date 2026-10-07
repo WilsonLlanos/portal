@@ -37,6 +37,35 @@ Foundry. Inclui camada de governança e segurança com Microsoft Presidio para a
 de dados pessoais (LGPD), além de telemetria e rastreamento de custos (FinOps) no Azure Application
 Insights.
 
+### Portal de Portfólio com Chat de IA (pessoal, código aberto)
+Repositório: github.com/WilsonLlanos/portal. É este próprio site: um portfólio bilíngue (PT/EN) com
+um assistente de IA que responde sobre a carreira de Wilson usando RAG sobre o currículo dele.
+Frontend em Next.js e TypeScript; backend em FastAPI com Gemini; busca vetorial com embeddings
+pré-calculados; guardrail Llama Prompt Guard 2 contra prompt injection, com degradação segura;
+limite de perguntas por visitante e teto diário de custo no Upstash Redis; CI/CD com GitHub Actions
+e deploy na Vercel. Foi desenvolvido com Spec-Driven Development (Spec Kit).
+
+### Suporte multiagente para lojistas — case Getnet (desafio técnico, código aberto)
+Repositório: github.com/WilsonLlanos/getnet-multi-agent-support-system. Desenvolvido como desafio
+técnico de um processo seletivo: um serviço de suporte para lojistas de maquininhas Getnet com um
+único endpoint, em que um roteador em LangGraph classifica cada mensagem e a envia a agentes
+especializados. O agente de conhecimento faz RAG sobre fontes aprovadas (Chroma com embeddings
+multilíngues locais) e consulta APIs externas (cotação PTAX do Banco Central e clima); o agente de
+suporte responde com os dados do próprio lojista por meio de tools; um agente de escalonamento
+registra o encaminhamento para atendimento humano. Há guardrails com motivos padronizados,
+redação de dados pessoais, verificação de prompt injection e observabilidade com logs
+estruturados. Quando o contexto é insuficiente, o sistema admite a limitação em vez de inventar.
+Tecnologias: Python, FastAPI, LangGraph, LangChain, Claude, Chroma, Sentence Transformers, Docker.
+Também foi desenvolvido com Spec-Driven Development.
+
+### Avaliação de qualidade de retrieval (usada na EISA, código aberto)
+Repositório: github.com/WilsonLlanos/rag-doc-quality. Ferramenta de linha de comando criada para o
+projeto de RAG do suporte N1 da EISA: indexa o corpus de documentação e mede a qualidade da busca
+antes de publicá-lo no Azure AI Search. Compara busca vetorial e híbrida (vetorial + BM25,
+fundidas por RRF), roda um golden set de perguntas com as métricas Recall@k e MRR, compara com um
+baseline salvo e lista as perguntas que falharam. Tecnologias: Python, Azure OpenAI (embeddings),
+Qdrant, fastembed (BM25) e Typer.
+
 ## Progressão na EISA - Empresa Interagrícola
 
 Wilson construiu sua carreira de tecnologia na EISA com promoções sucessivas.

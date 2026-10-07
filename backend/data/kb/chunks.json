@@ -49,11 +49,25 @@
     "text": "Bacharelado em Engenharia Civil em/at Uninove (2012-01 - 2016-12). A base em matemática e estatística que facilitou a transição para a tecnologia e hoje sustenta os estudos em IA."
   },
   {
-    "id": "pt-BR:project:proj-placeholder-1:0",
+    "id": "pt-BR:project:proj-portal:0",
     "lang": "pt-BR",
     "source": "project",
-    "source_id": "proj-placeholder-1",
-    "text": "Projeto/Project: [PLACEHOLDER] Projeto de IA. [PLACEHOLDER] Descrição curta do projeto, o problema resolvido e o resultado. Tecnologias/Technologies: Python, FastAPI."
+    "source_id": "proj-portal",
+    "text": "Projeto/Project: Portal de Portfólio com Chat de IA. Este site: um portfólio bilíngue com um assistente de IA que responde sobre a minha carreira usando RAG sobre o meu próprio currículo, com guardrail contra prompt injection, limites de custo e CI/CD. Desenvolvido com Spec-Driven Development. Tecnologias/Technologies: Next.js, TypeScript, FastAPI, Gemini, RAG, Prompt Guard 2, Upstash Redis, GitHub Actions, Vercel."
+  },
+  {
+    "id": "pt-BR:project:proj-getnet:0",
+    "lang": "pt-BR",
+    "source": "project",
+    "source_id": "proj-getnet",
+    "text": "Projeto/Project: Suporte Multiagente para Lojistas. Um roteador em LangGraph direciona cada mensagem a agentes especializados: RAG sobre fontes aprovadas, dados do próprio lojista via tools e APIs externas, com guardrails, redação de dados pessoais e observabilidade. Sem contexto suficiente, admite a limitação em vez de inventar. Tecnologias/Technologies: Python, FastAPI, LangGraph, LangChain, Claude, Chroma, Sentence Transformers, Docker."
+  },
+  {
+    "id": "pt-BR:project:proj-rag-doc-quality:0",
+    "lang": "pt-BR",
+    "source": "project",
+    "source_id": "proj-rag-doc-quality",
+    "text": "Projeto/Project: Avaliação de Qualidade de Retrieval. Ferramenta de linha de comando que mede a qualidade da busca de um corpus de documentação antes de publicá-lo no Azure AI Search: compara busca vetorial e híbrida (BM25 + RRF) num golden set, com Recall@k e MRR contra um baseline. Tecnologias/Technologies: Python, Azure OpenAI, Qdrant, BM25, fastembed, Typer."
   },
   {
     "id": "pt-BR:certification:cert-ml-dsa:0",
@@ -88,21 +102,35 @@
     "lang": "pt-BR",
     "source": "cv",
     "source_id": "cv",
-    "text": "para anonimização dinâmica de dados pessoais (LGPD), além de telemetria e rastreamento de custos (FinOps) no Azure Application Insights. ## Progressão na EISA - Empresa Interagrícola Wilson construiu sua carreira de tecnologia na EISA com promoções sucessivas. ### Desenvolvedor de Sistemas (desde jan/2026) - Desenvolvendo solução de IA com sistema multiagente (LangGraph) e RAG híbrido no Azure para automatizar o suporte N1 de uma plataforma de logística de café. - Desenvolveu comunicação orientada a eventos (Azure Service Bus + .NET), aprimorando o monitoramento das integrações. - Gerencia integrações críticas entre o ERP e os sistemas logísticos, sincronizando mais de 50 mil registros por dia com 99,9% de precisão. - Otimizou um pipeline ETL com SSIS, reduzindo drasticamente o tempo de processamento. - Implementou fluxos bidirecionais para a migração de mais de 70 processos com zero downtime. ### Analista Programador (fev/2025 a dez/2025) - Desenvolveu processos ETL (Azure Functions, SSIS) processando mais de 1 milhão de registros por mês com 99,8% de precisão. - Criou relatórios analíticos (Reporting Services, Crystal Reports) para todo o processo logístico da commodity. - Iniciou os"
+    "text": "para anonimização dinâmica de dados pessoais (LGPD), além de telemetria e rastreamento de custos (FinOps) no Azure Application Insights. ### Portal de Portfólio com Chat de IA (pessoal, código aberto) Repositório: github.com/WilsonLlanos/portal. É este próprio site: um portfólio bilíngue (PT/EN) com um assistente de IA que responde sobre a carreira de Wilson usando RAG sobre o currículo dele. Frontend em Next.js e TypeScript; backend em FastAPI com Gemini; busca vetorial com embeddings pré-calculados; guardrail Llama Prompt Guard 2 contra prompt injection, com degradação segura; limite de perguntas por visitante e teto diário de custo no Upstash Redis; CI/CD com GitHub Actions e deploy na Vercel. Foi desenvolvido com Spec-Driven Development (Spec Kit). ### Suporte multiagente para lojistas — case Getnet (desafio técnico, código aberto) Repositório: github.com/WilsonLlanos/getnet-multi-agent-support-system. Desenvolvido como desafio técnico de um processo seletivo: um serviço de suporte para lojistas de maquininhas Getnet com um único endpoint, em que um roteador em LangGraph classifica cada mensagem e a envia a agentes especializados. O agente de conhecimento faz RAG sobre fontes aprovadas (Chroma com embeddings multilíngues locais) e consulta APIs externas"
   },
   {
     "id": "pt-BR:cv:cv:3",
     "lang": "pt-BR",
     "source": "cv",
     "source_id": "cv",
-    "text": "primeiros protótipos de IA generativa com RAG e LLMs. - Foi promovido a Desenvolvedor de Sistemas após superar metas, concluindo entregas antecipadamente. ### Analista de Suporte (abr/2022 a jan/2025) - Prestou suporte técnico a usuários, diagnosticando e resolvendo problemas de sistemas, banco de dados e infraestrutura, reduzindo tickets recorrentes. ## Formação e certificações O curso \"Pipeline ETL e Machine Learning com Apache Spark\", da Data Science Academy (concluído em janeiro de 2025), foi o ponto de partida de Wilson no universo da IA. Wilson faz MBA em Inteligência Artificial e Big Data pelo ICMC/USP (2025-2026, conclusão prevista para outubro de 2026) e é bacharel em Engenharia Civil pela Uninove (2012-2016). Tem as certificações Microsoft Certified: Azure Data Fundamentals (DP-900) e \"Pipeline ETL e Machine Learning com Apache Spark\", pela Data Science Academy. ## Filosofia de trabalho \"A questão não é desenvolver, mas sim, desenvolver e manter com eficiência e segurança, pensando o melhor para cada projeto. E é exatamente isso que adoto em minhas soluções. Em um projeto mais recente, onde estou implementando uma solução de suporte automatizado para usuários"
+    "text": "(cotação PTAX do Banco Central e clima); o agente de suporte responde com os dados do próprio lojista por meio de tools; um agente de escalonamento registra o encaminhamento para atendimento humano. Há guardrails com motivos padronizados, redação de dados pessoais, verificação de prompt injection e observabilidade com logs estruturados. Quando o contexto é insuficiente, o sistema admite a limitação em vez de inventar. Tecnologias: Python, FastAPI, LangGraph, LangChain, Claude, Chroma, Sentence Transformers, Docker. Também foi desenvolvido com Spec-Driven Development. ### Avaliação de qualidade de retrieval (usada na EISA, código aberto) Repositório: github.com/WilsonLlanos/rag-doc-quality. Ferramenta de linha de comando criada para o projeto de RAG do suporte N1 da EISA: indexa o corpus de documentação e mede a qualidade da busca antes de publicá-lo no Azure AI Search. Compara busca vetorial e híbrida (vetorial + BM25, fundidas por RRF), roda um golden set de perguntas com as métricas Recall@k e MRR, compara com um baseline salvo e lista as perguntas que falharam. Tecnologias: Python, Azure OpenAI (embeddings), Qdrant, fastembed (BM25) e Typer. ## Progressão na EISA - Empresa Interagrícola Wilson construiu"
   },
   {
     "id": "pt-BR:cv:cv:4",
     "lang": "pt-BR",
     "source": "cv",
     "source_id": "cv",
-    "text": "de um sistema complexo em ambiente Azure, onde haverá uma integração do LLM com dois tipos de bancos diferentes (vetorial e relacional), um desafio de engenharia que foi superado.\" ## Fora do trabalho (interesses pessoais) Nas horas vagas, Wilson toca violão, joga Counter-Strike e acompanha as notícias sobre IA. Também medita, o que o ajuda a manter o foco. Gosta de se manter atualizado testando novas tecnologias e, de tempos em tempos, revisita os fundamentos da área para manter a eficiência na linha de frente."
+    "text": "sua carreira de tecnologia na EISA com promoções sucessivas. ### Desenvolvedor de Sistemas (desde jan/2026) - Desenvolvendo solução de IA com sistema multiagente (LangGraph) e RAG híbrido no Azure para automatizar o suporte N1 de uma plataforma de logística de café. - Desenvolveu comunicação orientada a eventos (Azure Service Bus + .NET), aprimorando o monitoramento das integrações. - Gerencia integrações críticas entre o ERP e os sistemas logísticos, sincronizando mais de 50 mil registros por dia com 99,9% de precisão. - Otimizou um pipeline ETL com SSIS, reduzindo drasticamente o tempo de processamento. - Implementou fluxos bidirecionais para a migração de mais de 70 processos com zero downtime. ### Analista Programador (fev/2025 a dez/2025) - Desenvolveu processos ETL (Azure Functions, SSIS) processando mais de 1 milhão de registros por mês com 99,8% de precisão. - Criou relatórios analíticos (Reporting Services, Crystal Reports) para todo o processo logístico da commodity. - Iniciou os primeiros protótipos de IA generativa com RAG e LLMs. - Foi promovido a Desenvolvedor de Sistemas após superar metas, concluindo entregas antecipadamente. ### Analista de Suporte (abr/2022 a"
+  },
+  {
+    "id": "pt-BR:cv:cv:5",
+    "lang": "pt-BR",
+    "source": "cv",
+    "source_id": "cv",
+    "text": "jan/2025) - Prestou suporte técnico a usuários, diagnosticando e resolvendo problemas de sistemas, banco de dados e infraestrutura, reduzindo tickets recorrentes. ## Formação e certificações O curso \"Pipeline ETL e Machine Learning com Apache Spark\", da Data Science Academy (concluído em janeiro de 2025), foi o ponto de partida de Wilson no universo da IA. Wilson faz MBA em Inteligência Artificial e Big Data pelo ICMC/USP (2025-2026, conclusão prevista para outubro de 2026) e é bacharel em Engenharia Civil pela Uninove (2012-2016). Tem as certificações Microsoft Certified: Azure Data Fundamentals (DP-900) e \"Pipeline ETL e Machine Learning com Apache Spark\", pela Data Science Academy. ## Filosofia de trabalho \"A questão não é desenvolver, mas sim, desenvolver e manter com eficiência e segurança, pensando o melhor para cada projeto. E é exatamente isso que adoto em minhas soluções. Em um projeto mais recente, onde estou implementando uma solução de suporte automatizado para usuários de um sistema complexo em ambiente Azure, onde haverá uma integração do LLM com dois tipos de bancos diferentes (vetorial e relacional), um desafio de engenharia que foi"
+  },
+  {
+    "id": "pt-BR:cv:cv:6",
+    "lang": "pt-BR",
+    "source": "cv",
+    "source_id": "cv",
+    "text": "superado.\" ## Fora do trabalho (interesses pessoais) Nas horas vagas, Wilson toca violão, joga Counter-Strike e acompanha as notícias sobre IA. Também medita, o que o ajuda a manter o foco. Gosta de se manter atualizado testando novas tecnologias e, de tempos em tempos, revisita os fundamentos da área para manter a eficiência na linha de frente."
   },
   {
     "id": "en:profile:profile:0",
@@ -154,11 +182,25 @@
     "text": "Bachelor's in Civil Engineering em/at Uninove (2012-01 - 2016-12). The math and statistics foundation that eased my move into technology and still supports my AI studies."
   },
   {
-    "id": "en:project:proj-placeholder-1:0",
+    "id": "en:project:proj-portal:0",
     "lang": "en",
     "source": "project",
-    "source_id": "proj-placeholder-1",
-    "text": "Projeto/Project: [PLACEHOLDER] AI Project. [PLACEHOLDER] Short description of the project, the problem solved and the result. Tecnologias/Technologies: Python, FastAPI."
+    "source_id": "proj-portal",
+    "text": "Projeto/Project: Portfolio Portal with AI Chat. This website: a bilingual portfolio with an AI assistant that answers questions about my career using RAG over my own résumé, with a prompt-injection guardrail, cost limits and CI/CD. Built with Spec-Driven Development. Tecnologias/Technologies: Next.js, TypeScript, FastAPI, Gemini, RAG, Prompt Guard 2, Upstash Redis, GitHub Actions, Vercel."
+  },
+  {
+    "id": "en:project:proj-getnet:0",
+    "lang": "en",
+    "source": "project",
+    "source_id": "proj-getnet",
+    "text": "Projeto/Project: Multi-Agent Merchant Support. A LangGraph router sends each message to specialized agents: RAG over approved sources, the merchant’s own data via tools, and external APIs, with guardrails, personal-data redaction and observability. When context is insufficient, it admits the limitation instead of making things up. Tecnologias/Technologies: Python, FastAPI, LangGraph, LangChain, Claude, Chroma, Sentence Transformers, Docker."
+  },
+  {
+    "id": "en:project:proj-rag-doc-quality:0",
+    "lang": "en",
+    "source": "project",
+    "source_id": "proj-rag-doc-quality",
+    "text": "Projeto/Project: Retrieval Quality Evaluation. A command-line tool that measures the search quality of a documentation corpus before publishing it to Azure AI Search: it compares vector and hybrid search (BM25 + RRF) on a golden set, with Recall@k and MRR against a baseline. Tecnologias/Technologies: Python, Azure OpenAI, Qdrant, BM25, fastembed, Typer."
   },
   {
     "id": "en:certification:cert-ml-dsa:0",
@@ -186,27 +228,34 @@
     "lang": "en",
     "source": "cv",
     "source_id": "cv",
-    "text": "system focused on automatic IT incident triage and on reducing response time (MTTR). He implemented asynchronous route orchestration and state control with LangGraph, with secure communication through the MCP (Model Context Protocol) pattern. He connected Azure AI Foundry reasoning to the operational context via RAG with Azure AI Search, using Azure SQL for memory persistence and auditing. He adopted Spec-Driven Development (SDD) to govern agent behavior, with explicit tool contracts and layered human approval to restrict agent scope and mitigate unsupervised execution risks. ### Multi-agent hybrid RAG for tier-1 support automation (in progress, 2026) LangGraph, Azure AI Foundry, Azure AI Search, Azure SQL. A multi-agent system with hybrid RAG to automate tier-1 support for a coffee logistics platform, combining vector search (Azure AI Search) and relational database queries (Azure SQL) via tool calling, with reasoning on Azure AI Foundry. It includes a governance and security layer with Microsoft Presidio for dynamic anonymization of personal data (LGPD), plus telemetry and cost tracking (FinOps) on Azure Application Insights. ## Career progression at EISA - Empresa Interagrícola Wilson built his tech career at"
+    "text": "system focused on automatic IT incident triage and on reducing response time (MTTR). He implemented asynchronous route orchestration and state control with LangGraph, with secure communication through the MCP (Model Context Protocol) pattern. He connected Azure AI Foundry reasoning to the operational context via RAG with Azure AI Search, using Azure SQL for memory persistence and auditing. He adopted Spec-Driven Development (SDD) to govern agent behavior, with explicit tool contracts and layered human approval to restrict agent scope and mitigate unsupervised execution risks. ### Multi-agent hybrid RAG for tier-1 support automation (in progress, 2026) LangGraph, Azure AI Foundry, Azure AI Search, Azure SQL. A multi-agent system with hybrid RAG to automate tier-1 support for a coffee logistics platform, combining vector search (Azure AI Search) and relational database queries (Azure SQL) via tool calling, with reasoning on Azure AI Foundry. It includes a governance and security layer with Microsoft Presidio for dynamic anonymization of personal data (LGPD), plus telemetry and cost tracking (FinOps) on Azure Application Insights. ### Portfolio Portal with AI Chat (personal, open source) Repository: github.com/WilsonLlanos/portal. It is this"
   },
   {
     "id": "en:cv:cv:2",
     "lang": "en",
     "source": "cv",
     "source_id": "cv",
-    "text": "EISA with successive promotions. ### Systems Developer (since Jan 2026) - Building an AI solution with a multi-agent system (LangGraph) and hybrid RAG on Azure to automate tier-1 support for a coffee logistics platform. - Built event-driven communication (Azure Service Bus + .NET), improving integration monitoring. - Manages critical integrations between the ERP and logistics systems, syncing 50k+ records per day with 99.9% accuracy. - Optimized an SSIS ETL pipeline, drastically reducing processing time. - Implemented bidirectional flows to migrate 70+ processes with zero downtime. ### Programmer Analyst (Feb 2025 to Dec 2025) - Built ETL processes (Azure Functions, SSIS) handling 1M+ records per month with 99.8% accuracy. - Created analytical reports (Reporting Services, Crystal Reports) covering the entire commodity logistics process. - Started his first generative AI prototypes with RAG and LLMs. - Was promoted to Systems Developer after exceeding goals and delivering ahead of schedule. ### Support Analyst (Apr 2022 to Jan 2025) - Provided technical support to users, diagnosing and solving system, database and infrastructure issues, reducing recurring tickets. ## Education and certifications The \"ETL Pipelines and"
+    "text": "very website: a bilingual (PT/EN) portfolio with an AI assistant that answers questions about Wilson's career using RAG over his résumé. Frontend in Next.js and TypeScript; backend in FastAPI with Gemini; vector search over precomputed embeddings; Llama Prompt Guard 2 guardrail against prompt injection, with safe degradation; per-visitor question limit and daily cost cap on Upstash Redis; CI/CD with GitHub Actions and deployment on Vercel. It was built with Spec-Driven Development (Spec Kit). ### Multi-agent merchant support — Getnet case (technical challenge, open source) Repository: github.com/WilsonLlanos/getnet-multi-agent-support-system. Built as a technical challenge for a hiring process: a support service for Getnet card-machine merchants with a single endpoint, where a LangGraph router classifies each message and sends it to specialized agents. The knowledge agent runs RAG over approved sources (Chroma with local multilingual embeddings) and calls external APIs (Brazilian Central Bank PTAX exchange rate and weather); the support agent answers from the merchant's own data through tools; an escalation agent records hand-offs to human support. It has guardrails with standardized reasons, personal-data redaction, prompt-injection checks and observability with structured logs. When context"
   },
   {
     "id": "en:cv:cv:3",
     "lang": "en",
     "source": "cv",
     "source_id": "cv",
-    "text": "Machine Learning with Apache Spark\" course from Data Science Academy (completed in January 2025) was Wilson's starting point in the AI world. Wilson is pursuing an MBA in Artificial Intelligence and Big Data at ICMC/USP (2025-2026, expected completion in October 2026) and holds a Bachelor's in Civil Engineering from Uninove (2012-2016). His certifications are Microsoft Certified: Azure Data Fundamentals (DP-900) and \"ETL Pipelines and Machine Learning with Apache Spark\", from Data Science Academy. ## Working philosophy \"The question isn't just building software, but building and maintaining it efficiently and securely, always thinking about what's best for each project. That's exactly what I bring to my solutions. In a recent project, where I'm implementing an automated support solution for users of a complex system on Azure, there will be an integration of the LLM with two different types of databases (vector and relational) — an engineering challenge that has been overcome.\" ## Outside of work (personal interests) In his free time, Wilson plays guitar, plays Counter-Strike and follows AI news. He also meditates, which helps him stay focused. He likes to"
+    "text": "is insufficient, the system admits the limitation instead of making things up. Technologies: Python, FastAPI, LangGraph, LangChain, Claude, Chroma, Sentence Transformers, Docker. It was also built with Spec-Driven Development. ### Retrieval quality evaluation (used at EISA, open source) Repository: github.com/WilsonLlanos/rag-doc-quality. A command-line tool created for EISA's tier-1 support RAG project: it indexes the documentation corpus and measures search quality before publishing it to Azure AI Search. It compares vector and hybrid search (vector + BM25, fused with RRF), runs a golden set of questions with Recall@k and MRR, compares results with a saved baseline and lists the questions that failed. Technologies: Python, Azure OpenAI (embeddings), Qdrant, fastembed (BM25) and Typer. ## Career progression at EISA - Empresa Interagrícola Wilson built his tech career at EISA with successive promotions. ### Systems Developer (since Jan 2026) - Building an AI solution with a multi-agent system (LangGraph) and hybrid RAG on Azure to automate tier-1 support for a coffee logistics platform. - Built event-driven communication (Azure Service Bus + .NET), improving integration monitoring. - Manages critical integrations between the ERP and logistics systems,"
   },
   {
     "id": "en:cv:cv:4",
     "lang": "en",
     "source": "cv",
     "source_id": "cv",
-    "text": "stay current by trying out new technologies and, from time to time, goes back to the fundamentals of the field to stay sharp on the front line."
+    "text": "syncing 50k+ records per day with 99.9% accuracy. - Optimized an SSIS ETL pipeline, drastically reducing processing time. - Implemented bidirectional flows to migrate 70+ processes with zero downtime. ### Programmer Analyst (Feb 2025 to Dec 2025) - Built ETL processes (Azure Functions, SSIS) handling 1M+ records per month with 99.8% accuracy. - Created analytical reports (Reporting Services, Crystal Reports) covering the entire commodity logistics process. - Started his first generative AI prototypes with RAG and LLMs. - Was promoted to Systems Developer after exceeding goals and delivering ahead of schedule. ### Support Analyst (Apr 2022 to Jan 2025) - Provided technical support to users, diagnosing and solving system, database and infrastructure issues, reducing recurring tickets. ## Education and certifications The \"ETL Pipelines and Machine Learning with Apache Spark\" course from Data Science Academy (completed in January 2025) was Wilson's starting point in the AI world. Wilson is pursuing an MBA in Artificial Intelligence and Big Data at ICMC/USP (2025-2026, expected completion in October 2026) and holds a Bachelor's in Civil Engineering from Uninove (2012-2016). His certifications are Microsoft Certified:"
+  },
+  {
+    "id": "en:cv:cv:5",
+    "lang": "en",
+    "source": "cv",
+    "source_id": "cv",
+    "text": "Azure Data Fundamentals (DP-900) and \"ETL Pipelines and Machine Learning with Apache Spark\", from Data Science Academy. ## Working philosophy \"The question isn't just building software, but building and maintaining it efficiently and securely, always thinking about what's best for each project. That's exactly what I bring to my solutions. In a recent project, where I'm implementing an automated support solution for users of a complex system on Azure, there will be an integration of the LLM with two different types of databases (vector and relational) — an engineering challenge that has been overcome.\" ## Outside of work (personal interests) In his free time, Wilson plays guitar, plays Counter-Strike and follows AI news. He also meditates, which helps him stay focused. He likes to stay current by trying out new technologies and, from time to time, goes back to the fundamentals of the field to stay sharp on the front line."
   }
 ]

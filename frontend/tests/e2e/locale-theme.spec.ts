@@ -10,7 +10,7 @@ test.describe("Idioma e tema", () => {
     await expect(page).toHaveURL(/\/en$/);
     await expect(page.locator("#hero")).toContainText(/Download CV/i);
 
-    await page.getByRole("link", { name: /view repository/i }).first().waitFor();
+    await page.getByRole("link", { name: /view on github/i }).first().waitFor();
     await expect(page).toHaveURL(/\/en$/);
   });
 
