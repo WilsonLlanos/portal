@@ -2,7 +2,7 @@
   "name": "Wilson Llanos",
   "headline": "AI Engineer",
   "tagline": "I build applied AI systems, from prototype to production.",
-  "summary": "I am a Systems Developer at EISA, building production generative AI solutions on the Azure ecosystem with a focus on data security and governance. I built a multi-agent system with LangGraph and MCP for IT incident triage, reducing response time, and I am now building a multi-agent system with hybrid RAG to automate tier-1 support. I also work on data integration across four systems, including legacy ones, eliminating recurring errors, and I have Machine Learning projects with Apache Spark on Databricks. MBA in AI and Big Data from ICMC/USP (completion in October 2026) and a degree in Civil Engineering.",
+  "summary": "I am a Systems Developer at EISA, building production generative AI solutions on the Azure ecosystem with a focus on data security and governance. I built a multi-agent system with LangGraph and MCP for IT incident triage, reducing response time, and I am now building a multi-agent system with hybrid RAG to automate tier-1 support. I also work on data integration across four systems, including legacy ones, eliminating recurring errors, and I have Machine Learning projects with Apache Spark on Databricks. MBA in AI and Big Data from ICMC/USP (completed in 2026) and a degree in Civil Engineering.",
   "photo": {
     "src": "/images/profile.png",
     "alt": "Portrait photo of Wilson Llanos, studio shot"
