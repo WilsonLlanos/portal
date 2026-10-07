@@ -4,7 +4,9 @@ module.exports = {
     collect: {
       startServerCommand: "npm run start",
       url: ["http://127.0.0.1:3000/pt-BR"],
-      numberOfRuns: 1,
+      // Mediana de 3 execuções: com 1 só, a variação de CPU do runner
+      // compartilhado do GitHub decide o resultado (TBT oscila muito).
+      numberOfRuns: 3,
     },
     assert: {
       assertions: {

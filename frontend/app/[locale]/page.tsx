@@ -3,7 +3,7 @@ import { Hero } from "@/components/sections/Hero";
 import { Projects } from "@/components/sections/Projects";
 import { Summary } from "@/components/sections/Summary";
 import { Timeline } from "@/components/sections/Timeline";
-import { ChatPanel } from "@/components/chat/ChatPanel";
+import { ChatLauncher } from "@/components/chat/ChatLauncher";
 import { Header } from "@/components/ui/Header";
 import { routing } from "@/i18n/routing";
 import { getProfile } from "@/lib/content/loader";
@@ -35,7 +35,7 @@ export default async function Home({
         <Projects locale={loc} />
         <Certifications locale={loc} />
       </main>
-      <ChatPanel contactHref={profile.links.whatsapp} cvHref={`/cv/cv-${loc}.pdf`} />
+      <ChatLauncher contactHref={profile.links.whatsapp} cvHref={`/cv/cv-${loc}.pdf`} />
     </>
   );
 }
