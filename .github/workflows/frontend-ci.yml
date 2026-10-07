@@ -1,12 +1,16 @@
 name: Frontend CI
 
 # T068
+# Sem `paths:` de propósito: este check é obrigatório na proteção da main e
+# precisa rodar em todo PR, senão o merge fica esperando um check que nunca vem.
 on:
   pull_request:
-    paths: ["frontend/**", ".github/workflows/frontend-ci.yml"]
   push:
     branches: [main]
-    paths: ["frontend/**", ".github/workflows/frontend-ci.yml"]
+
+concurrency:
+  group: frontend-ci-${{ github.ref }}
+  cancel-in-progress: true
 
 permissions:
   contents: read
