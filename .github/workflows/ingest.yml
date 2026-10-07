@@ -4,12 +4,16 @@ name: Base de conhecimento em dia
 # por scripts/ingest.py) foi regenerado e commitado junto. Compara apenas o
 # hash do conteúdo com o manifest (`--check`): não chama a API do Gemini, então
 # não tem custo nem precisa de segredo.
+# Sem `paths:` de propósito: este check é obrigatório na proteção da main e
+# precisa rodar em todo PR. Sem mudança de conteúdo, o --check passa direto.
 on:
   pull_request:
-    paths: ["frontend/content/**", "backend/data/kb/**"]
   push:
     branches: [main]
-    paths: ["frontend/content/**", "backend/data/kb/**"]
+
+concurrency:
+  group: ingest-check-${{ github.ref }}
+  cancel-in-progress: true
 
 permissions:
   contents: read
