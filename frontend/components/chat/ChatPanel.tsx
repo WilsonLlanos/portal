@@ -2,23 +2,39 @@
 
 import { useLocale, useTranslations } from "next-intl";
 import { useEffect, useRef, useState } from "react";
-import { ASK_AI_EVENT } from "./AskAiButton";
 import { ChatError, ChatSuggestions, PrivacyNotice } from "./ChatNotices";
 import { useChatSession } from "./useChatSession";
 
+/** Pergunta pronta de um botão "Pergunte à IA"; o id distingue cliques repetidos. */
+export type PendingQuestion = { id: number; question: string };
+
 /**
- * T055: chat (US3) como widget fixo no canto da tela, independente das seções:
- * um botão abre o painel, que fica disponível em qualquer ponto da página.
+ * T055: chat (US3) como widget fixo no canto da tela, independente das seções.
+ * Aberto pelo ChatLauncher, que carrega este componente sob demanda.
  * No celular o painel ocupa a tela inteira; no desktop, um cartão no canto.
  */
-export function ChatPanel({ contactHref, cvHref }: { contactHref: string; cvHref: string }) {
+export function ChatPanel({
+  open,
+  onClose,
+  pending,
+  onPendingHandled,
+  contactHref,
+  cvHref,
+}: {
+  open: boolean;
+  onClose: () => void;
+  pending: PendingQuestion | null;
+  onPendingHandled: () => void;
+  contactHref: string;
+  cvHref: string;
+}) {
   const locale = useLocale();
   const t = useTranslations("chat");
   const { messages, isStreaming, error, suggestions, send } = useChatSession(locale);
   const [draft, setDraft] = useState("");
-  const [open, setOpen] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
   const listRef = useRef<HTMLDivElement>(null);
+  const handledId = useRef(0);
 
   const handleSubmit = (event: React.FormEvent) => {
     event.preventDefault();
@@ -28,46 +44,33 @@ export function ChatPanel({ contactHref, cvHref }: { contactHref: string; cvHref
     void send(text);
   };
 
-  // Perguntas prontas vindas dos botões "Pergunte à IA" da trajetória.
+  // Perguntas prontas vindas dos botões "Pergunte à IA" da trajetória. O ref
+  // evita reenviar a mesma pergunta se o efeito rodar de novo (Strict Mode).
   useEffect(() => {
-    const onAskAi = (event: Event) => {
-      const question = (event as CustomEvent<string>).detail;
-      if (!question || isStreaming) return;
-      setOpen(true);
-      void send(question);
-    };
-    window.addEventListener(ASK_AI_EVENT, onAskAi);
-    return () => window.removeEventListener(ASK_AI_EVENT, onAskAi);
-  }, [isStreaming, send]);
+    if (!pending || pending.id === handledId.current) return;
+    handledId.current = pending.id;
+    onPendingHandled();
+    if (!isStreaming) void send(pending.question);
+  }, [pending, isStreaming, send, onPendingHandled]);
 
   // Foco no campo ao abrir; Esc fecha.
   useEffect(() => {
     if (!open) return;
     inputRef.current?.focus();
     const onKeyDown = (event: KeyboardEvent) => {
-      if (event.key === "Escape") setOpen(false);
+      if (event.key === "Escape") onClose();
     };
     window.addEventListener("keydown", onKeyDown);
     return () => window.removeEventListener("keydown", onKeyDown);
-  }, [open]);
+  }, [open, onClose]);
 
   // Mantém a última mensagem visível durante o streaming.
   useEffect(() => {
     listRef.current?.scrollTo({ top: listRef.current.scrollHeight });
   }, [messages]);
 
-  if (!open) {
-    return (
-      <button
-        type="button"
-        onClick={() => setOpen(true)}
-        className="fixed bottom-4 right-4 z-50 flex items-center gap-2 rounded-full bg-[var(--accent)] px-5 py-3 font-medium text-[var(--accent-foreground)] shadow-lg transition-transform hover:scale-105"
-      >
-        <span aria-hidden>✨</span>
-        {t("launcher")}
-      </button>
-    );
-  }
+  // Fechado, o painel continua montado (sem renderizar nada) para manter a conversa.
+  if (!open) return null;
 
   return (
     <section
@@ -81,7 +84,7 @@ export function ChatPanel({ contactHref, cvHref }: { contactHref: string; cvHref
         <h2 className="font-semibold">{t("title")}</h2>
         <button
           type="button"
-          onClick={() => setOpen(false)}
+          onClick={onClose}
           aria-label={t("close")}
           className="flex h-8 w-8 items-center justify-center rounded-full hover:bg-[var(--background)]"
         >
@@ -109,7 +112,7 @@ export function ChatPanel({ contactHref, cvHref }: { contactHref: string; cvHref
         ))}
         {error && <ChatError code={error.code} />}
         {/* Sugestões levam a seções da página: fecha o painel para mostrá-las. */}
-        <div onClick={() => setOpen(false)}>
+        <div onClick={onClose}>
           <ChatSuggestions items={suggestions} contactHref={contactHref} cvHref={cvHref} />
         </div>
       </div>
