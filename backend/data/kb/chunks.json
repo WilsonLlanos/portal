@@ -4,7 +4,7 @@
     "lang": "pt-BR",
     "source": "profile",
     "source_id": "profile",
-    "text": "Wilson Llanos — Engenheiro de IA. Construo sistemas de IA aplicada, do protótipo à produção. Sou Desenvolvedor de Sistemas na EISA e construo soluções de IA generativa em produção no ecossistema Azure, com foco em segurança e governança de dados. Desenvolvi um sistema multiagente com LangGraph e MCP para a triagem de incidentes de TI, reduzindo o tempo de resposta, e hoje desenvolvo um sistema multiagente com RAG híbrido para automatizar o suporte N1. Também atuo na integração de dados entre quatro sistemas, incluindo legados, eliminando erros recorrentes, e tenho projetos de Machine Learning com Apache Spark no Databricks. MBA em IA e Big Data pelo ICMC/USP (conclusão em outubro de 2026) e formado em Engenharia Civil."
+    "text": "Wilson Llanos — Engenheiro de IA. Construo sistemas de IA aplicada, do protótipo à produção. Sou Desenvolvedor de Sistemas na EISA e construo soluções de IA generativa em produção no ecossistema Azure, com foco em segurança e governança de dados. Desenvolvi um sistema multiagente com LangGraph e MCP para a triagem de incidentes de TI, reduzindo o tempo de resposta, e hoje desenvolvo um sistema multiagente com RAG híbrido para automatizar o suporte N1. Também atuo na integração de dados entre quatro sistemas, incluindo legados, eliminando erros recorrentes, e tenho projetos de Machine Learning com Apache Spark no Databricks. MBA em IA e Big Data pelo ICMC/USP (concluído em 2026) e formado em Engenharia Civil."
   },
   {
     "id": "pt-BR:experience:exp-eisa-dev-sistemas:0",
@@ -32,7 +32,7 @@
     "lang": "pt-BR",
     "source": "experience",
     "source_id": "edu-mba-ia",
-    "text": "MBA em Inteligência Artificial e Big Data em/at ICMC / USP (2025-07 - 2026-10). Decisão estratégica para aprofundar a formação em IA: aprendizado de máquina, deep learning e IA generativa, além de Big Data. Conclusão prevista para outubro de 2026."
+    "text": "MBA em Inteligência Artificial e Big Data em/at ICMC / USP (2025-07 - 2026-10). Decisão estratégica para aprofundar a formação em IA: aprendizado de máquina, deep learning e IA generativa, além de Big Data. Concluído em outubro de 2026."
   },
   {
     "id": "pt-BR:experience:edu-ml-dsa:0",
@@ -123,7 +123,7 @@
     "lang": "pt-BR",
     "source": "cv",
     "source_id": "cv",
-    "text": "jan/2025) - Prestou suporte técnico a usuários, diagnosticando e resolvendo problemas de sistemas, banco de dados e infraestrutura, reduzindo tickets recorrentes. ## Formação e certificações O curso \"Pipeline ETL e Machine Learning com Apache Spark\", da Data Science Academy (concluído em janeiro de 2025), foi o ponto de partida de Wilson no universo da IA. Wilson faz MBA em Inteligência Artificial e Big Data pelo ICMC/USP (2025-2026, conclusão prevista para outubro de 2026) e é bacharel em Engenharia Civil pela Uninove (2012-2016). Tem as certificações Microsoft Certified: Azure Data Fundamentals (DP-900) e \"Pipeline ETL e Machine Learning com Apache Spark\", pela Data Science Academy. ## Filosofia de trabalho \"A questão não é desenvolver, mas sim, desenvolver e manter com eficiência e segurança, pensando o melhor para cada projeto. E é exatamente isso que adoto em minhas soluções. Em um projeto mais recente, onde estou implementando uma solução de suporte automatizado para usuários de um sistema complexo em ambiente Azure, onde haverá uma integração do LLM com dois tipos de bancos diferentes (vetorial e relacional), um desafio de engenharia que foi"
+    "text": "jan/2025) - Prestou suporte técnico a usuários, diagnosticando e resolvendo problemas de sistemas, banco de dados e infraestrutura, reduzindo tickets recorrentes. ## Formação e certificações O curso \"Pipeline ETL e Machine Learning com Apache Spark\", da Data Science Academy (concluído em janeiro de 2025), foi o ponto de partida de Wilson no universo da IA. Wilson concluiu o MBA em Inteligência Artificial e Big Data pelo ICMC/USP (2025-2026, concluído em outubro de 2026) e é bacharel em Engenharia Civil pela Uninove (2012-2016). Tem as certificações Microsoft Certified: Azure Data Fundamentals (DP-900) e \"Pipeline ETL e Machine Learning com Apache Spark\", pela Data Science Academy. ## Filosofia de trabalho \"A questão não é desenvolver, mas sim, desenvolver e manter com eficiência e segurança, pensando o melhor para cada projeto. E é exatamente isso que adoto em minhas soluções. Em um projeto mais recente, onde estou implementando uma solução de suporte automatizado para usuários de um sistema complexo em ambiente Azure, onde haverá uma integração do LLM com dois tipos de bancos diferentes (vetorial e relacional), um desafio de engenharia que foi"
   },
   {
     "id": "pt-BR:cv:cv:6",
@@ -137,7 +137,7 @@
     "lang": "en",
     "source": "profile",
     "source_id": "profile",
-    "text": "Wilson Llanos — AI Engineer. I build applied AI systems, from prototype to production. I am a Systems Developer at EISA, building production generative AI solutions on the Azure ecosystem with a focus on data security and governance. I built a multi-agent system with LangGraph and MCP for IT incident triage, reducing response time, and I am now building a multi-agent system with hybrid RAG to automate tier-1 support. I also work on data integration across four systems, including legacy ones, eliminating recurring errors, and I have Machine Learning projects with Apache Spark on Databricks. MBA in AI and Big Data from ICMC/USP (completion in October 2026) and a degree in Civil Engineering."
+    "text": "Wilson Llanos — AI Engineer. I build applied AI systems, from prototype to production. I am a Systems Developer at EISA, building production generative AI solutions on the Azure ecosystem with a focus on data security and governance. I built a multi-agent system with LangGraph and MCP for IT incident triage, reducing response time, and I am now building a multi-agent system with hybrid RAG to automate tier-1 support. I also work on data integration across four systems, including legacy ones, eliminating recurring errors, and I have Machine Learning projects with Apache Spark on Databricks. MBA in AI and Big Data from ICMC/USP (completed in 2026) and a degree in Civil Engineering."
   },
   {
     "id": "en:experience:exp-eisa-dev-sistemas:0",
@@ -165,7 +165,7 @@
     "lang": "en",
     "source": "experience",
     "source_id": "edu-mba-ia",
-    "text": "MBA in Artificial Intelligence and Big Data em/at ICMC / USP (2025-07 - 2026-10). A strategic decision to deepen my AI education: machine learning, deep learning and generative AI, plus Big Data. Expected completion in October 2026."
+    "text": "MBA in Artificial Intelligence and Big Data em/at ICMC / USP (2025-07 - 2026-10). A strategic decision to deepen my AI education: machine learning, deep learning and generative AI, plus Big Data. Completed in October 2026."
   },
   {
     "id": "en:experience:edu-ml-dsa:0",
@@ -249,13 +249,13 @@
     "lang": "en",
     "source": "cv",
     "source_id": "cv",
-    "text": "syncing 50k+ records per day with 99.9% accuracy. - Optimized an SSIS ETL pipeline, drastically reducing processing time. - Implemented bidirectional flows to migrate 70+ processes with zero downtime. ### Programmer Analyst (Feb 2025 to Dec 2025) - Built ETL processes (Azure Functions, SSIS) handling 1M+ records per month with 99.8% accuracy. - Created analytical reports (Reporting Services, Crystal Reports) covering the entire commodity logistics process. - Started his first generative AI prototypes with RAG and LLMs. - Was promoted to Systems Developer after exceeding goals and delivering ahead of schedule. ### Support Analyst (Apr 2022 to Jan 2025) - Provided technical support to users, diagnosing and solving system, database and infrastructure issues, reducing recurring tickets. ## Education and certifications The \"ETL Pipelines and Machine Learning with Apache Spark\" course from Data Science Academy (completed in January 2025) was Wilson's starting point in the AI world. Wilson is pursuing an MBA in Artificial Intelligence and Big Data at ICMC/USP (2025-2026, expected completion in October 2026) and holds a Bachelor's in Civil Engineering from Uninove (2012-2016). His certifications are Microsoft Certified:"
+    "text": "syncing 50k+ records per day with 99.9% accuracy. - Optimized an SSIS ETL pipeline, drastically reducing processing time. - Implemented bidirectional flows to migrate 70+ processes with zero downtime. ### Programmer Analyst (Feb 2025 to Dec 2025) - Built ETL processes (Azure Functions, SSIS) handling 1M+ records per month with 99.8% accuracy. - Created analytical reports (Reporting Services, Crystal Reports) covering the entire commodity logistics process. - Started his first generative AI prototypes with RAG and LLMs. - Was promoted to Systems Developer after exceeding goals and delivering ahead of schedule. ### Support Analyst (Apr 2022 to Jan 2025) - Provided technical support to users, diagnosing and solving system, database and infrastructure issues, reducing recurring tickets. ## Education and certifications The \"ETL Pipelines and Machine Learning with Apache Spark\" course from Data Science Academy (completed in January 2025) was Wilson's starting point in the AI world. Wilson completed an MBA in Artificial Intelligence and Big Data at ICMC/USP (2025-2026, completed in October 2026) and holds a Bachelor's in Civil Engineering from Uninove (2012-2016). His certifications are Microsoft Certified: Azure Data"
   },
   {
     "id": "en:cv:cv:5",
     "lang": "en",
     "source": "cv",
     "source_id": "cv",
-    "text": "Azure Data Fundamentals (DP-900) and \"ETL Pipelines and Machine Learning with Apache Spark\", from Data Science Academy. ## Working philosophy \"The question isn't just building software, but building and maintaining it efficiently and securely, always thinking about what's best for each project. That's exactly what I bring to my solutions. In a recent project, where I'm implementing an automated support solution for users of a complex system on Azure, there will be an integration of the LLM with two different types of databases (vector and relational) — an engineering challenge that has been overcome.\" ## Outside of work (personal interests) In his free time, Wilson plays guitar, plays Counter-Strike and follows AI news. He also meditates, which helps him stay focused. He likes to stay current by trying out new technologies and, from time to time, goes back to the fundamentals of the field to stay sharp on the front line."
+    "text": "Fundamentals (DP-900) and \"ETL Pipelines and Machine Learning with Apache Spark\", from Data Science Academy. ## Working philosophy \"The question isn't just building software, but building and maintaining it efficiently and securely, always thinking about what's best for each project. That's exactly what I bring to my solutions. In a recent project, where I'm implementing an automated support solution for users of a complex system on Azure, there will be an integration of the LLM with two different types of databases (vector and relational) — an engineering challenge that has been overcome.\" ## Outside of work (personal interests) In his free time, Wilson plays guitar, plays Counter-Strike and follows AI news. He also meditates, which helps him stay focused. He likes to stay current by trying out new technologies and, from time to time, goes back to the fundamentals of the field to stay sharp on the front line."
   }
 ]

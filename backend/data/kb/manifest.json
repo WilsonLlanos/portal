@@ -2,6 +2,6 @@
   "embedding_model": "gemini-embedding-001",
   "dimension": 3072,
   "chunk_count": 37,
-  "generated_at": "2026-10-07T05:14:01.588704+00:00",
-  "content_hash": "9818dfd3c4a690606d9cd1028011d65e15fdc114fd932022a8805af51986e846"
+  "generated_at": "2026-10-07T14:50:24.143296+00:00",
+  "content_hash": "bef7afcbfe19e368dd1172a654567aca33022c1aa7ada116f08a640fbc638882"
 }
