@@ -24,7 +24,9 @@
   },
   "projects": {
     "title": "Projects",
-    "repoLink": "View repository"
+    "repoLink": "View on GitHub",
+    "askAi": "Ask the AI",
+    "askAiQuestion": "Tell me about the {name} project."
   },
   "certifications": {
     "title": "Certifications",

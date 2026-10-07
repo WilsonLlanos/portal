@@ -41,6 +41,8 @@ export interface Experience {
 export interface Project {
   id: string;
   name: string;
+  /** Selo de contexto do card, ex.: "Desafio técnico · código aberto". */
+  context: string;
   description: string;
   /** Ao menos 1 tecnologia. */
   technologies: string[];
