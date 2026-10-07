@@ -80,3 +80,10 @@ o melhor para cada projeto. E é exatamente isso que adoto em minhas soluções.
 recente, onde estou implementando uma solução de suporte automatizado para usuários de um sistema
 complexo em ambiente Azure, onde haverá uma integração do LLM com dois tipos de bancos diferentes
 (vetorial e relacional), um desafio de engenharia que foi superado."
+
+
+## Fora do trabalho (interesses pessoais)
+
+Nas horas vagas, Wilson toca violão, joga Counter-Strike e acompanha as notícias sobre IA. Também
+medita, o que o ajuda a manter o foco. Gosta de se manter atualizado testando novas tecnologias e,
+de tempos em tempos, revisita os fundamentos da área para manter a eficiência na linha de frente.

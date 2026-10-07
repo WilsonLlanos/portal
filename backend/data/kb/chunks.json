@@ -102,7 +102,7 @@
     "lang": "pt-BR",
     "source": "cv",
     "source_id": "cv",
-    "text": "de um sistema complexo em ambiente Azure, onde haverá uma integração do LLM com dois tipos de bancos diferentes (vetorial e relacional), um desafio de engenharia que foi superado.\""
+    "text": "de um sistema complexo em ambiente Azure, onde haverá uma integração do LLM com dois tipos de bancos diferentes (vetorial e relacional), um desafio de engenharia que foi superado.\" ## Fora do trabalho (interesses pessoais) Nas horas vagas, Wilson toca violão, joga Counter-Strike e acompanha as notícias sobre IA. Também medita, o que o ajuda a manter o foco. Gosta de se manter atualizado testando novas tecnologias e, de tempos em tempos, revisita os fundamentos da área para manter a eficiência na linha de frente."
   },
   {
     "id": "en:profile:profile:0",
@@ -200,6 +200,13 @@
     "lang": "en",
     "source": "cv",
     "source_id": "cv",
-    "text": "Machine Learning with Apache Spark\" course from Data Science Academy (completed in January 2025) was Wilson's starting point in the AI world. Wilson is pursuing an MBA in Artificial Intelligence and Big Data at ICMC/USP (2025-2026, expected completion in October 2026) and holds a Bachelor's in Civil Engineering from Uninove (2012-2016). His certifications are Microsoft Certified: Azure Data Fundamentals (DP-900) and \"ETL Pipelines and Machine Learning with Apache Spark\", from Data Science Academy. ## Working philosophy \"The question isn't just building software, but building and maintaining it efficiently and securely, always thinking about what's best for each project. That's exactly what I bring to my solutions. In a recent project, where I'm implementing an automated support solution for users of a complex system on Azure, there will be an integration of the LLM with two different types of databases (vector and relational) — an engineering challenge that has been overcome.\""
+    "text": "Machine Learning with Apache Spark\" course from Data Science Academy (completed in January 2025) was Wilson's starting point in the AI world. Wilson is pursuing an MBA in Artificial Intelligence and Big Data at ICMC/USP (2025-2026, expected completion in October 2026) and holds a Bachelor's in Civil Engineering from Uninove (2012-2016). His certifications are Microsoft Certified: Azure Data Fundamentals (DP-900) and \"ETL Pipelines and Machine Learning with Apache Spark\", from Data Science Academy. ## Working philosophy \"The question isn't just building software, but building and maintaining it efficiently and securely, always thinking about what's best for each project. That's exactly what I bring to my solutions. In a recent project, where I'm implementing an automated support solution for users of a complex system on Azure, there will be an integration of the LLM with two different types of databases (vector and relational) — an engineering challenge that has been overcome.\" ## Outside of work (personal interests) In his free time, Wilson plays guitar, plays Counter-Strike and follows AI news. He also meditates, which helps him stay focused. He likes to"
+  },
+  {
+    "id": "en:cv:cv:4",
+    "lang": "en",
+    "source": "cv",
+    "source_id": "cv",
+    "text": "stay current by trying out new technologies and, from time to time, goes back to the fundamentals of the field to stay sharp on the front line."
   }
 ]

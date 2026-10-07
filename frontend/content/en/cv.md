@@ -76,3 +76,10 @@ securely, always thinking about what's best for each project. That's exactly wha
 solutions. In a recent project, where I'm implementing an automated support solution for users of
 a complex system on Azure, there will be an integration of the LLM with two different types of
 databases (vector and relational) — an engineering challenge that has been overcome."
+
+
+## Outside of work (personal interests)
+
+In his free time, Wilson plays guitar, plays Counter-Strike and follows AI news. He also meditates,
+which helps him stay focused. He likes to stay current by trying out new technologies and, from time
+to time, goes back to the fundamentals of the field to stay sharp on the front line.

@@ -1,7 +1,7 @@
 {
   "embedding_model": "gemini-embedding-001",
   "dimension": 3072,
-  "chunk_count": 29,
-  "generated_at": "2026-10-05T23:19:32.557592+00:00",
-  "content_hash": "d1c91fd84d9a2ed155e594c2a44ad7aa3101b720d7dce8e36b2c98fea8a9ccfa"
+  "chunk_count": 30,
+  "generated_at": "2026-10-07T03:47:55.695831+00:00",
+  "content_hash": "0e2174c6b5d44733ab731870192b3d4f6fb5b27c0fc7571b6d812d84f2e05004"
 }
