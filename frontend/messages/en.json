@@ -50,12 +50,12 @@
   },
   "chat": {
     "title": "Ask about my career",
-    "placeholder": "Ask about my AI experience...",
+    "placeholder": "Ask about Wilson's AI experience...",
     "send": "Send",
     "privacyNotice": "Your questions are logged anonymously for 30 days to improve this service. Please don't share personal data.",
     "errorGeneric": "The chat is unavailable right now. Please try again shortly or reach out directly.",
     "errorRateLimited": "You've reached the hourly question limit. Please try again later, or reach out directly.",
-    "errorPaused": "The chat has reached its daily usage limit and will be back tomorrow. Meanwhile, download my CV or get in touch.",
+    "errorPaused": "The chat has reached its daily usage limit and will be back tomorrow. Meanwhile, download Wilson's CV or get in touch with him.",
     "errorTooLong": "Your question is too long. Please keep it under 500 characters.",
     "suggestions": {
       "projects": "View projects",
