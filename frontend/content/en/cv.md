@@ -92,8 +92,8 @@ Wilson built his tech career at EISA with successive promotions.
 The "ETL Pipelines and Machine Learning with Apache Spark" course from Data Science Academy
 (completed in January 2025) was Wilson's starting point in the AI world.
 
-Wilson is pursuing an MBA in Artificial Intelligence and Big Data at ICMC/USP (2025-2026, expected
-completion in October 2026) and holds a Bachelor's in Civil Engineering from Uninove (2012-2016).
+Wilson completed an MBA in Artificial Intelligence and Big Data at ICMC/USP (2025-2026, completed
+in October 2026) and holds a Bachelor's in Civil Engineering from Uninove (2012-2016).
 His certifications are Microsoft Certified: Azure Data Fundamentals (DP-900) and "ETL Pipelines and
 Machine Learning with Apache Spark", from Data Science Academy.
 

@@ -97,8 +97,8 @@ Wilson construiu sua carreira de tecnologia na EISA com promoções sucessivas.
 O curso "Pipeline ETL e Machine Learning com Apache Spark", da Data Science Academy
 (concluído em janeiro de 2025), foi o ponto de partida de Wilson no universo da IA.
 
-Wilson faz MBA em Inteligência Artificial e Big Data pelo ICMC/USP (2025-2026, conclusão prevista
-para outubro de 2026) e é bacharel em Engenharia Civil pela Uninove (2012-2016). Tem as
+Wilson concluiu o MBA em Inteligência Artificial e Big Data pelo ICMC/USP (2025-2026,
+concluído em outubro de 2026) e é bacharel em Engenharia Civil pela Uninove (2012-2016). Tem as
 certificações Microsoft Certified: Azure Data Fundamentals (DP-900) e "Pipeline ETL e Machine
 Learning com Apache Spark", pela Data Science Academy.
 
