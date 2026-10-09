@@ -70,12 +70,12 @@ class ChatDependencies:
 def _refusal_text(lang: str) -> str:
     if lang == "pt-BR":
         return (
-            "Prefiro manter nossa conversa focada na minha carreira e nos meus projetos. "
-            "Pergunte à vontade sobre minha experiência em IA, ou veja meus projetos e meu CV!"
+            "Prefiro manter nossa conversa focada na carreira e nos projetos do Wilson. "
+            "Pergunte à vontade sobre a experiência dele em IA, ou veja os projetos e o CV dele!"
         )
     return (
-        "I'd rather keep our conversation focused on my career and projects. "
-        "Feel free to ask about my AI experience, or check out my projects and CV!"
+        "I'd rather keep our conversation focused on Wilson's career and projects. "
+        "Feel free to ask about his AI experience, or check out his projects and CV!"
     )
 
 

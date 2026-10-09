@@ -17,6 +17,10 @@
   --accent: #b45309;
   --accent-foreground: #ffffff;
   --focus-ring: #b45309;
+  /* `only light`: impede o escurecimento automático de navegadores mobile
+     (Chrome Android, Samsung Internet) quando o sistema está em modo escuro,
+     que deixava o tema claro acinzentado. */
+  color-scheme: only light;
 }
 
 :root[data-theme="dark"] {
@@ -28,6 +32,7 @@
   --accent: #f5a623; /* âmbar vindo da luz da foto */
   --accent-foreground: #14100d;
   --focus-ring: #f5a623;
+  color-scheme: dark;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -40,6 +45,7 @@
     --accent: #f5a623;
     --accent-foreground: #14100d;
     --focus-ring: #f5a623;
+    color-scheme: dark;
   }
 }
 
