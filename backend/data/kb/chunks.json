@@ -133,6 +133,76 @@
     "text": "superado.\" ## Fora do trabalho (interesses pessoais) Nas horas vagas, Wilson toca violão, joga Counter-Strike e acompanha as notícias sobre IA. Também medita, o que o ajuda a manter o foco. Gosta de se manter atualizado testando novas tecnologias e, de tempos em tempos, revisita os fundamentos da área para manter a eficiência na linha de frente."
   },
   {
+    "id": "pt-BR:portal:visão-geral-do-portal:0",
+    "lang": "pt-BR",
+    "source": "portal",
+    "source_id": "visão-geral-do-portal",
+    "text": "Visão geral do Portal. O Portal é o site de portfólio do Wilson Llanos: um site bilíngue (português e inglês) com um assistente de IA que responde perguntas sobre a carreira dele. O assistente usa RAG (Retrieval-Augmented Generation) sobre o próprio conteúdo do portfólio: currículo, experiências, projetos, certificações e esta descrição técnica do site. O código é aberto (github.com/WilsonLlanos/portal) e foi desenvolvido com Spec-Driven Development."
+  },
+  {
+    "id": "pt-BR:portal:arquitetura-e-stack-do-portal:0",
+    "lang": "pt-BR",
+    "source": "portal",
+    "source_id": "arquitetura-e-stack-do-portal",
+    "text": "Arquitetura e stack do Portal. O frontend usa Next.js 16 (App Router), TypeScript, Tailwind CSS 4, next-intl para as rotas /pt-BR e /en e next-themes para os temas claro e escuro. As páginas são pré-renderizadas em build (SSG). O backend é Python 3.12 com FastAPI, gerenciado com uv. Frontend e backend são publicados como dois projetos separados na Vercel. O chat responde por streaming (Server-Sent Events). O conteúdo fica em arquivos versionados em frontend/content/, e a mesma fonte alimenta as páginas e a base de conhecimento do chat, para o que o site mostra e o que o chat sabe não divergirem."
+  },
+  {
+    "id": "pt-BR:portal:pipeline-do-chat-passo-a-passo:0",
+    "lang": "pt-BR",
+    "source": "portal",
+    "source_id": "pipeline-do-chat-passo-a-passo",
+    "text": "Pipeline do chat, passo a passo. Cada pergunta passa por estas etapas, nesta ordem: (1) validação do tamanho da mensagem (até 500 caracteres); (2) verificação do teto diário de custo; (3) rate limit por visitante; (4) guardrail contra prompt injection (InputGuard); (5) recuperação dos trechos relevantes na base de conhecimento (RAG); (6) montagem do prompt com o contexto recuperado e o histórico curto da conversa; (7) geração da resposta pelo LLM, em streaming; (8) registro da interação para observabilidade. O servidor não guarda estado da conversa: o cliente envia as últimas 4 mensagens junto com a pergunta."
+  },
+  {
+    "id": "pt-BR:portal:rag-ingestão-e-base-de-conhecimento:0",
+    "lang": "pt-BR",
+    "source": "portal",
+    "source_id": "rag-ingestão-e-base-de-conhecimento",
+    "text": "RAG: ingestão e base de conhecimento. A base de conhecimento é gerada pelo script backend/scripts/ingest.py. Ele lê o conteúdo de frontend/content/ nos dois idiomas, quebra o texto em trechos (chunks) de cerca de 180 palavras, ou por seção no caso desta descrição técnica, e gera um embedding para cada trecho com o modelo gemini-embedding-001 do Google. O resultado é gravado em arquivos em backend/data/kb/: chunks.json (texto e metadados, como idioma e origem), vectors.npz (matriz de embeddings) e manifest.json (modelo, dimensão, data e um hash do conteúdo). Um check no GitHub Actions compara esse hash com o conteúdo atual e bloqueia o merge se a base estiver desatualizada."
+  },
+  {
+    "id": "pt-BR:portal:rag-busca-vetorial-sem-banco-vetorial:0",
+    "lang": "pt-BR",
+    "source": "portal",
+    "source_id": "rag-busca-vetorial-sem-banco-vetorial",
+    "text": "RAG: busca vetorial sem banco vetorial. O Portal não usa banco vetorial. Como a base é pequena, a busca é feita em memória com NumPy, por similaridade de cosseno, atrás de uma interface VectorStore (FileVectorStore) que permite trocar por um banco vetorial, como o Qdrant, no futuro. Na pergunta, o backend gera o embedding da mensagem com o mesmo modelo, filtra os trechos pelo idioma da sessão, calcula o cosseno contra todos de uma vez (multiplicação de matriz) e envia ao LLM os 5 mais parecidos (top_k = 5). Ao iniciar, o backend confere se o modelo de embedding do manifest é o mesmo configurado, para não comparar vetores incompatíveis. Alternativas consideradas e descartadas: Qdrant Cloud (suspende por inatividade), Chroma (persistência em disco não funciona em serverless) e pgvector (excessivo para o volume)."
+  },
+  {
+    "id": "pt-BR:portal:geração-da-resposta-llm:0",
+    "lang": "pt-BR",
+    "source": "portal",
+    "source_id": "geração-da-resposta-llm",
+    "text": "Geração da resposta (LLM). As respostas são geradas pelo Google Gemini, via SDK google-genai, atrás de uma interface LLMClient que permite trocar de provedor por configuração. A temperatura é 0,4 e o limite é de 512 tokens de saída por resposta. O prompt de sistema exige responder apenas com base no contexto recuperado, admitir quando não sabe e responder no idioma em que o visitante escreveu. O Portal usa a camada paga do Gemini, com orçamento limitado, porque na camada gratuita o Google pode usar o conteúdo enviado para melhorar seus produtos."
+  },
+  {
+    "id": "pt-BR:portal:segurança-guardrail-contra-prompt-injection:0",
+    "lang": "pt-BR",
+    "source": "portal",
+    "source_id": "segurança-guardrail-contra-prompt-injection",
+    "text": "Segurança: guardrail contra prompt injection. Antes de qualquer busca, a pergunta passa pelo Llama Prompt Guard 2 (86M), um classificador de prompt injection da Meta, chamado via API da Groq. Ele devolve uma probabilidade de ataque, e o backend bloqueia a pergunta a partir de 0,5, respondendo com uma recusa educada. Há também heurísticas locais com expressões regulares, em português e inglês. A política é fail-open com degradação: se a Groq ficar lenta (timeout de 2 segundos) ou fora do ar, um circuit breaker para de chamá-la por 60 segundos após 3 falhas seguidas, e o chat continua funcionando apenas com as defesas locais."
+  },
+  {
+    "id": "pt-BR:portal:limites-de-custo-e-rate-limit:0",
+    "lang": "pt-BR",
+    "source": "portal",
+    "source_id": "limites-de-custo-e-rate-limit",
+    "text": "Limites de custo e rate limit. Para controlar custo e abuso, o Portal limita cada visitante a 20 perguntas por hora e tem um teto diário de custo estimado de 50 centavos de dólar. Ao atingir o teto, o chat é pausado até o dia seguinte. Os contadores ficam no Upstash Redis, porque funções serverless não compartilham memória. O visitante é identificado por um hash do IP e do user agent com sal diário, sem guardar o IP. Se o Redis falhar, entra um limitador em memória mais restritivo (10 perguntas por hora): para custo, a política é fail-safe."
+  },
+  {
+    "id": "pt-BR:portal:observabilidade-testes-e-ci-cd:0",
+    "lang": "pt-BR",
+    "source": "portal",
+    "source_id": "observabilidade-testes-e-ci-cd",
+    "text": "Observabilidade, testes e CI/CD. Cada interação do chat é registrada no Langfuse Cloud (idioma, resultado — respondida, recusada, sem resposta ou erro —, resultado do guardrail, IDs dos trechos recuperados, tokens e custo estimado, sem dados pessoais do visitante), além de logs JSON estruturados e um endpoint GET /health. Os testes usam pytest e ruff no backend, e Vitest, ESLint, Playwright (com checagem de acessibilidade) e Lighthouse CI no frontend. Há também conjuntos de avaliação com perguntas e ataques reais. O GitHub Actions roda o CI do backend, o CI do frontend, o check de base de conhecimento em dia e um health check agendado da produção a cada 30 minutos. A branch main é protegida e só recebe código por pull request com os checks verdes. O deploy é feito pela integração nativa da Vercel."
+  },
+  {
+    "id": "pt-BR:portal:spec-driven-development:0",
+    "lang": "pt-BR",
+    "source": "portal",
+    "source_id": "spec-driven-development",
+    "text": "Spec-Driven Development. O Portal foi construído com Spec-Driven Development (Spec Kit): primeiro uma constituição com os princípios do projeto, depois a especificação (spec.md), a pesquisa com as decisões técnicas (research.md), o plano (plan.md), o modelo de dados e a lista de tarefas (tasks.md), e só então a implementação. Os artefatos ficam em specs/001-portfolio-portal/ no repositório."
+  },
+  {
     "id": "en:profile:profile:0",
     "lang": "en",
     "source": "profile",
@@ -257,5 +327,75 @@
     "source": "cv",
     "source_id": "cv",
     "text": "Fundamentals (DP-900) and \"ETL Pipelines and Machine Learning with Apache Spark\", from Data Science Academy. ## Working philosophy \"The question isn't just building software, but building and maintaining it efficiently and securely, always thinking about what's best for each project. That's exactly what I bring to my solutions. In a recent project, where I'm implementing an automated support solution for users of a complex system on Azure, there will be an integration of the LLM with two different types of databases (vector and relational) — an engineering challenge that has been overcome.\" ## Outside of work (personal interests) In his free time, Wilson plays guitar, plays Counter-Strike and follows AI news. He also meditates, which helps him stay focused. He likes to stay current by trying out new technologies and, from time to time, goes back to the fundamentals of the field to stay sharp on the front line."
+  },
+  {
+    "id": "en:portal:portal-overview:0",
+    "lang": "en",
+    "source": "portal",
+    "source_id": "portal-overview",
+    "text": "Portal overview. The Portal is Wilson Llanos's portfolio website: a bilingual site (Portuguese and English) with an AI assistant that answers questions about his career. The assistant uses RAG (Retrieval-Augmented Generation) over the portfolio's own content: résumé, experience, projects, certifications and this technical description of the site. The code is open source (github.com/WilsonLlanos/portal) and was built with Spec-Driven Development."
+  },
+  {
+    "id": "en:portal:portal-architecture-and-stack:0",
+    "lang": "en",
+    "source": "portal",
+    "source_id": "portal-architecture-and-stack",
+    "text": "Portal architecture and stack. The frontend uses Next.js 16 (App Router), TypeScript, Tailwind CSS 4, next-intl for the /pt-BR and /en routes, and next-themes for light and dark themes. Pages are pre-rendered at build time (SSG). The backend is Python 3.12 with FastAPI, managed with uv. Frontend and backend are deployed as two separate projects on Vercel. The chat answers by streaming (Server-Sent Events). Content lives in versioned files under frontend/content/, and the same source feeds both the pages and the chat's knowledge base, so what the site shows and what the chat knows never diverge."
+  },
+  {
+    "id": "en:portal:chat-pipeline-step-by-step:0",
+    "lang": "en",
+    "source": "portal",
+    "source_id": "chat-pipeline-step-by-step",
+    "text": "Chat pipeline, step by step. Each question goes through these steps, in this order: (1) message length validation (up to 500 characters); (2) daily cost cap check; (3) per-visitor rate limit; (4) prompt-injection guardrail (InputGuard); (5) retrieval of relevant excerpts from the knowledge base (RAG); (6) prompt assembly with the retrieved context and the short conversation history; (7) answer generation by the LLM, streamed; (8) logging of the interaction for observability. The server keeps no conversation state: the client sends the last 4 messages along with the question."
+  },
+  {
+    "id": "en:portal:rag-ingestion-and-knowledge-base:0",
+    "lang": "en",
+    "source": "portal",
+    "source_id": "rag-ingestion-and-knowledge-base",
+    "text": "RAG: ingestion and knowledge base. The knowledge base is built by the backend/scripts/ingest.py script. It reads the content in frontend/content/ in both languages, splits the text into chunks of about 180 words (or by section, for this technical description) and creates an embedding for each chunk with Google's gemini-embedding-001 model. The output is saved as files in backend/data/kb/: chunks.json (text and metadata such as language and source), vectors.npz (the embedding matrix) and manifest.json (model, dimension, date and a content hash). A GitHub Actions check compares that hash with the current content and blocks the merge if the knowledge base is out of date."
+  },
+  {
+    "id": "en:portal:rag-vector-search-without-a-vector-database:0",
+    "lang": "en",
+    "source": "portal",
+    "source_id": "rag-vector-search-without-a-vector-database",
+    "text": "RAG: vector search without a vector database. The Portal does not use a vector database. Since the knowledge base is small, search runs in memory with NumPy using cosine similarity, behind a VectorStore interface (FileVectorStore) that allows swapping in a vector database such as Qdrant later. For each question, the backend embeds the message with the same model, filters chunks by the session language, computes cosine similarity against all of them at once (a matrix multiplication) and sends the 5 most similar to the LLM (top_k = 5). On startup, the backend checks that the manifest's embedding model matches the configured one, so incompatible vectors are never compared. Alternatives considered and rejected: Qdrant Cloud (suspends on inactivity), Chroma (disk persistence doesn't work in serverless) and pgvector (overkill for this volume)."
+  },
+  {
+    "id": "en:portal:answer-generation-llm:0",
+    "lang": "en",
+    "source": "portal",
+    "source_id": "answer-generation-llm",
+    "text": "Answer generation (LLM). Answers are generated by Google Gemini, through the google-genai SDK, behind an LLMClient interface that allows switching providers by configuration. Temperature is 0.4 and output is capped at 512 tokens per answer. The system prompt requires answering only from the retrieved context, admitting when the answer is unknown, and replying in the language the visitor wrote in. The Portal uses Gemini's paid tier with a limited budget, because on the free tier Google may use submitted content to improve its products."
+  },
+  {
+    "id": "en:portal:security-prompt-injection-guardrail:0",
+    "lang": "en",
+    "source": "portal",
+    "source_id": "security-prompt-injection-guardrail",
+    "text": "Security: prompt-injection guardrail. Before any search, the question goes through Llama Prompt Guard 2 (86M), Meta's prompt-injection classifier, called through the Groq API. It returns an attack probability, and the backend blocks the question at 0.5 or above, replying with a polite refusal. Local regex heuristics in Portuguese and English add another layer. The policy is fail-open with degradation: if Groq is slow (2-second timeout) or down, a circuit breaker stops calling it for 60 seconds after 3 consecutive failures, and the chat keeps working with local defenses only."
+  },
+  {
+    "id": "en:portal:cost-limits-and-rate-limiting:0",
+    "lang": "en",
+    "source": "portal",
+    "source_id": "cost-limits-and-rate-limiting",
+    "text": "Cost limits and rate limiting. To control cost and abuse, the Portal limits each visitor to 20 questions per hour and has an estimated daily cost cap of 50 US cents; when the cap is reached, the chat pauses until the next day. Counters live in Upstash Redis, because serverless functions don't share memory. Visitors are identified by a hash of IP and user agent with a daily salt, without storing the IP. If Redis fails, a stricter in-memory limiter takes over (10 questions per hour): for cost, the policy is fail-safe."
+  },
+  {
+    "id": "en:portal:observability-testing-and-ci-cd:0",
+    "lang": "en",
+    "source": "portal",
+    "source_id": "observability-testing-and-ci-cd",
+    "text": "Observability, testing and CI/CD. Every chat interaction is traced in Langfuse Cloud (language, outcome — answered, refused, no answer or error —, guardrail result, IDs of the retrieved chunks, tokens and estimated cost, with no personal visitor data), alongside structured JSON logs and a GET /health endpoint. Tests use pytest and ruff on the backend, and Vitest, ESLint, Playwright (with accessibility checks) and Lighthouse CI on the frontend, plus evaluation sets with real questions and attacks. GitHub Actions runs backend CI, frontend CI, the knowledge-base freshness check and a scheduled production health check every 30 minutes. The main branch is protected and only accepts pull requests with green checks. Deployment uses Vercel's native Git integration."
+  },
+  {
+    "id": "en:portal:spec-driven-development:0",
+    "lang": "en",
+    "source": "portal",
+    "source_id": "spec-driven-development",
+    "text": "Spec-Driven Development. The Portal was built with Spec-Driven Development (Spec Kit): first a constitution with the project's principles, then the specification (spec.md), research with the technical decisions (research.md), the plan (plan.md), the data model and the task list (tasks.md), and only then the implementation. These artifacts live in specs/001-portfolio-portal/ in the repository."
   }
 ]

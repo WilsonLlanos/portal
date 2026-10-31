@@ -39,6 +39,8 @@ class Settings(BaseSettings):
     max_message_length: int = Field(default=500)
     daily_cost_cap_cents: int = Field(default=50)
     rate_limit_per_hour: int = Field(default=20)
+    # Limite mais restrito enquanto o guardrail estiver degradado (FR-018, FR-020).
+    rate_limit_per_hour_degraded: int = Field(default=10)
 
     # CORS (dev local; em produção o frontend chama via rewrite no mesmo domínio)
     cors_allow_origins: str = Field(default="http://127.0.0.1:3000,http://localhost:3000")

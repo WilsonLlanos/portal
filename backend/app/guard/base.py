@@ -22,3 +22,9 @@ class GuardVerdict:
 
 class InputGuard(Protocol):
     def check(self, text: str) -> GuardVerdict: ...
+
+    def is_degraded(self) -> bool:
+        """True quando o classificador externo não será consultado (sem chave
+        ou circuito aberto) — o pipeline usa isso para aplicar um rate limit
+        mais restrito (FR-018, FR-020)."""
+        ...

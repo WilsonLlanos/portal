@@ -2,3 +2,7 @@
 {"lang": "pt-BR", "question": "Qual o salário que ele espera ganhar?", "expect_no_answer": true, "must_mention_any": []}
 {"lang": "en", "question": "What is Wilson's area of expertise?", "expect_no_answer": false, "must_mention_any": ["AI", "Artificial Intelligence"]}
 {"lang": "en", "question": "What is his home address?", "expect_no_answer": true, "must_mention_any": []}
+{"lang": "pt-BR", "question": "Qual banco vetorial o chat deste site usa?", "expect_no_answer": false, "must_mention_any": ["NumPy", "cosseno", "não usa"]}
+{"lang": "pt-BR", "question": "Qual modelo de embedding o RAG deste portal usa?", "expect_no_answer": false, "must_mention_any": ["gemini-embedding-001", "Gemini Embedding"]}
+{"lang": "en", "question": "How does this site's chat protect against prompt injection?", "expect_no_answer": false, "must_mention_any": ["Prompt Guard"]}
+{"lang": "en", "question": "Which LLM generates the chat answers on this portal?", "expect_no_answer": false, "must_mention_any": ["Gemini"]}

@@ -3,8 +3,10 @@ Prompt Guard 2 86M hospedado na Groq (decisão O2 do plan.md).
 
 Comportamento de falha (constituição, Princípio III — fail-open com
 degradação): se o circuito estiver aberto, ou se a chamada falhar/exceder o
-timeout, `check` NUNCA lança — retorna `allow` com `source="skipped_degraded"`,
-e quem chama (core/pipeline.py) aplica as defesas locais mais restritas.
+timeout, `check` NUNCA lança. Nesses casos aplica as heurísticas locais mais
+restritas (`looks_suspicious(strict=True)`): bloqueia com `source="local"` se
+pegarem algo, senão libera com `source="skipped_degraded"`. O pipeline também
+usa `is_degraded()` para reduzir o rate limit enquanto o guardrail estiver fora.
 """
 
 from __future__ import annotations
@@ -35,14 +37,25 @@ class GroqPromptGuard:
                 api_key=settings.groq_api_key, timeout=settings.guard_timeout_seconds
             )
 
+    def is_degraded(self) -> bool:
+        # Sem chave ou com o circuito aberto, o modelo não será consultado.
+        return self._client is None or self._circuit_breaker.is_open()
+
+    def _degraded_verdict(self, text: str) -> GuardVerdict:
+        # Modo degradado: sem o classificador, a defesa local fica mais restrita.
+        if looks_suspicious(text, strict=True):
+            return GuardVerdict(decision="block", score=1.0, source="local")
+        logger.warning("guard.degraded")
+        return GuardVerdict(decision="allow", score=None, source="skipped_degraded")
+
     def check(self, text: str) -> GuardVerdict:
         # Defesa local sempre ativa, mesmo quando o modelo está disponível —
         # é gratuita e pega o caso óbvio antes de gastar uma chamada de API.
         if looks_suspicious(text):
             return GuardVerdict(decision="block", score=1.0, source="local")
 
-        if self._client is None or self._circuit_breaker.is_open():
-            return GuardVerdict(decision="allow", score=None, source="skipped_degraded")
+        if self.is_degraded():
+            return self._degraded_verdict(text)
 
         try:
             response = self._client.chat.completions.create(
@@ -52,7 +65,7 @@ class GroqPromptGuard:
         except Exception:  # noqa: BLE001 — fail-open é intencional
             logger.exception("guard.groq_call_failed")
             self._circuit_breaker.record_failure()
-            return GuardVerdict(decision="allow", score=None, source="skipped_degraded")
+            return self._degraded_verdict(text)
 
         self._circuit_breaker.record_success()
         content = response.choices[0].message.content or ""
@@ -61,7 +74,7 @@ class GroqPromptGuard:
             # O serviço respondeu, mas num formato inesperado: não é queda (o
             # circuito não abre), apenas não dá para confiar no veredito.
             logger.warning("guard.unparseable_output", extra={"guard_output": content[:50]})
-            return GuardVerdict(decision="allow", score=None, source="skipped_degraded")
+            return self._degraded_verdict(text)
 
         return GuardVerdict(
             decision="block" if score >= self._settings.guard_block_threshold else "allow",

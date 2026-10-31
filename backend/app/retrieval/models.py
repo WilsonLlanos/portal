@@ -8,7 +8,7 @@ from typing import Literal
 from pydantic import BaseModel
 
 Lang = Literal["pt-BR", "en"]
-Source = Literal["profile", "experience", "project", "certification", "cv"]
+Source = Literal["profile", "experience", "project", "certification", "cv", "portal"]
 
 
 class KnowledgeChunk(BaseModel):

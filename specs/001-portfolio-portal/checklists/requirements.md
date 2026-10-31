@@ -34,3 +34,4 @@
 - A spec cita "prompt injection" e "jailbreak" como categorias de ataque (comportamento), sem citar ferramentas.
 - Decisão assumida: contato por links na v1; formulário próprio adiado (registrado em Assumptions). Pode ser revisto no `/speckit-clarify`.
 - SC-003 e SC-007 dependem de um conjunto de perguntas/ataques de referência a ser criado na fase de plano/tarefas.
+- Revalidado em 2026-10-27 após a emenda de T077/T078 (FR-008, FR-013, FR-013b, FR-014, FR-016, US3/AC2-AC3-AC8-AC9, US4/AC2, edge cases de idioma, Key Entities): todos os itens continuam passando; nenhum [NEEDS CLARIFICATION]; a emenda descreve comportamento, sem citar ferramentas.

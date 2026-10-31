@@ -286,3 +286,13 @@ Cada etapa é publicável e agrega valor sem quebrar a anterior.
 - Cada história é entregável e testável de forma independente
 - Fazer commit após cada tarefa ou grupo lógico, em um PR por história, com CI verde antes do merge na `main` (constituição VII)
 - Evitar: tarefas vagas, conflito no mesmo arquivo, dependências entre histórias que quebrem a independência
+
+## Phase 9: Convergence
+
+- [x] T074 CRITICAL: Endurecer as defesas locais quando o guardrail estiver degradado (`source="skipped_degraded"`) — ex.: heurísticas adicionais/mais amplas em `backend/app/guard/heuristics.py` aplicadas só nesse modo e limite de tamanho menor no `backend/app/core/pipeline.py` —, hoje o modo degradado apenas libera a pergunta com as mesmas heurísticas do modo normal, per Constitution III / FR-020 / US3/AC6 (missing)
+- [x] T075 CRITICAL: Incluir a pergunta sanitizada e a latência (ms) em todas as chamadas de `log_chat_interaction` em `backend/app/core/pipeline.py` (hoje só são enviados idioma, outcome, guard, chunk ids, tokens e custo), sem dados pessoais, per Constitution VIII / FR-021 / T053 (partial)
+- [x] T076 Reduzir o rate limit por visitante enquanto o guardrail estiver degradado (circuit breaker aberto ou sem `GROQ_API_KEY`), em `backend/app/limits/rate_limit.py` e `backend/app/core/pipeline.py`, com teste em `backend/tests/unit/test_limits.py`, per FR-018 (missing)
+- [x] T077 Reconciliar a regra de idioma: `backend/app/core/prompt.py` (regra 4) responde no idioma da mensagem do visitante, enquanto a spec exige o idioma selecionado no portal — atualizar FR-016, US3/AC3 e o edge case "mistura idiomas" em `spec.md` para registrar a decisão do autor, ou reverter a regra, per FR-016 / US3/AC3 (contradicts)
+- [x] T078 Registrar na spec/constituição a nova fonte `portal` da base de conhecimento (`frontend/content/{lang}/portal.md`, ingerida por `backend/scripts/ingest.py`) e a regra 5 do prompt (detalhes técnicos só sob pedido) — FR-013, Key Entities ("Base de conhecimento do chat") e Princípio I citam apenas CV, projetos, certificações e formação, per FR-013 / Constitution I (unrequested)
+- [x] T079 Isolar `backend/tests/unit/test_limits.py::test_fallback_limiter_used_when_redis_unavailable` do `.env` local (ex.: `Settings(upstash_redis_rest_url="", upstash_redis_rest_token="")` ou `monkeypatch.delenv`), pois falha quando há credenciais do Upstash no ambiente, per T037 (partial)
+- [x] T080 Documentar em `tasks.md`/`README.md` que `.github/workflows/backend-ci.yml` exclui `tests/eval` (dependem de credenciais reais e têm custo), divergindo de T069 ("unit + contract + eval"), ou criar um workflow manual (`workflow_dispatch`) para a avaliação, per T069 (partial)

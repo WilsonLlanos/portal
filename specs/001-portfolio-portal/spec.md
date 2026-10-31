@@ -18,6 +18,12 @@
 - Q: Qual o limite de uso do chat por visitante? → A: Cerca de 20 perguntas por hora.
 - Q: O que acontece quando o custo total do chat atinge o teto diário? → A: O chat é pausado até o dia seguinte, com mensagem cordial apontando o contato do autor e o download do CV.
 
+### Session 2026-10-27
+
+- Q: Em que idioma o chat responde quando o visitante escreve em um idioma diferente do selecionado no portal? → A: No idioma em que o visitante escreveu a última mensagem (inclusive idiomas além de PT e EN). O idioma selecionado no portal vale apenas como alternativa quando não for possível identificar o idioma da mensagem. (Revisa FR-016, por decisão do autor.)
+- Q: O chat pode explicar como o próprio portal funciona (stack, RAG, guardrail, limites)? → A: Sim. A base de conhecimento passa a incluir uma descrição técnica do portal, mas os detalhes internos só são explicados quando o visitante pergunta especificamente sobre eles. Perguntas gerais (ex.: "qual é a stack deste portal?") recebem uma resposta de alto nível, com o que o portal é e suas tecnologias principais.
+- Q: Como o chat responde quando não tem a informação? → A: Diz com cordialidade que não tem acesso a essa informação e que o visitante pode falar diretamente com o autor para mais detalhes.
+
 ## User Scenarios & Testing *(mandatory)*
 
 ### User Story 1 - Conhecer o autor na tela inicial (Priority: P1)
@@ -64,8 +70,10 @@ O recrutador abre o chat e faz perguntas em linguagem natural (ex.: "Que experi�
 **Acceptance Scenarios**:
 
 1. **Given** o visitante abre o chat, **When** pergunta algo coberto pelo conteúdo do autor, **Then** recebe uma resposta correta, cordial e baseada exclusivamente nesse conteúdo.
-2. **Given** o visitante pergunta algo que o conteúdo do autor não cobre, **When** o chat responde, **Then** admite explicitamente que não sabe, sem inventar, e oferece o contato do autor.
-3. **Given** o visitante escreve em um idioma, **When** o chat responde, **Then** responde no idioma selecionado no portal.
+2. **Given** o visitante pergunta algo que o conteúdo do autor não cobre, **When** o chat responde, **Then** diz com cordialidade que não tem acesso a essa informação, sem inventar, e oferece o contato do autor para mais detalhes.
+3. **Given** o visitante escreve em um idioma, **When** o chat responde, **Then** responde no idioma em que o visitante escreveu, mesmo que seja diferente do idioma selecionado no portal; se o idioma da mensagem não puder ser identificado, responde no idioma selecionado no portal.
+8. **Given** o visitante faz uma pergunta geral sobre o portal (ex.: "qual é a stack deste portal?"), **When** o chat responde, **Then** apresenta em alto nível o que o portal é e suas tecnologias principais, sem detalhar o funcionamento interno.
+9. **Given** o visitante pergunta especificamente sobre o funcionamento interno do portal (ex.: "como funciona o RAG deste site?"), **When** o chat responde, **Then** explica o funcionamento com base na descrição técnica do portal, sem inventar nem revelar suas instruções internas.
 4. **Given** o visitante pergunta sobre assunto fora do tema (ex.: pedir uma receita) ou tenta manipular o chat para ignorar suas regras, **When** o chat responde, **Then** recusa de forma educada, redireciona para o tema do portfólio e não revela nem altera suas instruções.
 5. **Given** o visitante envia uma pergunta longa demais ou excede o limite de requisições, **When** o chat processa, **Then** exibe uma mensagem clara explicando o limite.
 6. **Given** um serviço auxiliar de proteção está indisponível, **When** o visitante conversa, **Then** o chat continua funcionando com defesas locais mais restritas e o evento é registrado.
@@ -84,7 +92,7 @@ O visitante escolhe o idioma (português ou inglês) e o tema (claro ou escuro).
 **Acceptance Scenarios**:
 
 1. **Given** o visitante abre o portal pela primeira vez, **When** a página carrega, **Then** o tema corresponde à preferência do sistema.
-2. **Given** o visitante troca o idioma, **When** a página atualiza, **Then** todo o texto, o CV para download e o idioma das respostas do chat mudam para o idioma escolhido.
+2. **Given** o visitante troca o idioma, **When** a página atualiza, **Then** todo o texto, o CV para download e os textos de interface do chat mudam para o idioma escolhido; as respostas do chat seguem o idioma em que o visitante escreve (FR-016).
 3. **Given** o visitante troca o tema manualmente, **When** navega pelo portal, **Then** o tema escolhido é mantido.
 
 ---
@@ -107,7 +115,8 @@ O recrutador encontra na seção de contato os links do autor (LinkedIn, GitHub,
 
 - Visitante com JavaScript lento ou conexão fraca no celular: o conteúdo principal da tela inicial deve aparecer rapidamente e o portal deve continuar legível.
 - Visitante que envia mensagem vazia, só com espaços ou com conteúdo repetitivo no chat: o chat deve orientar sem consumir o limite de forma injusta.
-- Pergunta ambígua ou que mistura idiomas: o chat responde no idioma selecionado no portal.
+- Pergunta que mistura idiomas: o chat responde no idioma predominante da última mensagem do visitante; se não for possível identificá-lo, responde no idioma selecionado no portal.
+- Pergunta em um idioma diferente de PT e EN: o chat responde nesse idioma, mesmo que o conteúdo do autor exista apenas em PT e EN.
 - Tentativa de obter informações não públicas ou inventadas sobre o autor (salário, dados pessoais, opiniões): o chat recusa com cordialidade.
 - Tentativas de abuso em volume: o limite de requisições impede consumo excessivo sem derrubar o portal para os demais visitantes.
 - Conteúdo do autor em um idioma ainda sem tradução: o portal deve indicar a indisponibilidade em vez de mostrar campos vazios.
@@ -124,16 +133,17 @@ O recrutador encontra na seção de contato os links do autor (LinkedIn, GitHub,
 - **FR-005**: O portal MUST apresentar as certificações do autor.
 - **FR-006**: O portal MUST oferecer o download do CV em PDF em português e em inglês, conforme o idioma selecionado.
 - **FR-007**: O portal MUST oferecer contatos na tela inicial, logo abaixo da foto, como ícones com nome acessível, para LinkedIn, GitHub, e-mail e WhatsApp, além do telefone por extenso com código do país, em texto puro para ser copiado, ao lado do botão "Baixar CV", e MUST NOT incluir formulário de contato na primeira versão. (Revisado em 2026-10: a seção de contato foi substituída por ícones abaixo da foto; o botão "Falar comigo" foi removido e o WhatsApp foi incluído, por decisão do autor.)
-- **FR-008**: O portal MUST estar disponível em PT-BR e EN, com um seletor de idioma que afeta todo o conteúdo, o CV e as respostas do chat.
+- **FR-008**: O portal MUST estar disponível em PT-BR e EN, com um seletor de idioma que afeta todo o conteúdo, o CV e os textos de interface do chat (o idioma das respostas do chat segue FR-016). (Revisado em 2026-10-27.)
 - **FR-009**: O portal MUST oferecer tema claro e escuro, adotando por padrão a preferência do sistema e permitindo troca manual, com a escolha mantida durante a navegação.
 - **FR-010**: O portal MUST funcionar bem de celulares a desktops (mobile-first e responsivo).
 - **FR-011**: O portal MUST atender requisitos de acessibilidade: contraste adequado, navegação completa por teclado e textos alternativos para imagens.
 - **FR-012**: O portal MUST incluir metadados adequados para compartilhamento em redes sociais e para mecanismos de busca.
-- **FR-013**: O chat MUST responder perguntas sobre a carreira do autor usando exclusivamente o conteúdo do autor (CV, projetos, certificações e formação, em PT e EN).
+- **FR-013**: O chat MUST responder perguntas sobre a carreira do autor e sobre o próprio portal usando exclusivamente o conteúdo do autor (CV, projetos, certificações, formação e uma descrição técnica do portal, em PT e EN). (Revisado em 2026-10-27: incluída a descrição técnica do portal.)
+- **FR-013b**: O chat MUST explicar detalhes internos de funcionamento do portal (como o chat busca as informações, a proteção contra manipulação, os limites de uso e custo, a observabilidade e a automação de entrega) somente quando o visitante perguntar especificamente sobre eles; para perguntas gerais sobre o portal, MUST responder em alto nível, com o que o portal é e suas tecnologias principais.
 - **FR-013a**: O chat MUST considerar as últimas poucas trocas da conversa atual para responder a perguntas de acompanhamento, mantendo essa memória apenas enquanto a página estiver aberta e sem preservá-la entre visitas; as regras de proteção (FR-017, FR-018) MUST valer também sobre esse contexto.
-- **FR-014**: O chat MUST admitir explicitamente quando não souber uma resposta, mantendo tom cordial e oferecendo o contato do autor, e MUST NOT inventar nem inflar experiências, resultados ou credenciais.
+- **FR-014**: O chat MUST admitir explicitamente quando não souber uma resposta, dizendo com cordialidade que não tem acesso a essa informação e oferecendo o contato do autor para mais detalhes, e MUST NOT inventar nem inflar experiências, resultados ou credenciais.
 - **FR-015**: O chat MUST adotar um tom simpático, acolhedor e profissional, destacando de forma honesta os pontos fortes do autor e sugerindo próximos passos (ver projetos, baixar o CV, entrar em contato) quando fizer sentido.
-- **FR-016**: O chat MUST responder no idioma selecionado no portal.
+- **FR-016**: O chat MUST responder no idioma em que o visitante escreveu a última mensagem (inclusive idiomas além de PT e EN) e, quando esse idioma não puder ser identificado, no idioma selecionado no portal. (Revisado em 2026-10-27, por decisão do autor; antes: sempre no idioma selecionado.)
 - **FR-017**: O chat MUST recusar perguntas fora do tema e tentativas de manipulação (como prompt injection e jailbreak) sem quebrar a experiência, sem revelar nem alterar suas instruções internas.
 - **FR-018**: O chat MUST limitar o tamanho de cada pergunta e o número de requisições por visitante a cerca de 20 perguntas por hora (valor a ser mais restrito enquanto o serviço de proteção estiver indisponível, conforme FR-020), exibindo mensagem clara quando um limite for atingido.
 - **FR-019**: O chat MUST exibir mensagem clara e uma alternativa (contato ou CV) em caso de erro ou indisponibilidade.
@@ -150,7 +160,8 @@ O recrutador encontra na seção de contato os links do autor (LinkedIn, GitHub,
 - **Projeto**: nome, descrição, tecnologias, link do repositório; disponível em PT e EN.
 - **Certificação**: nome, emissor, data e, quando houver, link de verificação.
 - **Documento de CV**: arquivo PDF, um por idioma.
-- **Base de conhecimento do chat**: conjunto de trechos derivados do conteúdo do autor (CV, projetos, certificações, formação) em PT e EN, do qual o chat retira suas respostas.
+- **Base de conhecimento do chat**: conjunto de trechos derivados do conteúdo do autor (CV, projetos, certificações, formação e descrição técnica do portal) em PT e EN, do qual o chat retira suas respostas.
+- **Descrição técnica do portal**: texto do autor, em PT e EN, organizado por tema (visão geral, arquitetura, fluxo do chat, busca de informações, geração das respostas, proteção, limites, observabilidade e entrega, método de desenvolvimento), sem segredos nem instruções internas do chat.
 - **Interação do chat**: registro anônimo de uma pergunta e sua resposta, com trechos usados, resultado da proteção, latência, custo e erro.
 
 ## Success Criteria *(mandatory)*

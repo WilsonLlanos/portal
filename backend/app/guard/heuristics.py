@@ -26,5 +26,22 @@ _SUSPICIOUS_PATTERNS = [
 ]
 
 
-def looks_suspicious(text: str) -> bool:
-    return any(pattern.search(text) for pattern in _SUSPICIOUS_PATTERNS)
+# Padrões extras, usados só quando o Prompt Guard 2 está degradado
+# (constituição, Princípio III: "defesas locais mais restritas"). Pegam mais
+# variações de manipulação ao custo de alguns falsos positivos — aceitável
+# enquanto não há classificador para fazer o trabalho fino.
+_STRICT_PATTERNS = [
+    re.compile(r"system\s+prompt|prompt\s+(do|de)\s+sistema", re.IGNORECASE),
+    re.compile(r"jailbreak|\bDAN\b|developer\s+mode|modo\s+desenvolvedor", re.IGNORECASE),
+    re.compile(r"pretend\s+(to\s+be|you\s+are)|finja\s+(ser|que)|role\s*-?\s*play", re.IGNORECASE),
+    re.compile(r"(suas|tuas)\s+(instru|regras)|your\s+(instructions|rules)", re.IGNORECASE),
+    re.compile(
+        r"sem\s+(restri|filtro)|without\s+(restrictions|filters)|no\s+restrictions", re.IGNORECASE
+    ),
+    re.compile(r"esque[cç]a\s+(tudo|as|o\s+que)|forget\s+(everything|all|your)", re.IGNORECASE),
+]
+
+
+def looks_suspicious(text: str, *, strict: bool = False) -> bool:
+    patterns = _SUSPICIOUS_PATTERNS + _STRICT_PATTERNS if strict else _SUSPICIOUS_PATTERNS
+    return any(pattern.search(text) for pattern in patterns)

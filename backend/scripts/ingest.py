@@ -17,6 +17,7 @@ from __future__ import annotations
 
 import hashlib
 import json
+import re
 import sys
 from datetime import UTC, datetime
 from pathlib import Path
@@ -43,6 +44,20 @@ def _chunk_text(text: str) -> list[str]:
     if not words:
         return []
     return [" ".join(words[i : i + WORDS_PER_CHUNK]) for i in range(0, len(words), WORDS_PER_CHUNK)]
+
+
+def _markdown_sections(text: str) -> list[tuple[str, str]]:
+    """Quebra um Markdown por seção `## `, devolvendo (slug, texto) com o título
+    no início de cada texto — cada seção vira um trecho focado em um tema, o
+    que melhora a busca em relação a cortar a cada N palavras.
+    """
+    sections: list[tuple[str, str]] = []
+    for block in text.split("\n## ")[1:]:
+        title, _, body = block.partition("\n")
+        # Só letras/números no slug: o id do chunk usa ":" como separador.
+        slug = "-".join(re.findall(r"\w+", title.lower()))
+        sections.append((slug, f"{title.strip()}. {body.strip()}"))
+    return sections
 
 
 def _profile_text(profile: dict) -> str:
@@ -91,6 +106,13 @@ def collect_source_records(lang: str) -> list[tuple[str, str, str]]:
     cv_path = lang_dir / "cv.md"
     if cv_path.exists():
         records.append(("cv", "cv", cv_path.read_text(encoding="utf-8")))
+
+    # Descrição técnica do próprio Portal (stack, RAG, guardrail, limites, CI/CD),
+    # para o chat conseguir explicar como este site funciona.
+    portal_path = lang_dir / "portal.md"
+    if portal_path.exists():
+        for slug, text in _markdown_sections(portal_path.read_text(encoding="utf-8")):
+            records.append(("portal", slug, text))
 
     return records
 
