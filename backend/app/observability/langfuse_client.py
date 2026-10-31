@@ -55,6 +55,20 @@ def log_chat_interaction(**fields: Any) -> None:
         return
 
     try:
-        client.trace(name="chat.interaction", **fields)
+        # SDK v3+ (OpenTelemetry): não existe mais `client.trace(...)`. Um evento
+        # avulso registra a interação: a pergunta sanitizada vai em `input` e o
+        # restante (idioma, outcome, guardrail, trechos, tokens, custo, latência)
+        # em `metadata`.
+        metadata = dict(fields)
+        question = metadata.pop("question", None)
+        client.create_event(
+            name="chat.interaction",
+            input=question,
+            metadata=metadata,
+            level="ERROR" if metadata.get("outcome") == "error" else "DEFAULT",
+        )
+        # Em serverless a instância pode congelar logo após a resposta; o flush
+        # garante o envio do lote (roda depois do evento `done` já ter saído).
+        client.flush()
     except Exception:  # noqa: BLE001
         logger.exception("langfuse.log_failed")

@@ -65,8 +65,8 @@ Gerada por `backend/scripts/ingest.py` a partir do conteúdo acima. **Não edita
 |---|---|---|
 | `id` | string | estável (ex.: `en:project:portal-ia:0`) |
 | `lang` | `"pt-BR"` \| `"en"` | filtro de busca |
-| `source` | `profile` \| `experience` \| `project` \| `certification` \| `cv` | origem, usada para citar/rastrear |
-| `source_id` | string | id do item de origem |
+| `source` | `profile` \| `experience` \| `project` \| `certification` \| `cv` \| `portal` | origem, usada para citar/rastrear |
+| `source_id` | string | id do item de origem (em `portal`, o slug da seção `##` de `frontend/content/{lang}/portal.md`) |
 | `text` | string | trecho, em torno de 150 a 300 tokens |
 | `embedding` | float[] | vetor do trecho (arquivo `.npz`, alinhado por índice) |
 

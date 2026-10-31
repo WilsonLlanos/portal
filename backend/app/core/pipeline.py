@@ -7,9 +7,11 @@ validar tamanho -> teto diário -> rate limit -> InputGuard -> VectorStore.searc
 
 from __future__ import annotations
 
+import re
+import time
 from collections.abc import Iterator
 from dataclasses import dataclass
-from typing import Literal
+from typing import Any, Literal
 
 from app.core.config import Settings, get_settings
 from app.core.prompt import (
@@ -79,6 +81,19 @@ def _refusal_text(lang: str) -> str:
     )
 
 
+_EMAIL_PATTERN = re.compile(r"[\w.+-]+@[\w-]+\.[\w.-]+")
+# 8+ dígitos, com espaços, pontos, traços ou parênteses no meio (telefone, CPF...).
+_LONG_NUMBER_PATTERN = re.compile(r"\+?\d[\d\s().-]{6,}\d")
+
+
+def _sanitize_for_log(message: str) -> str:
+    """Remove dados pessoais óbvios que o visitante possa ter digitado
+    (FR-022): e-mails e números longos viram marcadores."""
+    text = _EMAIL_PATTERN.sub("[email]", message.strip())
+    text = _LONG_NUMBER_PATTERN.sub("[número]", text)
+    return text
+
+
 def run_chat_pipeline(
     *,
     message: str,
@@ -89,6 +104,17 @@ def run_chat_pipeline(
 ) -> Iterator[PipelineEvent]:
     deps = deps or ChatDependencies()
     settings = deps.settings
+    started_at = time.monotonic()
+    sanitized_question = _sanitize_for_log(message)
+
+    def log(**fields: Any) -> None:
+        # Toda interação registrada leva a pergunta sanitizada e a latência
+        # (constituição, Princípio VIII; FR-021), além dos campos de cada etapa.
+        log_chat_interaction(
+            question=sanitized_question,
+            latency_ms=int((time.monotonic() - started_at) * 1000),
+            **fields,
+        )
 
     # 1) Tamanho (FR-018)
     if not message.strip():
@@ -102,13 +128,13 @@ def run_chat_pipeline(
     cost_tracker = get_daily_cost_tracker()
     if cost_tracker.is_paused():
         yield PipelineEvent(type="error", error_code="chat_paused", error_message="paused")
-        log_chat_interaction(lang=lang, outcome="paused")
+        log(lang=lang, outcome="paused")
         return
 
     # 3) Rate limit por visitante (FR-018)
-    if not deps.rate_limiter.allow(visitor_key):
+    if not deps.rate_limiter.allow(visitor_key, degraded=deps.guard.is_degraded()):
         yield PipelineEvent(type="error", error_code="rate_limited", error_message="rate_limited")
-        log_chat_interaction(lang=lang, outcome="rate_limited")
+        log(lang=lang, outcome="rate_limited")
         return
 
     # 4) InputGuard (FR-017, FR-020)
@@ -116,9 +142,7 @@ def run_chat_pipeline(
     if verdict.decision == "block":
         yield PipelineEvent(type="token", text=_refusal_text(lang))
         yield PipelineEvent(type="done", outcome="refused", suggestions=["projects", "contact"])
-        log_chat_interaction(
-            lang=lang, outcome="refused", guard_result=verdict.source, guard_score=verdict.score
-        )
+        log(lang=lang, outcome="refused", guard_result=verdict.source, guard_score=verdict.score)
         return
 
     # 5) Recuperação (RAG)
@@ -155,7 +179,7 @@ def run_chat_pipeline(
     except LLMUnavailable:
         logger.exception("pipeline.llm_stream_failed")
         yield PipelineEvent(type="error", error_code="unavailable", error_message="llm_unavailable")
-        log_chat_interaction(lang=lang, outcome="error", guard_result=verdict.source)
+        log(lang=lang, outcome="error", guard_result=verdict.source)
         return
 
     cost_cents = (
@@ -168,7 +192,7 @@ def run_chat_pipeline(
     suggestions = ["projects", "cv", "contact"]
     yield PipelineEvent(type="done", outcome=outcome, suggestions=suggestions)
 
-    log_chat_interaction(
+    log(
         lang=lang,
         outcome=outcome,
         guard_result=verdict.source,

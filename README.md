@@ -66,7 +66,19 @@ merge — configuração do GitHub, não código). Workflows em
 | `health-check.yml` | Verifica `GET /health` do backend em produção, agendado |
 | `frontend-ci.yml` | Lint, typecheck, testes (Vitest + Playwright), build, Lighthouse CI |
 | `backend-ci.yml` | `ruff` e `pytest` (sem os testes de `tests/eval`, que exigem credenciais reais) |
-| `ingest.yml` | Regenera a base de conhecimento quando `frontend/content/**` muda |
+| `ingest.yml` | Confere (`ingest.py --check`) se `backend/data/kb/` está em dia com `frontend/content/`; a regeneração é feita localmente com `uv run python scripts/ingest.py` |
+
+**Avaliação (`backend/tests/eval`) fora do CI, de propósito.** Os conjuntos de
+perguntas e ataques de referência (SC-003, SC-007) fazem chamadas reais ao
+Gemini e à Groq: exigem chaves e têm custo. Por isso o `backend-ci.yml` roda
+`pytest --ignore=tests/eval`, divergindo da tarefa T069 ("unit + contract +
+eval"). Rode a avaliação localmente antes de mudanças no prompt, no conteúdo ou
+na busca, com `GEMINI_API_KEY` e `GROQ_API_KEY` no ambiente:
+
+```bash
+cd backend
+uv run pytest tests/eval -s
+```
 
 ## Conteúdo
 

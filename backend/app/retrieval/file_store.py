@@ -72,22 +72,59 @@ class FileVectorStore:
         assert_embedding_model_matches(settings)
 
     def search(self, query_embedding: list[float], lang: Lang, top_k: int) -> list[ScoredChunk]:
+        # Carrega a base já em memória (o @lru_cache em _load lê os arquivos só na 1ª vez):
+        # chunks = lista de trechos de texto, vectors = matriz N×D com o embedding de cada
+        # trecho (mesma ordem), _ = manifest, que não é usado aqui.
         chunks, vectors, _ = _load()
-        query = np.asarray(query_embedding, dtype=np.float32)
-        query_norm = np.linalg.norm(query)
-        if query_norm == 0:
-            return []
 
+        # Converte o embedding da pergunta (lista Python) em array NumPy float32,
+        # mesmo tipo da matriz, para as contas vetorizadas.
+        query = np.asarray(query_embedding, dtype=np.float32)
+
+        # Norma (comprimento) do vetor da pergunta: ‖q‖ = sqrt(q1² + q2² + ... + qD²).
+        query_norm = np.linalg.norm(query)
+
+        # Vetor nulo não tem direção, então o cosseno não existe (seria divisão por zero).
+        if query_norm == 0:
+            return []  # Nesse caso não devolve nenhum trecho.
+
+        # Máscara booleana com N posições: True onde o trecho é do idioma pedido
+        # (ex.: [True, False, True, ...]).
         lang_mask = np.array([chunk.lang == lang for chunk in chunks])
+
+        # Se nenhum trecho for desse idioma, não há o que comparar.
         if not lang_mask.any():
             return []
 
+        # Indexação booleana do NumPy: mantém só as linhas da matriz em que a máscara é True.
+        # Resultado: matriz M×D (M = trechos do idioma).
         candidate_vectors = vectors[lang_mask]
+
+        # Faz o mesmo filtro na lista de trechos, para as posições continuarem alinhadas
+        # com candidate_vectors. strict=True dá erro se as duas listas tiverem tamanhos
+        # diferentes.
         candidate_chunks = [c for c, keep in zip(chunks, lang_mask, strict=True) if keep]
 
+        # Norma de cada linha da matriz (axis=1 = ao longo das colunas de cada linha):
+        # vetor com M valores, ‖v_i‖ de cada trecho.
         norms = np.linalg.norm(candidate_vectors, axis=1)
+
+        # Troca normas zero por um número minúsculo, para não dividir por zero na linha
+        # seguinte.
         norms[norms == 0] = 1e-9
+
+        # Similaridade de cosseno de todos os trechos de uma vez:
+        #   candidate_vectors @ query  -> produto escalar v_i · q de cada trecho (M valores)
+        #   norms * query_norm         -> ‖v_i‖ · ‖q‖ de cada trecho (M valores)
+        #   a divisão, elemento a elemento, dá cos(θ_i), entre -1 e 1 (perto de 1 = mais
+        #   parecido).
         similarities = (candidate_vectors @ query) / (norms * query_norm)
 
+        # argsort devolve os índices em ordem crescente. Negar as similaridades
+        # inverte para decrescente (mais parecido primeiro). [:top_k] fica com os k melhores.
         order = np.argsort(-similarities)[:top_k]
+
+        # Monta o resultado: para cada índice escolhido, o trecho e sua nota.
+        # float(...) converte o np.float32 em float do Python (serializável e sem tipo
+        # NumPy vazando).
         return [ScoredChunk(chunk=candidate_chunks[i], score=float(similarities[i])) for i in order]

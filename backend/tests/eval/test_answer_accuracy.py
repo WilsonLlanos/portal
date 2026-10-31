@@ -12,6 +12,23 @@ from app.core.pipeline import ChatDependencies, run_chat_pipeline
 
 QUESTIONS_PATH = Path(__file__).parent / "questions.jsonl"
 
+# A busca sempre devolve os top_k trechos mais parecidos (não há nota mínima),
+# então o outcome do pipeline quase nunca é "no_answer". O que importa para
+# SC-003 é o texto: o chat admitiu que não tem a informação (regra 2 do prompt)?
+_ADMISSION_MARKERS = [
+    "não tenho acesso",
+    "não tenho essa informação",
+    "não tenho informaç",
+    "não possuo",
+    "não sei",
+    "don't have access",
+    "do not have access",
+    "don't have that information",
+    "don't have information",
+    "do not have information",
+    "don't know",
+]
+
 requires_live_credentials = pytest.mark.skipif(
     not os.environ.get("GEMINI_API_KEY"),
     reason="GEMINI_API_KEY não configurada — pulando avaliação com chamadas reais (ver README.md)",
@@ -58,8 +75,12 @@ def test_answer_accuracy_meets_sc003():
 
         if expect_no_answer:
             no_answer_total += 1
-            if outcome == "no_answer":
+            # Normaliza o apóstrofo tipográfico (’) que o modelo às vezes usa.
+            normalized = text.lower().replace("’", "'")
+            if outcome == "no_answer" or any(m in normalized for m in _ADMISSION_MARKERS):
                 no_answer_correct += 1
+            else:
+                print(f"[no_answer não admitida] {item['question']!r} -> {text!r}")
         else:
             mentions = any(
                 term.lower() in text.lower() for term in item.get("must_mention_any", [])

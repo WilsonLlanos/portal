@@ -38,8 +38,22 @@ def test_rate_limiter_allows_up_to_configured_limit_then_blocks():
     assert results[20] is False  # a 21ª requisição na mesma hora é bloqueada
 
 
+def test_rate_limiter_is_stricter_while_guard_degraded():
+    settings = Settings(rate_limit_per_hour=20, rate_limit_per_hour_degraded=10)
+    limiter = RateLimiter(settings)
+    limiter._redis = _FakeRedis()
+    key = make_visitor_key("203.0.113.3", "pytest-agent")
+
+    results = [limiter.allow(key, degraded=True) for _ in range(11)]
+
+    assert results[:10] == [True] * 10
+    assert results[10] is False  # FR-018: teto menor com o guardrail fora
+
+
 def test_fallback_limiter_used_when_redis_unavailable():
-    settings = Settings()  # sem credenciais Upstash -> client None
+    # Credenciais vazias explícitas: argumentos têm precedência sobre o .env
+    # local, então o teste não depende do ambiente de quem roda.
+    settings = Settings(upstash_redis_rest_url="", upstash_redis_rest_token="")
     limiter = RateLimiter(settings)
     assert limiter._redis is None  # confirma que caiu no caminho de fallback
 

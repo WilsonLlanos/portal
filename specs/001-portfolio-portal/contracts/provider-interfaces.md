@@ -33,7 +33,10 @@ class VectorStore(Protocol):
 ```python
 class InputGuard(Protocol):
     def check(self, text: str) -> GuardVerdict: ...
+    def is_degraded(self) -> bool: ...
 ```
+
+- `is_degraded()` indica que o classificador externo não será consultado (sem chave ou circuito aberto). Nesse modo, `check` aplica heurísticas locais mais restritas e o pipeline reduz o rate limit por visitante (FR-018, FR-020).
 
 - `GuardVerdict` tem `decision` (`allow` | `block`), `score` (float ou `None`) e `source` (`model` | `local` | `skipped_degraded`).
 - Nunca lança exceção para o chamador: falhas do serviço externo viram `skipped_degraded` (fail-open) com defesas locais mais restritas; o circuito abre após falhas consecutivas e fecha após um período de espera.

@@ -37,15 +37,22 @@ class RateLimiter:
                 token=settings.upstash_redis_rest_token,
             )
 
-    def allow(self, visitor_key: str) -> bool:
+    def allow(self, visitor_key: str, *, degraded: bool = False) -> bool:
         if self._redis is None:
             return fallback_allow(visitor_key)
 
+        # Com o guardrail fora, o mesmo contador vale contra um teto menor:
+        # quem já fez 10+ perguntas na hora fica bloqueado até a janela virar.
+        limit = (
+            self._settings.rate_limit_per_hour_degraded
+            if degraded
+            else self._settings.rate_limit_per_hour
+        )
         try:
             count = self._redis.incr(visitor_key)
             if count == 1:
                 self._redis.expire(visitor_key, _WINDOW_SECONDS)
-            return count <= self._settings.rate_limit_per_hour
+            return count <= limit
         except Exception:  # noqa: BLE001 — reserva local em caso de falha do Redis
             logger.exception("rate_limit.redis_failed")
             return fallback_allow(visitor_key)
