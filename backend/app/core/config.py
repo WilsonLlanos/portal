@@ -34,6 +34,11 @@ class Settings(BaseSettings):
     langfuse_public_key: str = Field(default="")
     langfuse_secret_key: str = Field(default="")
     langfuse_host: str = Field(default="https://cloud.langfuse.com")
+    # Timeout do envio ao Langfuse: a observabilidade nunca pode segurar o
+    # chat (feature 002, FR-009).
+    langfuse_timeout_seconds: int = Field(default=2)
+    # `development` localmente e `production` na Vercel (feature 002, research.md R14).
+    langfuse_tracing_environment: str = Field(default="development")
 
     # Limites do chat (decisão O3 do plan.md)
     max_message_length: int = Field(default=500)

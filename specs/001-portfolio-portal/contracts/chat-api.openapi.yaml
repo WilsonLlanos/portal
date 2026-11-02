@@ -94,6 +94,15 @@ components:
               content:
                 type: string
                 description: Truncado pelo servidor em 1000 caracteres
+        conversation_id:
+          type: string
+          format: uuid
+          description: >
+            Identificador aleatório da conversa atual, gerado no navegador
+            (crypto.randomUUID) uma vez por abertura da página e mantido só em
+            memória; agrupa as perguntas no painel de observabilidade (FR-017 da
+            feature 002). Não identifica o visitante. Valores fora do formato UUID
+            são ignorados pelo servidor (tratados como ausentes), sem erro 422.
     ChatEventStream:
       description: >
         Sequência de eventos SSE. `token` carrega fragmentos da resposta; `done`

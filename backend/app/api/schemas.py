@@ -2,6 +2,7 @@
 specs/001-portfolio-portal/contracts/chat-api.openapi.yaml.
 """
 
+import uuid
 from typing import Literal
 
 from pydantic import BaseModel, Field, field_validator
@@ -38,6 +39,18 @@ class ChatRequest(BaseModel):
     message: str = Field(min_length=1)
     lang: Lang
     history: list[HistoryTurn] = Field(default_factory=list)
+    # Identificador aleatório da conversa, gerado no navegador (feature 002,
+    # FR-017). Só UUID é aceito, para o campo não virar canal de texto livre no
+    # painel; outro valor é descartado em silêncio (vira None), sem 422.
+    conversation_id: str | None = None
+
+    @field_validator("conversation_id", mode="before")
+    @classmethod
+    def _keep_only_uuid(cls, value: object) -> str | None:
+        try:
+            return str(uuid.UUID(str(value)))
+        except ValueError:
+            return None
 
     @field_validator("history")
     @classmethod

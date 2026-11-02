@@ -20,14 +20,13 @@ Substitui a entidade `ChatInteraction` de [001 data-model.md § 3](../001-portfo
 | Campo | Onde fica | Regra |
 |---|---|---|
 | `question` | `input` da raiz e do trace | pergunta **sanitizada** (R7) |
-| `answer` | `output` da raiz e do trace | resposta final **sanitizada** (R7); texto parcial em caso de erro; texto de recusa quando recusada; omitida em `rate_limited` e `paused` |
-| `outcome` | `metadata` da raiz | `answered` \| `no_answer` \| `refused` \| `rate_limited` \| `paused` \| `error` |
+| `answer` | `output` da raiz e do trace | resposta final **sanitizada** (R7); texto parcial em caso de erro ou desconexão; texto de recusa quando recusada; omitida em `rate_limited` e `paused` |
+| `outcome` | `metadata` da raiz | `answered` \| `no_answer` \| `refused` \| `rate_limited` \| `paused` \| `error` \| `disconnected` |
 | `environment` | ambiente do cliente Langfuse e `metadata` da raiz | `development` \| `production` (R14) |
 | `lang` | atributo propagado | idioma da sessão (`pt-BR` \| `en`) |
 | `kb_version` | atributo propagado | `content_hash` do `manifest.json` da base |
 | `session_id` | atributo propagado | `conversation_id`, quando válido |
 | `latency_ms` | `metadata` da raiz | do recebimento da pergunta ao fim da resposta |
-| `client_disconnected` | `metadata` da raiz | `true` quando o visitante fechou a conexão no meio do streaming, antes de o trace ser encerrado (com `level=WARNING`) |
 
 Nome do trace: `chat-turn`. Perguntas vazias ou longas demais, rejeitadas antes de qualquer processamento, não geram trace (FR-001).
 
@@ -36,7 +35,7 @@ Nome do trace: `chat-turn`. Perguntas vazias ou longas demais, rejeitadas antes 
 1. **Aberto** depois das validações de tamanho.
 2. **Encerrado** localmente, sem rede, antes do último evento enviado ao visitante (`done` ou `error`).
 3. **Enviado** (`flush`) depois do último evento: pelo próprio streaming, ou por uma tarefa em segundo plano quando a resposta é um erro HTTP (429/503).
-4. Se o visitante desconecta no meio do streaming, o trace é encerrado com `client_disconnected = true` e enviado pelo exportador em segundo plano do SDK, em melhor esforço.
+4. Se o visitante desconecta no meio do streaming, o trace é encerrado com `outcome = disconnected` e `level=WARNING`, e enviado pelo exportador em segundo plano do SDK, em melhor esforço.
 
 ## Etapas (observações filhas da raiz)
 
@@ -69,6 +68,7 @@ Cada etapa tem início e fim próprios (a duração vem daí, FR-002).
 | `rate_limited` | — | — | — | — | não |
 | `paused` (teto de custo) | — | — | — | — | não |
 | `error` (LLM indisponível) | ✓ | ✓ | ✓ | ✓, com `level=ERROR` e saída parcial | não |
+| `disconnected` (visitante fechou a conexão no meio do streaming) | as executadas até a desconexão | | | saída parcial, se chegou a começar | não |
 
 O juiz só avalia traces do ambiente `production` (R14).
 

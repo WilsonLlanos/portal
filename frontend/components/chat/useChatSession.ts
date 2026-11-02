@@ -37,12 +37,29 @@ export function useChatSession(locale: string) {
     suggestions: [],
   });
   const abortRef = useRef<AbortController | null>(null);
+  // Feature 002 (FR-017): identificador aleatório da conversa, que agrupa as
+  // perguntas no painel de observabilidade. Fica só em memória, nunca em
+  // localStorage, sessionStorage ou cookie: recarregar a página gera uma nova
+  // conversa, e o valor não identifica o visitante.
+  const conversationIdRef = useRef<string | null>(null);
 
   const send = useCallback(
     async (text: string) => {
       abortRef.current?.abort();
       const controller = new AbortController();
       abortRef.current = controller;
+
+      // Gerado na primeira pergunta. `crypto.randomUUID` só existe em contexto
+      // seguro (HTTPS ou localhost); chamá-lo fora disso (ex.: teste pelo
+      // celular via IP da rede local) quebraria o chat. Sem ele, a pergunta é
+      // registrada sem agrupamento.
+      if (
+        conversationIdRef.current === null &&
+        typeof globalThis.crypto?.randomUUID === "function"
+      ) {
+        conversationIdRef.current = globalThis.crypto.randomUUID();
+      }
+      const conversationId = conversationIdRef.current;
 
       // O servidor também trunca, mas cortar aqui evita enviar texto à toa.
       const history = state.messages
@@ -63,7 +80,12 @@ export function useChatSession(locale: string) {
         const response = await fetch("/api/chat", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ message: text, lang: locale, history }),
+          body: JSON.stringify({
+            message: text,
+            lang: locale,
+            history,
+            ...(conversationId ? { conversation_id: conversationId } : {}),
+          }),
           signal: controller.signal,
         });
 

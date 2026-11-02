@@ -9,6 +9,7 @@ from collections.abc import Iterator
 
 from fastapi import APIRouter, Request
 from fastapi.responses import JSONResponse, StreamingResponse
+from starlette.background import BackgroundTask
 
 from app.api.schemas import ChatRequest
 from app.core.pipeline import PipelineEvent, run_chat_pipeline
@@ -106,6 +107,11 @@ def _client_ip(request: Request) -> str:
     return request.client.host if request.client else "unknown"
 
 
+def _drain(events: Iterator[PipelineEvent]) -> None:
+    for _ in events:
+        pass
+
+
 def _chain(first: PipelineEvent, rest: Iterator[PipelineEvent]) -> Iterator[PipelineEvent]:
     yield first
     yield from rest
@@ -124,6 +130,7 @@ async def post_chat(payload: ChatRequest, request: Request):
         lang=payload.lang,
         history=history,
         visitor_key=visitor_key,
+        conversation_id=payload.conversation_id,
     )
 
     # As validações que falham antes de qualquer streaming (tamanho, teto
@@ -147,7 +154,15 @@ async def post_chat(payload: ChatRequest, request: Request):
         message = _ERROR_MESSAGES.get(code, _ERROR_MESSAGES["unavailable"]).get(
             payload.lang, _ERROR_MESSAGES["unavailable"]["en"]
         )
-        return JSONResponse(status_code=status_code, content={"code": code, "message": message})
+        # O pipeline envia o trace depois do último evento, quando o gerador é
+        # consumido até o fim. A BackgroundTask faz isso, e o Starlette só a
+        # executa depois de enviar a resposta: o 429/503 não espera o Langfuse
+        # (feature 002, research.md R8).
+        return JSONResponse(
+            status_code=status_code,
+            content={"code": code, "message": message},
+            background=BackgroundTask(_drain, events),
+        )
 
     return StreamingResponse(
         _to_sse(_chain(first_event, events), payload.lang),
