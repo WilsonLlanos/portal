@@ -59,7 +59,7 @@ specs/002-chat-observability/
 ├── plan.md              # Este arquivo
 ├── research.md          # Phase 0: decisões R1–R14
 ├── data-model.md        # Phase 1: entidades, scores, etapas por outcome
-├── quickstart.md        # Phase 1: configuração do Langfuse e do juiz + 10 cenários de validação
+├── quickstart.md        # Phase 1: configuração do Langfuse e do juiz + 11 cenários de validação
 ├── contracts/
 │   ├── trace-structure.md   # nomes, tipos e campos das observações e scores
 │   ├── chat-api-delta.md    # campo conversation_id em POST /api/chat

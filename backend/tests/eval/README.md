@@ -15,3 +15,15 @@ baseados no conteúdo placeholder). **Expandir para dezenas de itens** assim
 que o conteúdo real do autor (bio, projetos, certificações) estiver em
 `frontend/content/`, para que os 95%/100% de SC-003 e a "grande maioria" de
 SC-007 sejam estatisticamente significativos.
+
+## Precisão do juiz (feature 002, SC-004)
+
+`test_judge_accuracy.py` aplica o critério de `app/observability/judge_prompt.md`
+a `judge_reference.jsonl` e confere pelo menos 90% de acerto e no máximo 1
+"recusa" classificada como "lacuna".
+
+- Exige `GEMINI_JUDGE_API_KEY` no ambiente: a chave **exclusiva do juiz**, não a
+  `GEMINI_API_KEY` do chat. Sem ela, o teste é pulado.
+- O modelo é opcional, em `GEMINI_JUDGE_MODEL` (padrão `gemini-3.1-flash-lite`);
+  use o mesmo configurado no avaliador do Langfuse.
+- Fica fora do CI, como os demais testes desta pasta.

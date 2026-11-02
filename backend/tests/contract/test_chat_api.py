@@ -4,6 +4,7 @@ specs/001-portfolio-portal/contracts/chat-api.openapi.yaml (códigos
 não faz nenhuma chamada de rede.
 """
 
+import pytest
 from fastapi.testclient import TestClient
 
 import app.api.chat as chat_module
@@ -121,3 +122,65 @@ def test_long_history_is_truncated_not_rejected(monkeypatch):
     assert response.status_code == 200
     assert len(captured["history"]) == 4  # só as trocas mais recentes
     assert len(captured["history"][-1].content) == 1000  # truncado, não recusado
+
+
+def _capture_kwargs(monkeypatch) -> tuple[TestClient, dict]:
+    captured: dict = {}
+
+    def _capturing_pipeline(**kwargs):
+        captured.update(kwargs)
+        yield PipelineEvent(type="done", outcome="answered", suggestions=[])
+
+    client = _client(monkeypatch, [])
+    monkeypatch.setattr(chat_module, "run_chat_pipeline", _capturing_pipeline)
+    return client, captured
+
+
+def test_valid_conversation_id_is_forwarded(monkeypatch):
+    """Feature 002, FR-017: o UUID gerado no navegador agrupa as perguntas."""
+    client, captured = _capture_kwargs(monkeypatch)
+    conversation_id = "0b7e7c1e-8a4f-4d2b-9f3e-2a6c1d5e4f70"
+    response = client.post(
+        "/chat", json={"message": "oi", "lang": "pt-BR", "conversation_id": conversation_id}
+    )
+
+    assert response.status_code == 200
+    assert captured["conversation_id"] == conversation_id
+
+
+def test_invalid_conversation_id_becomes_none(monkeypatch):
+    """Um valor fora do formato UUID é descartado, sem 422 (texto livre não entra no painel)."""
+    client, captured = _capture_kwargs(monkeypatch)
+    response = client.post(
+        "/chat", json={"message": "oi", "lang": "pt-BR", "conversation_id": "joao@x.com"}
+    )
+
+    assert response.status_code == 200
+    assert captured["conversation_id"] is None
+
+
+def test_missing_conversation_id_is_accepted(monkeypatch):
+    client, captured = _capture_kwargs(monkeypatch)
+    response = client.post("/chat", json={"message": "oi", "lang": "pt-BR"})
+
+    assert response.status_code == 200
+    assert captured["conversation_id"] is None
+
+
+@pytest.mark.parametrize(("code", "status"), [("rate_limited", 429), ("chat_paused", 503)])
+def test_error_response_drains_pipeline_after_sending(monkeypatch, code, status):
+    """Feature 002, research.md R8: o pipeline envia o trace depois do último
+    evento, então o gerador precisa ser consumido até o fim, depois da resposta."""
+    drained: list[bool] = []
+
+    def _pipeline(**_kwargs):
+        yield PipelineEvent(type="error", error_code=code)
+        drained.append(True)  # roda só quando o próximo item é pedido (o flush do trace)
+
+    client = _client(monkeypatch, [])
+    monkeypatch.setattr(chat_module, "run_chat_pipeline", _pipeline)
+    response = client.post("/chat", json={"message": "oi", "lang": "pt-BR"})
+
+    assert response.status_code == status
+    assert response.json()["code"] == code
+    assert drained == [True]

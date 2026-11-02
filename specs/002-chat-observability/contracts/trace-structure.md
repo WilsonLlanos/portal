@@ -28,12 +28,11 @@ Todo texto que pode conter dado do visitante (pergunta, histórico e resposta) �
 | Campo | Conteúdo |
 |---|---|
 | `input` | pergunta sanitizada (string) |
-| `output` | resposta final sanitizada (string); parcial em erro; texto de recusa em `refused`; omitido em `rate_limited`/`paused` |
-| `metadata.outcome` | `answered` \| `no_answer` \| `refused` \| `rate_limited` \| `paused` \| `error` |
+| `output` | resposta final sanitizada (string); parcial em `error` e `disconnected`; texto de recusa em `refused`; omitido em `rate_limited`/`paused` |
+| `metadata.outcome` | `answered` \| `no_answer` \| `refused` \| `rate_limited` \| `paused` \| `error` \| `disconnected` |
 | `metadata.environment` | `"development"` \| `"production"`, igual ao ambiente do cliente (filtro da regra do juiz) |
 | `metadata.latency_ms` | inteiro |
-| `metadata.client_disconnected` | `true` só quando o gerador foi fechado antes de o trace ser encerrado (visitante desconectou) |
-| `level` | `DEFAULT`; `ERROR` em `error`; `WARNING` em desconexão |
+| `level` | `DEFAULT`; `ERROR` em `error`; `WARNING` em `disconnected` |
 
 **É a observação avaliada pelo juiz** (research.md R4).
 
@@ -86,6 +85,6 @@ Todo texto que pode conter dado do visitante (pergunta, histórico e resposta) �
 
 - Nenhuma chamada ao SDK pode lançar exceção para o pipeline; falhas viram log `observability.trace_failed`.
 - Nenhum envio pela rede antes do primeiro token. O trace é encerrado localmente antes do último evento (`done` ou `error`), e o `flush()` roda depois dele: no próprio streaming ou, quando o primeiro evento já é um erro HTTP (429/503), numa `BackgroundTask` que roda depois da resposta (research.md R8).
-- Visitante desconectado no meio do streaming: o `finally` do pipeline encerra o trace com `client_disconnected = true`, e o exportador em segundo plano do SDK o envia em melhor esforço, sem `flush` síncrono.
+- Visitante desconectado no meio do streaming: o `finally` do pipeline encerra o trace com `outcome = disconnected` (fora da regra do juiz, que só avalia `answered` e `no_answer`), e o exportador em segundo plano do SDK o envia em melhor esforço, sem `flush` síncrono.
 - Só observações criadas pela fachada são exportadas (`should_export_span=is_langfuse_span`); spans de outras bibliotecas instrumentadas nunca saem do processo.
 - Sem chaves configuradas, o tracer é um Noop e o log JSON `chat.interaction` continua sendo emitido.

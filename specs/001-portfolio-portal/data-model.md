@@ -86,6 +86,9 @@ Chave = data (UTC). Acumula custo estimado em centavos a partir dos tokens usado
 `message` (máx. em caracteres definido em configuração e no limite de contexto do guardrail), `lang`, `history` (até 4 mensagens anteriores, ou seja, cerca de 2 trocas pergunta+resposta, cada uma cortada em 1000 caracteres; o excedente é truncado no servidor, não recusado).
 
 ### ChatInteraction (Langfuse, retenção de 30 dias)
+
+> **Substituída pela feature 002.** O evento único descrito abaixo deu lugar a um trace completo por pergunta (raiz `chat-turn` com as etapas `guardrail`, `embed-question`, `retrieval` e `answer`). Ver [002 data-model.md](../002-chat-observability/data-model.md). A tabela fica como registro histórico.
+
 | Campo | Regra |
 |---|---|
 | `question` | texto sanitizado; sem dados pessoais |
